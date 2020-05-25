@@ -11,28 +11,28 @@ function Navbar() {
                 <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
                     <ul className="nav flex-column">
                         <li className="nav-item">
-                            <Link className="nav-link active" to="#">Home</Link>
+                            <Link className="nav-link active" to="/">Home</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="#">About Us</Link>
+                            <Link className="nav-link" to="/aboutus">About Us</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="#">Our Sevices</Link>
+                            <Link className="nav-link" to="ourservices">Our Sevices</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="#">Our Barbers</Link>
+                            <Link className="nav-link" to="/ourbarbers">Our Barbers</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="#">Appointment</Link>
+                            <Link className="nav-link" to="/appointment">Appointment</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="#">Contact</Link>
+                            <Link className="nav-link" to="/contact">Contact</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="#">Log In</Link>
+                            <Link className="nav-link" to="/login">Log In</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="#">Register</Link>
+                            <Link className="nav-link" to="/register">Register</Link>
                         </li>
                     </ul>
                 </div>
