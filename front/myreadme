@@ -3,7 +3,7 @@ PASO A PASO REALIZACION DE ESTE PROYECTO
 ETAPA 1: CREACION DE LA APLICACION
     1. CREAR PROYECTO // TERMINAL: npx create-react-app pffront
 
-    2. INSTALAR LIBRERIAS // TERMINAL: npm i jquery popper.js bootstrap react-router-dom @fortawesome/fontawesome-free@5.1.0-9 --save
+    2. INSTALAR LIBRERIAS // TERMINAL: npm i jquery@3.4.1 popper.js bootstrap react-router-dom @fortawesome/fontawesome-free@5.1.0-9 --save
 
     ************************
         OPCIONAL: HACER PUSH EN REPOSITORIO GUTHUB
