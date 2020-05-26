@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import barber01 from '../../images/barber_01.jpg';
+import barber02 from '../../images/barber_02.jpg';
+import barber03 from '../../images/barber_03.jpg';
 
 function LandAbout() {
   return (
@@ -31,13 +34,13 @@ function LandAbout() {
           <div className="about-tab">
             <ul className="nav nav-pills mb-3 d-flex justify-content-center" id="pills-tab" role="tablist">
               <li className="nav-item mx-2" role="presentation">
-                <a className="nav-link active btn btn-light specialbtn" id="pills-mission-tab" data-toggle="pill" href="#pills-mission" role="tab" aria-controls="pills-mission" aria-selected="true">Our Mission</a>
+                <Link className="nav-link active btn btn-light specialbtn" id="pills-mission-tab" data-toggle="pill" to="#pills-mission" role="tab" aria-controls="pills-mission" aria-selected="true">Our Mission</Link>
               </li>
               <li className="nav-item" role="presentation">
-                <a className="nav-link btn btn-light specialbtn" id="pills-why-tab" data-toggle="pill" href="#pills-why" role="tab" aria-controls="pills-why" aria-selected="false">Why Us?</a>
+                <Link className="nav-link btn btn-light specialbtn" id="pills-why-tab" data-toggle="pill" to="#pills-why" role="tab" aria-controls="pills-why" aria-selected="false">Why Us?</Link>
               </li>
               <li className="nav-item mx-2" role="presentation">
-                <a className="nav-link btn btn-light specialbtn" id="pills-about-tab" data-toggle="pill" href="#pills-about" role="tab" aria-controls="pills-about" aria-selected="false">About Us</a>
+                <Link className="nav-link btn btn-light specialbtn" id="pills-about-tab" data-toggle="pill" to="#pills-about" role="tab" aria-controls="pills-about" aria-selected="false">About Us</Link>
               </li>
             </ul>
             <div className="tab-content col-10 mx-auto text-center" id="pills-tabContent">
@@ -63,7 +66,7 @@ function LandAbout() {
                   <li><i className="far fa-circle" aria-hidden="true"></i> Visual Impact</li>
                   <li><i className="far fa-circle" aria-hidden="true"></i> 100% Sincronized</li>
                   <li><i className="far fa-circle" aria-hidden="true"></i> Custom Support</li>
-                  
+
                 </ul></div>
               <div className="tab-pane fade" id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab"><p>There are many variations of passages of Lorem Ipsum available, but the
               majority have suffered alteration in some form, by injected humour, or
@@ -75,7 +78,48 @@ function LandAbout() {
         </div>
       </div>
 
-      <hr className="hr1 col-md-10" />
+      <hr className="hr1 my-5 col-md-10" />
+
+      <div className="row text-center mx-auto">
+        <div className="col-md-4 col-sm-6 col-xs-12">
+          <div className="service-widget text-justify">
+            <div className="post-media wow fadeIn">
+              <Link to="images/barber_01.jpg" data-rel="prettyPhoto[gal]"
+                className="hoverbutton global-radius"><i className="flaticon-unlink"></i></Link>
+              <img src={barber01} alt="" className="img-responsive img-rounded" />
+            </div>
+            <h4>Show us Your Graft Style</h4>
+            <p>Aliquam sagittis ligula et sem lacinia, ut facilisis enim sollicitudin. Proin nisi
+                                    est, convallis nec purus vitae, iaculis posuere sapien. Cum sociis natoque.</p>
+          </div>
+        </div>
+
+        <div className="col-md-4 col-sm-6 col-xs-12">
+          <div className="service-widget text-justify">
+            <div className="post-media wow fadeIn">
+              <Link to="images/barber_02.jpg" data-rel="prettyPhoto[gal]"
+                className="hoverbutton global-radius"><i className="flaticon-unlink"></i></Link>
+              <img src={barber02} alt="" className="img-responsive img-rounded" />
+            </div>
+            <h4>Outstanding Barber Shop</h4>
+            <p>Duis at tellus at dui tincidunt scelerisque nec sed felis. Suspendisse id dolor sed
+                                    leo rutrum euismod. Nullam vestibulum fermentum erat. It nam auctor. </p>
+          </div>
+        </div>
+
+        <div className="col-md-4 col-sm-6 col-xs-12">
+          <div className="service-widget text-justify">
+            <div className="post-media wow fadeIn">
+              <Link to="images/barber_03.jpg" data-rel="prettyPhoto[gal]"
+                className="hoverbutton global-radius"><i className="flaticon-unlink"></i></Link>
+              <img src={barber03} alt="" className="img-responsive img-rounded" />
+            </div>
+            <h4>The Barber Materials</h4>
+            <p>Etiam materials ut mollis tellus, vel posuere nulla. Etiam sit amet lacus vitae massa
+                                    sodales aliquam at eget quam. Integer ultricies et magna quis posuere.</p>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

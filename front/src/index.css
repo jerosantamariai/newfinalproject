@@ -243,10 +243,15 @@ color: #bb9d52;
   color: white !important;
   outline:none; 
   border-style: none;
+  border-radius: 100px !important;
 }
 
 .vertnav button:hover{
   background-color: rgb(188,156,92) !important;
   margin-bottom: 10px !important;
   color: white !important;
+}
+
+.post-media img{
+  max-width: 270px;
 }
