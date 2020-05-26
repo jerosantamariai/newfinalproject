@@ -11,23 +11,29 @@ import Appointment from './views/appointment';
 import Contact from './views/contact';
 import logIn from './views/login';
 import Register from './views/register';
+import Footer from './components/footer';
 
 const App = props => {
   return (
     <BrowserRouter>
       <Navbar />
       <div className="col-md-9 offset-3">
-        <Switch>
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={logIn} />
-          <Route exact path="/contact" component={Contact} />
-          <Route exact path="/appointment" component={Appointment} />
-          <Route exact path="/ourbarbers" component={ourBarbers} />
-          <Route exact path="/ourservices" component={ourServices} />
-          <Route exact path="/aboutus" component={aboutUs} />
-          <Route exact path="/" component={Home} />
-          <Route component={NotFound} />
-        </Switch>
+        <div className="row">
+          <Switch>
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={logIn} />
+            <Route exact path="/contact" component={Contact} />
+            <Route exact path="/appointment" component={Appointment} />
+            <Route exact path="/ourbarbers" component={ourBarbers} />
+            <Route exact path="/ourservices" component={ourServices} />
+            <Route exact path="/aboutus" component={aboutUs} />
+            <Route exact path="/" component={Home} />
+            <Route component={NotFound} />
+          </Switch>
+        </div>
+        <div className="row">
+          <Footer />
+        </div>
       </div>
     </BrowserRouter>
   )
