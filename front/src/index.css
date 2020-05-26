@@ -232,3 +232,21 @@ color: #bb9d52;
   display: inline;
   margin-left: 50px;
 }
+
+#leftnav{
+  background-color: rgb(19,19,19) !important;
+}
+
+.vertnav button{
+  background-color: rgb(19,19,19) !important;
+  margin: 10px auto !important;
+  color: white !important;
+  outline:none; 
+  border-style: none;
+}
+
+.vertnav button:hover{
+  background-color: rgb(188,156,92) !important;
+  margin-bottom: 10px !important;
+  color: white !important;
+}
