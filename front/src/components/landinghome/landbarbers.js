@@ -6,7 +6,7 @@ import barber_team_03 from '../../images/barber_team_03.jpg';
 function LandBarbers() {
   return (
     <>
-      <div id="barbers" className="barbersection my-5 py-5">
+      <div id="barbers" className="barbersection mt-5 pt-5">
         <div className="container-fluid">
           <div className="section-title row text-center d-flex justify-content-center">
             <div className="col-md-8 col-md-offset-2">
