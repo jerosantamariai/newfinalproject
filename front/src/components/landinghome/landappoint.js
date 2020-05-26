@@ -12,7 +12,7 @@ function LandAppoint() {
             <h2><strong>The Barber Shop</strong><br />
                       in New York</h2>
               <p className="lead">With SMBarber responsive landing page template, you can showcase your next barber shop websites!</p>
-              <Link to="/appointment" className="btn btn-dark btn-radius btn-brd grd1 effect-1 butn">APPOINTMENT NOW</Link>
+              <Link to="/appointment" className="btn btn-dark btn-radius btn-brd grd1 effect-1 butn  specialbtn">APPOINTMENT NOW</Link>
             </div>
           </div>
           <div className="carousel-item">
@@ -21,7 +21,7 @@ function LandAppoint() {
             <h2><strong>The Barber Shop</strong><br />
                       in New York</h2>
               <p className="lead">With SMBarber responsive landing page template, you can showcase your next barber shop websites!</p>
-              <Link to="/appointment" className="btn btn-dark btn-radius btn-brd grd1 effect-1 butn">APPOINTMENT NOW</Link>
+              <Link to="/appointment" className="btn btn-dark btn-radius btn-brd grd1 effect-1 butn specialbtn">APPOINTMENT NOW</Link>
             </div>
           </div>
           <div className="carousel-item">
@@ -30,7 +30,7 @@ function LandAppoint() {
               <h2><strong>The Barber Shop</strong><br />
                       in New York</h2>
               <p className="lead">With SMBarber responsive landing page template, you can showcase your next barber shop websites!</p>
-              <Link to="/appointment" className="btn btn-dark btn-radius btn-brd grd1 effect-1 butn">APPOINTMENT NOW</Link>
+              <Link to="/appointment" className="btn btn-dark btn-radius btn-brd grd1 effect-1 butn specialbtn">APPOINTMENT NOW</Link>
             </div>
           </div>
         </div>

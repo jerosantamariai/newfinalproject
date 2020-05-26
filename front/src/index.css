@@ -211,7 +211,24 @@ color: #bb9d52;
   padding: 30px;
 }
 
+.specialbtn:hover{
+  background-color: rgb(188,156,92) !important;
+}
+
 .noDecoration{
     text-decoration: none !important;
     color: white !important;
+}
+
+.about-tab a{
+  border-radius: 100px !important;
+}
+
+.no-bullets {
+  list-style-type: none;
+}
+
+.no-bullets li {
+  display: inline;
+  margin-left: 50px;
 }
