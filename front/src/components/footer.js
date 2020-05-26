@@ -11,12 +11,12 @@ function Footer() {
                         <div className="footer-distributed">
                             <div className="footer-left">
                                 <p className="footer-links">
-                                    <Link to="#">Home</Link>
-                                    <Link to="#">Blog</Link>
-                                    <Link to="#">Pricing</Link>
-                                    <Link to="#">About</Link>
-                                    <Link to="#">Faq</Link>
-                                    <Link to="#">Contact</Link>
+                                    <Link to="/">Home</Link>
+                                    <Link to="/ourbarbers">Blog</Link>
+                                    <Link to="/pricing">Pricing</Link>
+                                    <Link to="/aboutus">About</Link>
+                                    <Link to="/faq">Faq</Link>
+                                    <Link to="/contact">Contact</Link>
                                 </p>
                                 <p className="footer-company-name">All Rights Reserved. &copy; 2018 <Link to="#">SMBarber</Link> Design By : <Link to="https://html.design/">html design</Link></p>
                             </div>

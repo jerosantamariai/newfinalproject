@@ -12,6 +12,8 @@ import Contact from './views/contact';
 import logIn from './views/login';
 import Register from './views/register';
 import Footer from './components/footer';
+import Pricing from './views/pricing';
+import Faq from './views/faq';
 
 const App = props => {
   return (
@@ -21,6 +23,8 @@ const App = props => {
         <div className="row">
           <Switch>
             <Route exact path="/register" component={Register} />
+            <Route exact path="/faq" component={Faq} />
+            <Route exact path="/pricing" component={Pricing} />
             <Route exact path="/login" component={logIn} />
             <Route exact path="/contact" component={Contact} />
             <Route exact path="/appointment" component={Appointment} />
