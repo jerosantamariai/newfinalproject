@@ -448,6 +448,20 @@ color: #bb9d52;
   height: 550px;
 }
 
+.nothinghere{
+  margin: 0px auto !important;
+  background: 
+  linear-gradient(rgba(19,19,19,0.5),rgba(19,19,19,0.9)),
+  url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRaEy-9Ddjmr8fFzQHOHMc3W_PIcQ8B71bQi2pfIo-vo4k8JrjE&usqp=CAU);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: rgb(188,156,92,0.7);
+  padding: 40px;
+  color: rgb(255, 255, 255);
+  width: 100%;
+  height: 550px;
+}
+
 .testi-meta{
   color: white;
   margin-top: 30px;
