@@ -3,7 +3,9 @@ import React from 'react';
 function ourServices() {
   return (
     <>
-      <h1>Our Services!!!</h1>
+      <div className="servisteiner">
+        <h1>Our Services!!!</h1>
+      </div>
     </>
   );
 }

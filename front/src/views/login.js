@@ -3,7 +3,9 @@ import React from 'react';
 function logIn() {
   return (
     <>
-      <h1>Log In!!!</h1>
+      <div className="loginsteiner">
+        <h1>Log In!!!</h1>
+      </div>
     </>
   );
 }

@@ -3,7 +3,9 @@ import React from 'react';
 function Pricing() {
   return (
     <>
-      <h1>Pricing!!!</h1>
+      <div className="pricistener">
+        <h1>Pricing!!!</h1>
+      </div>
     </>
   );
 }

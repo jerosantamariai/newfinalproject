@@ -336,6 +336,118 @@ color: #bb9d52;
   color: rgb(255, 255, 255);
 }
 
+.pricistener{
+  margin: 0px auto !important;
+  background: 
+  linear-gradient(rgba(19,19,19,0.5),rgba(19,19,19,0.9)),
+  url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTo-sfJA68W31tFU23FmhjTQkY_al5oRSOnNTUmX5xJOuClritH&usqp=CAU);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: rgb(188,156,92,0.7);
+  padding: 40px;
+  color: rgb(255, 255, 255);
+  width: 100%;
+  height: 550px;
+}
+
+.servisteiner{
+  margin: 0px auto !important;
+  background: 
+  linear-gradient(rgba(19,19,19,0.5),rgba(19,19,19,0.9)),
+  url(https://images.squarespace-cdn.com/content/v1/5cd9d27f840b16669a850ca3/1557795744556-K4OHMPGMAVP0QBK8MN3E/ke17ZwdGBToddI8pDm48kP8VQ8qlVqwk_QT5FAymW9d7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UZrwG2UoTO-LAuHBXIn7DjXpzv7JrEEnjpClQgNcWMNIJvwGh1qtNWvMhYKnvaKhbA/Screen+Shot+2019-05-13+at+8.07.40+PM.png?format=2500w);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: rgb(188,156,92,0.7);
+  padding: 40px;
+  color: rgb(255, 255, 255);
+  width: 100%;
+  height: 550px;
+}
+
+.barbersteiner{
+  margin: 0px auto !important;
+  background: 
+  linear-gradient(rgba(19,19,19,0.5),rgba(19,19,19,0.9)),
+  url(https://st3.depositphotos.com/12071432/18627/i/450/depositphotos_186272986-stock-photo-serious-handsome-barber-holding-razor.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: rgb(188,156,92,0.7);
+  padding: 40px;
+  color: rgb(255, 255, 255);
+  width: 100%;
+  height: 550px;
+}
+
+.loginsteiner{
+  margin: 0px auto !important;
+  background: 
+  linear-gradient(rgba(19,19,19,0.5),rgba(19,19,19,0.9)),
+  url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR3p23q3zP4E3kzHrk1ZOE8lOp7EqX7OOcbA7EZye3-e6A0h0On&usqp=CAU);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: rgb(188,156,92,0.7);
+  padding: 40px;
+  color: rgb(255, 255, 255);
+  width: 100%;
+  height: 550px;
+}
+
+.faqsteiner{
+  margin: 0px auto !important;
+  background: 
+  linear-gradient(rgba(19,19,19,0.5),rgba(19,19,19,0.9)),
+  url(https://modaellos.com/wp-content/uploads/2020/01/barba-llena-larga.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: rgb(188,156,92,0.7);
+  padding: 40px;
+  color: rgb(255, 255, 255);
+  width: 100%;
+  height: 550px;
+}
+
+.contactsteiner{
+  margin: 0px auto !important;
+  background: 
+  linear-gradient(rgba(19,19,19,0.5),rgba(19,19,19,0.9)),
+  url(https://i.pinimg.com/564x/c1/3b/32/c13b32c5fd6b8263bd1b526da2054fdd.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: rgb(188,156,92,0.7);
+  padding: 40px;
+  color: rgb(255, 255, 255);
+  width: 100%;
+  height: 550px;
+}
+
+.appointsteiner{
+  margin: 0px auto !important;
+  background: 
+  linear-gradient(rgba(19,19,19,0.5),rgba(19,19,19,0.9)),
+  url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSJODTgeNTNKT-yHHPWNQiYKSVbJxDBV1oLxxMMvA7LnxINbi1W&usqp=CAU);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: rgb(188,156,92,0.7);
+  padding: 40px;
+  color: rgb(255, 255, 255);
+  width: 100%;
+  height: 550px;
+}
+
+.aboutsteiner{
+  margin: 0px auto !important;
+  background: 
+  linear-gradient(rgba(19,19,19,0.5),rgba(19,19,19,0.9)),
+  url(https://www.insidehook.com/wp-content/uploads/2020/03/Coronavirus-Beards.jpg?fit=1500%2C1000);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: rgb(188,156,92,0.7);
+  padding: 40px;
+  color: rgb(255, 255, 255);
+  width: 100%;
+  height: 550px;
+}
+
 .testi-meta{
   color: white;
   margin-top: 30px;
