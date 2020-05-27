@@ -19,7 +19,7 @@ function LandComments() {
             </div>
           </div>
         </div>
-        <div className="row my-0">
+        <div className="row">
           <div className="col-md-12 col-sm-12">
             <div className="testi d-flex">
               <div className="testimonial clearfix">

@@ -8,26 +8,26 @@ import LandComments from '../components/landinghome/landcomments';
 function Home() {
   return (
     <>
-      <div className="row">
-        <div className="col-md-12">
-          <LandAppoint />
+        <div className="row">
+          <div className="col-md-12">
+            <LandAppoint />
+          </div>
         </div>
-      </div>
-      <div className="row">
-        <div className="col-md-12">
-          <LandAbout />
+        <div className="row">
+          <div className="col-md-12">
+            <LandAbout />
+          </div>
         </div>
-      </div>
-      <div className="row">
-        <div className="col-md-12">
-          <LandBarbers />
+        <div className="row">
+          <div className="col-md-12">
+            <LandBarbers />
+          </div>
         </div>
-      </div>
-      <div className="row">
-        <div className="col-md-12">
-          <LandComments />
+        <div className="row">
+          <div className="col-md-12">
+            <LandComments />
+          </div>
         </div>
-      </div>
     </>
   );
 }

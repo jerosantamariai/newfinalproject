@@ -5,7 +5,7 @@ function Footer() {
     return (
         <>
 
-            <footer className="page-footer font-small special-color-dark pt-4">
+            <footer className="page-footer font-small special-color-dark">
                 <div className="copyrights">
                     <div className="container-fluid">
                         <div className="footer-distributed">
