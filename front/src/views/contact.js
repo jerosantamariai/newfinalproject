@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Contact() {
+const Contact = props => {
   return (
     <>
       <div className="contactsteiner">

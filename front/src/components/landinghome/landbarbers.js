@@ -3,21 +3,20 @@ import barber_team_01 from '../../images/barber_team_01.jpg';
 import barber_team_02 from '../../images/barber_team_02.jpg';
 import barber_team_03 from '../../images/barber_team_03.jpg';
 
-function LandBarbers() {
+const LandBarbers = props => {
   return (
     <>
-      <div id="barbers" className="barbersection mt-5 pt-5">
+      <div id="barbers" className="barbersection pt-5">
         <div className="container-fluid">
           <div className="section-title row text-center d-flex justify-content-center">
             <div className="col-md-8 col-md-offset-2">
               <small>MEET OUR BABRER TEAM</small>
-              <h1>OUR BARBERS</h1>
+              <h1><strong>OUR BARBERS</strong> </h1>
               <hr className="grd1" />
               <p className="lead">Quisque eget nisl id nulla sagittis auctor quis id. Aliquam quis vehicula
                                 enim, non aliquam risus. Sed a tellus quis mi rhoncus dignissim.</p>
             </div>
           </div>
-
           <div className="row dev-list text-center barberlist">
             <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 fadeIn">
               <div className="widget clearfix">
@@ -40,7 +39,6 @@ function LandBarbers() {
                                     Barber Shop Company.</p>
               </div>
             </div>
-
             <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 fadeIn">
               <div className="widget clearfix">
                 <div className="hover-br">
@@ -62,7 +60,6 @@ function LandBarbers() {
                                     Barber Shop Market.</p>
               </div>
             </div>
-
             <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 fadeIn">
               <div className="widget clearfix">
                 <div className="hover-br">

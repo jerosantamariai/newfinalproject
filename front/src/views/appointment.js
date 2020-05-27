@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Appointment() {
+const Appointment = props => {
   return (
     <>
     <div className="appointsteiner">

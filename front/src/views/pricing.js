@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Pricing() {
+const Pricing = props => {
   return (
     <>
       <div className="pricistener">

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import logo from '../images/logo-img.png';
+import { Context } from '../store/appContext';
 
-function Navbar() {
+const Navbar = props => {
+    const { store, actions } = useContext(Context);
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark col-md-3 d-lg-flex align-items-center" id="leftnav">
@@ -15,29 +17,45 @@ function Navbar() {
                             <Link to="/"><img src={logo} alt="logo" /></Link>
                         </li>
                         <li className="nav-item">
-                        <button type="button" className="btn btn-dark btn-block btn-sm"><Link className="nav-link noDecoration active" to="/">Home</Link></button>
+                            <button type="button" className="btn btn-dark btn-block btn-sm"><Link className="nav-link noDecoration active" to="/">Home</Link></button>
                         </li>
                         <li className="nav-item">
-                        <button type="button" className="btn btn-dark btn-block btn-sm"><Link className="nav-link noDecoration" to="/aboutus">About Us</Link></button>
+                            <button type="button" className="btn btn-dark btn-block btn-sm"><Link className="nav-link noDecoration" to="/aboutus">About Us</Link></button>
                         </li>
                         <li className="nav-item">
-                        <button type="button" className="btn btn-dark btn-block btn-sm"><Link className="nav-link noDecoration" to="ourservices">Our Sevices</Link></button>
+                            <button type="button" className="btn btn-dark btn-block btn-sm"><Link className="nav-link noDecoration" to="ourservices">Our Sevices</Link></button>
                         </li>
                         <li className="nav-item">
-                        <button type="button" className="btn btn-dark btn-block btn-sm"><Link className="nav-link noDecoration" to="/ourbarbers">Our Barbers</Link></button>
+                            <button type="button" className="btn btn-dark btn-block btn-sm"><Link className="nav-link noDecoration" to="/ourbarbers">Our Barbers</Link></button>
                         </li>
                         <li className="nav-item">
-                        <button type="button" className="btn btn-dark btn-block btn-sm"><Link className="nav-link noDecoration" to="/appointment">Appointment</Link></button>
+                            <button type="button" className="btn btn-dark btn-block btn-sm"><Link className="nav-link noDecoration" to="/appointment">Appointment</Link></button>
                         </li>
                         <li className="nav-item">
-                        <button type="button" className="btn btn-dark btn-block btn-sm"><Link className="nav-link noDecoration" to="/contact">Contact</Link></button>
+                            <button type="button" className="btn btn-dark btn-block btn-sm"><Link className="nav-link noDecoration" to="/contact">Contact</Link></button>
                         </li>
-                        <li className="nav-item">
-                        <button type="button" className="btn btn-dark btn-block btn-sm"><Link className="nav-link noDecoration" to="/login">Log In</Link></button>
-                        </li>
-                        <li className="nav-item">
-                        <button type="button" className="btn btn-dark btn-block btn-sm"><Link className="nav-link noDecoration" to="/register">Register</Link></button>
-                        </li>
+                        {
+                            store.currentUser === null && (
+                                <>
+                                    <li className="nav-item">
+                                        <button type="button" className="btn btn-dark btn-block btn-sm"><Link className="nav-link noDecoration" to="/login">Log In</Link></button>
+                                    </li>
+                                    <li className="nav-item">
+                                        <button type="button" className="btn btn-dark btn-block btn-sm"><Link className="nav-link noDecoration" to="/register">Register</Link></button>
+                                    </li>
+                                </>
+                            )
+                        }
+                        {
+                            store.currentUser !== null && (
+                                <>
+                                    <li className="nav-item">
+                                        <button type="button" className="btn btn-dark btn-block btn-sm"><Link className="nav-link noDecoration" to="/login">{store.currentUser.users.email}</Link></button>
+                                    </li>
+                                </>
+                            )
+                        }
+
                     </ul>
                 </div>
             </nav>

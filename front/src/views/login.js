@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Context } from '../store/appContext';
 
-function logIn() {
+const LogIn = props => {
+  const { store, actions } = useContext(Context);
   return (
     <>
       <div className="loginsteiner">
+        {
+          !!store.errors && (
+            <div className="row">
+              <div className="col-md-12">
+                <div className="alert alert-warning alert-dismissible fade show" role="alert">
+                  <strong>ERROR!</strong> {store.errors.msg}
+                  <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          )
+        }
         <div className="row d-flex justify-content-center text-center my-5">
           <div className="col-md-8">
             <h1>Welcome Back!</h1>
@@ -11,15 +27,15 @@ function logIn() {
         </div>
         <div className="row d-flex justify-content-center mb-5">
           <div className="col-md-8">
-            <form>
+            <form onSubmit={e => actions.login(e, props.history)}>
               <div className="form-group mb-5">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                <label htmlFor="loginEmail">Email address</label>
+                <input type="email" className="form-control" id="loginEmail" aria-describedby="emailHelp" name="email" onChange={actions.handleChange} value={store.email} />
                 <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
               </div>
               <div className="form-group mb-5">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" className="form-control" id="exampleInputPassword1" />
+                <label htmlFor="loginPassword">Password</label>
+                <input type="password" className="form-control" id="loginPassword" name="password" onChange={actions.handleChange} value={store.password} />
               </div>
               <button type="submit" className="btn btn-primary mb-5">Submit</button>
             </form>
@@ -30,4 +46,4 @@ function logIn() {
   );
 }
 
-export default logIn;
+export default LogIn;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function LandAppoint() {
+const LandAppoint = props => {
   return (
     <>
       <div id="carouselExampleSlidesOnly" className="carousel slide no-gutters" data-ride="carousel">

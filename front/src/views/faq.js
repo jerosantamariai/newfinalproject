@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Faq() {
+const Faq = props => {
   return (
     <>
       <div className="faqsteiner">

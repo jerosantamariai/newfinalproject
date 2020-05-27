@@ -36,21 +36,21 @@ def login():
     if not request.is_json:
         return jsonify({"msg": "Ingresar formato correcto"}), 400
 
-    username = request.json.get('username', None)
+    email = request.json.get('email', None)
     password = request.json.get('password', None)
     
 
-    if not username or username == '':
-        return jsonify({"msg": "Ingresar nombre de usuario"}), 400
+    if not email or email == '':
+        return jsonify({"msg": "Ingresar Correo Electronico"}), 400
     if not password or password == '':
         return jsonify({"msg": "Ingresar contraseña"}), 400
 
-    users = Users.query.filter_by(username=username).first()
+    users = Users.query.filter_by(email=email).first()
     if not users:
         return jsonify({"msg": "Algo ingresaste mal, vuelve a intentarlo"}), 401
 
     if bcrypt.check_password_hash(users.password, password):
-        access_token = create_access_token(identity=users.username)
+        access_token = create_access_token(identity=users.email)
         data = {
             "access_token": access_token,
             "users": users.serialize()
@@ -65,34 +65,26 @@ def register():
     if not request.is_json:
         return jsonify({"msg": "Ingresar formato correcto"}), 400
 
-    username = request.json.get('username', None)
-    password = request.json.get('password', None)
-    name = request.json.get('name', '')
-    lastname = request.json.get('lastname', '')
     email = request.json.get('email', None)
+    password = request.json.get('password', None)
 
-    if not username or username == '':
-        return jsonify({"msg": "Ingresar nombre de usuario"}), 400
-    if not password or password == '':
-        return jsonify({"msg": "Ingresar contraseña"}), 400
     if not email or email == '':
         return jsonify({"msg": "Ingresar correo electronico"}), 400
+    if not password or password == '':
+        return jsonify({"msg": "Ingresar contraseña"}), 400
 
-    users = Users.query.filter_by(username=username).first()
+    users = Users.query.filter_by(email=email).first()
     if users:
         return jsonify({"msg": "Nombre de usuario existe, por favor ingresar otro"}), 400
 
     users = Users()
-    users.username = username
-    users.password = bcrypt.generate_password_hash(password)
-    users.name = name
-    users.lastname = lastname
     users.email = email
+    users.password = bcrypt.generate_password_hash(password)
 
     db.session.add(users)
     db.session.commit()
 
-    access_token = create_access_token(identity=users.username)
+    access_token = create_access_token(identity=users.email)
     data = {
         "access_token": access_token,
         "users": users.serialize()

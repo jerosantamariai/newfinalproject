@@ -2,7 +2,7 @@ import React from 'react';
 import testi_01 from '../../images/testi_01.png';
 import testi_02 from '../../images/testi_02.png';
 
-function LandComments() {
+const LandComments = props => {
   return (
     <>
       <div className="testiwrapper">
