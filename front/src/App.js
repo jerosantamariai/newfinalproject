@@ -17,6 +17,7 @@ import Faq from './views/faq';
 import Dashboard from './views/dashboard';
 import Blog from './views/blog';
 import Dashpass from './views/dashviews/dashpass';
+import Dashuser from './views/dashviews/dashuser';
 
 const App = props => {
   return (
@@ -26,6 +27,7 @@ const App = props => {
         <div className="row">
           <Switch>
             <Route exact path="/register" component={Register} />
+            <Route exact path="/dashboard/:dashuser" component={Dashuser} />
             <Route exact path="/dashboard/:dashpass" component={Dashpass} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/blog" component={Blog} />

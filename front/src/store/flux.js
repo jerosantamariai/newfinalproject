@@ -6,6 +6,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             success: null,
             isAuth: false,
             currentUser: null,
+            name: '',
+            lastname: '',
+            phone: '',
             email: '',
             password: '',
             oldpassword: '',
@@ -148,8 +151,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                 })
                 sessionStorage.removeItem('currentUser');
                 sessionStorage.removeItem('isAuthenticated');
-            }
-        },
+            },
+        }
+            
     }
 }
 

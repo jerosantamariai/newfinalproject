@@ -120,7 +120,7 @@ def changepassword():
 
 @app.route('/users', methods=['GET', 'POST'])
 @app.route('/users/<int:id>', methods=['GET', 'PUT', 'DELETE'])
-# @jwt_required
+@jwt_required
 def users(id = None):
     if request.method == 'GET':
         if id is not None:
@@ -133,12 +133,49 @@ def users(id = None):
             users = Users.query.all()
             users = list(map(lambda user: user.serialize(), users))
             return jsonify(users), 200
+
     if request.method == 'POST':
-        return jsonify({"msg": "users post"}), 200
+        name = request.form.get('name', None)
+        lastname = request.form.get('lastname', None)
+        phone = request.form.get('phone', None)
+        email = request.form.get('email', None)
+        
+        users = Users()
+         
+        users.name = name 
+        users.lastname = lastname 
+        users.phone = phone
+        users.email = email
+        
+        db.session.add(users) 
+        db.session.commit()  
+
+        return jsonify(users.serialize()), 201
+    
     if request.method == 'PUT':
-        return jsonify({"msg": "users put"}), 200
+        name = request.form.get('name', None)
+        lastname = request.form.get('lastname', None)
+        phone = request.form.get('phone', None)
+        email = request.form.get('email', None)
+                
+        users = Users()
+         
+        users.name = name 
+        users.lastname = lastname 
+        users.phone = phone
+        users.email = email
+        
+        db.session.commit()  
+
+        return jsonify(users.serialize()), 201
+
     if request.method == 'DELETE':
-        return jsonify({"msg": "users delete"}), 200
+        users = Users.query.get(id)
+        if not blog:
+            return jsonify({"msg": "Usuario no encontrado"}), 404
+        db.session.delete(users)
+        db.session.commit()
+        return jsonify({"msg":"Usuario borrado"}), 200
 
 @app.route('/blog', methods=['GET', 'POST'])
 @app.route('/blog/<int:id>', methods=['GET', 'PUT', 'DELETE'])
