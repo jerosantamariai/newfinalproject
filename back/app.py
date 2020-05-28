@@ -157,7 +157,7 @@ def blog(id = None):
             blogs = list(map(lambda blog: blog.serialize(), blogs))
             return jsonify(blogs), 200
 
-if request.method == 'POST':
+    if request.method == 'POST':
         title = request.form.get('title', None)
         publictext = request.form.get('publictext', None)
         privatext = request.form.get('privatext', None)
@@ -200,7 +200,15 @@ if request.method == 'POST':
         blog.privatext = privatext
  
         db.session.commit()
-        return jsonify(blog.serialize()), 201 
+        return jsonify(blog.serialize()), 201
+
+    if request.method == 'DELETE':
+        blog = Blogs.query.get(id)
+        if not blog:
+            return jsonify({"msg": "Blog no encontrado"}), 404
+        db.session.delete(blog)
+        db.session.commit()
+        return jsonify({"msg":"Blog borrado"}), 200
 
 @manager.command
 def loadroles():
