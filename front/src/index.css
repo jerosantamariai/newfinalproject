@@ -493,13 +493,30 @@ font-family: 'Montserrat', sans-serif;
   min-height: 550px;
 }
 
-/* .specialcard{
-  background-color: rgba(102, 102, 102, 0.2);
+.dashpassteiner{
+  margin: 0px auto !important;
+  background: 
+  linear-gradient(rgba(19,19,19,0.5),rgba(19,19,19,0.9)),
+  url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQNNuzS7N5HsD6HdmhAbEnyVGbFejkXRztsk10KcLkduVvfVREV&usqp=CAU);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 40px;
+  color: rgb(255, 255, 255);
+  width: 100%;
+  min-height: 550px;
 }
 
-.specialcardbody{
-  background-color: rgba(85, 85, 85, 0.4);
-} */
+.listwrapper{
+  background-color: rgba(104, 103, 103, 0.4);
+  }
+
+.dashitem{
+  background-color: rgba(19, 19, 19, 0.4) !important;
+}
+
+.dashitem:hover{
+  background-color: rgb(188,156,92,0.7) !important;
+}
 
 .testi-meta{
   color: white;

@@ -7,6 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             currentUser: null,
             email: '',
             password: '',
+            oldpassword: '',
         },
 
         actions: {
@@ -60,7 +61,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         }
                     })
             },
-            
+
             register: (e, history) => {
                 e.preventDefault();
                 const store = getStore();
@@ -96,6 +97,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                         }
                     })
             },
+
+            
         }
     }
 }
