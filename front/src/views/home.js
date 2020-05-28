@@ -1,19 +1,35 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import LandAppoint from '../components/landinghome/landappoint';
 import LandAbout from '../components/landinghome/landabout';
 import LandBarbers from '../components/landinghome/landbarbers';
 import LandComments from '../components/landinghome/landcomments';
 import { Link } from 'react-router-dom';
+import { Context } from '../store/appContext';
 
 const Home = props => {
+  const { store, actions } = useContext(Context)
   return (
     <>
-        <div className="row">
-          <div className="col-md-12">
-            <LandAppoint />
-          </div>
+      <div className="row">
+        <div className="col-md-12">
+          {
+            !!store.success && (
+              <div className="row fixed-top text-center">
+                <div className="col-md-12">
+                  <div className="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>FELICITACIONES!</strong> {store.success.success}
+                    <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )
+          }
+          <LandAppoint />
         </div>
-        <div className="row mt-5 d-flex justify-content-center">
+      </div>
+      <div className="row mt-5 d-flex justify-content-center">
         <div className="col-md-8 col-md-offset-2 text-center">
           <div className="message-box">
             <h4>About</h4>
@@ -30,21 +46,21 @@ const Home = props => {
           </div>
         </div>
       </div>
-        <div className="row">
-          <div className="col-md-12">
-            <LandAbout />
-          </div>
+      <div className="row">
+        <div className="col-md-12">
+          <LandAbout />
         </div>
-        <div className="row">
-          <div className="col-md-12">
-            <LandBarbers />
-          </div>
+      </div>
+      <div className="row">
+        <div className="col-md-12">
+          <LandBarbers />
         </div>
-        <div className="row">
-          <div className="col-md-12">
-            <LandComments />
-          </div>
+      </div>
+      <div className="row">
+        <div className="col-md-12">
+          <LandComments />
         </div>
+      </div>
     </>
   );
 }

@@ -114,7 +114,7 @@ def changepassword():
     if bcrypt.check_password_hash(users.password, oldpassword):
         users.password = bcrypt.generate_password_hash(password)
         db.session.commit()
-        return jsonify({"msg": "Contraseña cambiada!"}), 200
+        return jsonify({"success": "Contraseña cambiada!"}), 200
     else:
         return jsonify({"msg": "Ingresaste mal tu contraseña antigua!"}), 400
 

@@ -8,7 +8,7 @@ const Register = props => {
       <div className="registeiner col-md-12">
       {
           !!store.errors && (
-            <div className="row">
+            <div className="row fixed-top text-center">
               <div className="col-md-12">
                 <div className="alert alert-warning alert-dismissible fade show" role="alert">
                   <strong>ERROR!</strong> {store.errors.msg}
