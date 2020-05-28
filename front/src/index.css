@@ -464,6 +464,43 @@ font-family: 'Montserrat', sans-serif;
   width: 100%;
   min-height: 550px;
 }
+
+.dashteiner{
+  margin: 0px auto !important;
+  background: 
+  linear-gradient(rgba(19,19,19,0.5),rgba(19,19,19,0.9)),
+  url(https://lh3.googleusercontent.com/KdS80Cg-hJHPGUm5h-k0PHGoPrmGKCN6TNdMdPvuD0Zvz3v72xbyipQ8lJzm-bFvGZ2IuXdb=w1080-h608-p-no-v0);
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background-color: rgb(188,156,92,0.7); */
+  padding: 40px;
+  color: rgb(255, 255, 255);
+  width: 100%;
+  min-height: 550px;
+}
+
+.blogteiner{
+  margin: 0px auto !important;
+  background: 
+  linear-gradient(rgba(19,19,19,0.5),rgba(19,19,19,0.9)),
+  url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSqo3hIV-4aOr9YUH252N5T3WvdXZvKjYvwnHXyMjWssikNfWzo&usqp=CAU);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background: rgba(0,0,0,0.2);
+  padding: 40px;
+  color: rgb(255, 255, 255);
+  width: 100%;
+  min-height: 550px;
+}
+
+/* .specialcard{
+  background-color: rgba(102, 102, 102, 0.2);
+}
+
+.specialcardbody{
+  background-color: rgba(85, 85, 85, 0.4);
+} */
+
 .testi-meta{
   color: white;
   margin-top: 30px;

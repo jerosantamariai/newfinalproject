@@ -3,7 +3,7 @@ from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
-from models import db, Users
+from models import db, Users, Roles
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity
@@ -80,6 +80,7 @@ def register():
     users = Users()
     users.email = email
     users.password = bcrypt.generate_password_hash(password)
+    users.role_id = 2
 
     db.session.add(users)
     db.session.commit()
@@ -106,9 +107,9 @@ def changepassword():
     if not password or password == '':
         return jsonify({"msg": "Debes ingresar una nueva clave"}), 400
 
-    username = get_jwt_identity()
+    email = get_jwt_identity()
 
-    users = Users.query.filter_by(username=username).first()
+    users = Users.query.filter_by(email=email).first()
 
     if bcrypt.check_password_hash(users.password, oldpassword):
         users.password = bcrypt.generate_password_hash(password)
@@ -119,7 +120,7 @@ def changepassword():
 
 @app.route('/users', methods=['GET', 'POST'])
 @app.route('/users/<int:id>', methods=['GET', 'PUT', 'DELETE'])
-@jwt_required
+# @jwt_required
 def users(id = None):
     if request.method == 'GET':
         if id is not None:
@@ -138,6 +139,34 @@ def users(id = None):
         return jsonify({"msg": "users put"}), 200
     if request.method == 'DELETE':
         return jsonify({"msg": "users delete"}), 200
+
+@manager.command
+def loadroles():
+    role = Roles()
+    role.rolename = "admin"
+
+    db.session.add(role)
+    db.session.commit()
+
+    role = Roles()
+    role.rolename = "customer"
+
+    db.session.add(role)
+    db.session.commit()
+
+    print("Han sido creados los roles")
+
+@manager.command
+def loadadmin():
+    users = Users()
+    users.email = "admin@gmail.com"
+    users.password = bcrypt.generate_password_hash("123456")
+    users.role_id = 1
+
+    db.session.add(users)
+    db.session.commit()
+
+    print("Administrador creado!")
 
 if __name__ == '__main__':
     manager.run()

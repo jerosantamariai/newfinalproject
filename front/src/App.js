@@ -14,6 +14,8 @@ import Register from './views/register';
 import Footer from './components/footer';
 import Pricing from './views/pricing';
 import Faq from './views/faq';
+import Dashboard from './views/dashboard';
+import Blog from './views/blog';
 
 const App = props => {
   return (
@@ -23,6 +25,8 @@ const App = props => {
         <div className="row">
           <Switch>
             <Route exact path="/register" component={Register} />
+            <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/blog" component={Blog} />
             <Route exact path="/faq" component={Faq} />
             <Route exact path="/pricing" component={Pricing} />
             <Route exact path="/login" component={LogIn} />

@@ -12,7 +12,7 @@ const Footer = props => {
                             <div className="footer-left">
                                 <p className="footer-links">
                                     <Link to="/">Home</Link>
-                                    <Link to="/ourbarbers">Blog</Link>
+                                    <Link to="/blog">Blog</Link>
                                     <Link to="/pricing">Pricing</Link>
                                     <Link to="/aboutus">About</Link>
                                     <Link to="/faq">Faq</Link>
