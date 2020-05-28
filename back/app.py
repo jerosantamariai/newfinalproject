@@ -158,7 +158,6 @@ def blog(id = None):
             return jsonify(blogs), 200
 
 if request.method == 'POST':
-        
         title = request.form.get('title', None)
         publictext = request.form.get('publictext', None)
         privatext = request.form.get('privatext', None)
@@ -181,6 +180,27 @@ if request.method == 'POST':
         db.session.commit()  
 
         return jsonify(blog.serialize()), 201
+
+    if request.method == 'PUT':
+        title = request.form.get('title', None)
+        publictext = request.form.get('publictext', None)
+        privatext = request.form.get('privatext', None)
+       
+        if not title and title == "":
+            return jsonify({"msg":"Debes insertar el titulo del blog"}), 400
+        if not publictext and publictext == "":
+            return jsonify({"msg":"Debes insertar el texto publico del blog"}), 400
+        if not privatext and privatext == "":
+            return jsonify({"msg":"Debes insertar el texto privado del blog"}), 400
+
+        blog = Blogs()
+         
+        blog.title = title 
+        blog.publictext = publictext 
+        blog.privatext = privatext
+ 
+        db.session.commit()
+        return jsonify(blog.serialize()), 201 
 
 @manager.command
 def loadroles():
