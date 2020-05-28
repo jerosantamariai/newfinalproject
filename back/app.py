@@ -140,6 +140,23 @@ def users(id = None):
     if request.method == 'DELETE':
         return jsonify({"msg": "users delete"}), 200
 
+@app.route('/blog', methods=['GET', 'POST'])
+@app.route('/blog/<int:id>', methods=['GET', 'PUT', 'DELETE'])
+# @jwt_required
+def blog(id = None):
+    if request.method == 'GET':
+
+        if id is not None :
+            blog = Blog.query.get(id)
+            if blog:
+               return jsonify(blog.serialize()), 200
+            else:
+               return jsonify({"msg": "Not Found"}), 404   
+        else :
+            blogs = Blog.query.all()
+            blogs = list(map(lambda blog: blog.serialize(), blogs))
+            return jsonify(blogs), 200
+
 @manager.command
 def loadroles():
     role = Roles()
