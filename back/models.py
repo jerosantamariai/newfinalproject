@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
@@ -21,6 +22,7 @@ class Users (db.Model):
     email = db.Column(db.String(100), nullable=False)
     avatar = db.Column(db.String(100), nullable=True)
     phone = db.Column(db.String(12), nullable=True)
+    createdate = db.Column(db.DateTime, default=datetime.now())
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'), nullable=False)
     role = db.relationship(Roles)
 
@@ -32,6 +34,22 @@ class Users (db.Model):
             "email": self.email,
             "avatar": self.avatar,
             "phone": self.phone,
+            "createdate": self.createdate,
             "role": self.role.serialize()
         }
 
+class Blogs (db.Model):
+    __tablename__ = 'blogs'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    publictext = db.Column(db.String(100), nullable=True)
+    privatext = db.Column(db.String(1000), nullable=True)
+    createdate = db.Column(db.DateTime, default=datetime.now())
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "publictext": self.publictext,
+            "privatext": self.privatext,
+            "createdate": self.createdate
+        }
