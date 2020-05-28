@@ -349,7 +349,7 @@ color: #bb9d52;
   padding: 40px;
   color: rgb(255, 255, 255);
   width: 100%;
-  height: 550px;
+  min-height: 550px;
 }
 .servisteiner{
   margin: 0px auto !important;
@@ -362,7 +362,7 @@ color: #bb9d52;
   padding: 40px;
   color: rgb(255, 255, 255);
   width: 100%;
-  height: 550px;
+  min-height: 550px;
 }
 .barbersteiner{
   margin: 0px auto !important;
@@ -375,7 +375,7 @@ color: #bb9d52;
   padding: 40px;
   color: rgb(255, 255, 255);
   width: 100%;
-  height: 550px;
+  min-height: 550px;
 }
 .loginsteiner{
   margin: 0px auto !important;
@@ -388,7 +388,7 @@ color: #bb9d52;
   padding: 40px;
   color: rgb(255, 255, 255);
   width: 100%;
-  height: 550px;
+  min-height: 550px;
 }
 .faqsteiner{
   margin: 0px auto !important;
@@ -401,7 +401,7 @@ color: #bb9d52;
   padding: 40px;
   color: rgb(255, 255, 255);
   width: 100%;
-  height: 550px;
+  min-height: 550px;
 }
 .contactsteiner{
   margin: 0px auto !important;
@@ -414,7 +414,7 @@ color: #bb9d52;
   padding: 40px;
   color: rgb(255, 255, 255);
   width: 100%;
-  height: 550px;
+  min-height: 550px;
 }
 .appointsteiner{
   margin: 0px auto !important;
@@ -427,7 +427,7 @@ color: #bb9d52;
   padding: 40px;
   color: rgb(255, 255, 255);
   width: 100%;
-  height: 550px;
+  min-height: 550px;
 }
 .aboutsteiner{
   margin: 0px auto !important;
@@ -440,7 +440,7 @@ color: #bb9d52;
   padding: 40px;
   color: rgb(255, 255, 255);
   width: 100%;
-  height: 550px;
+  min-height: 550px;
 }
 .aboutsteinertitulo {
   margin-top: 150px;
@@ -462,7 +462,7 @@ font-family: 'Montserrat', sans-serif;
   padding: 40px;
   color: rgb(255, 255, 255);
   width: 100%;
-  height: 550px;
+  min-height: 550px;
 }
 .testi-meta{
   color: white;

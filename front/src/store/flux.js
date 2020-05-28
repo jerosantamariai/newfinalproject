@@ -3,6 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         store: {
             path: 'http://localhost:5000',
             errors: null,
+            isAuth: false,
             currentUser: null,
             email: '',
             password: '',
@@ -13,6 +14,15 @@ const getState = ({ getStore, getActions, setStore }) => {
                 setStore({
                     [e.target.name]: e.target.value
                 })
+            },
+
+            isAuth: () => {
+                if (sessionStorage.getItem('currentUser')){
+                    setStore({
+                        currentUser: JSON.parse(sessionStorage.getItem('currentUser')),
+                        isAuth: sessionStorage.getItem('isAuth')
+                    })
+                }
             },
 
             login: (e, history) => {
@@ -39,13 +49,13 @@ const getState = ({ getStore, getActions, setStore }) => {
                         } else {
                             setStore({
                                 currentUser: data,
-                                isAuthenticated: true,
+                                isAuth: true,
                                 email: '',
                                 password: '',
                                 errors: null
                             })
                             sessionStorage.setItem('currentUser', JSON.stringify(data))
-                            sessionStorage.setItem('isAuthenticated', true)
+                            sessionStorage.setItem('isAuth', true)
                             history.push("/");
                         }
                     })

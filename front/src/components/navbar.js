@@ -35,25 +35,22 @@ const Navbar = props => {
                             <button type="button" className="btn btn-dark btn-block btn-sm"><Link className="nav-link noDecoration" to="/contact">Contact</Link></button>
                         </li>
                         {
-                            store.currentUser === null && (
-                                <>
-                                    <li className="nav-item">
-                                        <button type="button" className="btn btn-dark btn-block btn-sm"><Link className="nav-link noDecoration" to="/login">Log In</Link></button>
-                                    </li>
-                                    <li className="nav-item">
-                                        <button type="button" className="btn btn-dark btn-block btn-sm"><Link className="nav-link noDecoration" to="/register">Register</Link></button>
-                                    </li>
-                                </>
-                            )
-                        }
-                        {
-                            store.currentUser !== null && (
+                            store.currentUser !== null ? (
                                 <>
                                     <li className="nav-item">
                                         <button type="button" className="btn btn-dark btn-block btn-sm"><Link className="nav-link noDecoration" to="/login">{store.currentUser.users.email}</Link></button>
                                     </li>
                                 </>
-                            )
+                            ) : (
+                                    <>
+                                        <li className="nav-item">
+                                            <button type="button" className="btn btn-dark btn-block btn-sm"><Link className="nav-link noDecoration" to="/login">Log In</Link></button>
+                                        </li>
+                                        <li className="nav-item">
+                                            <button type="button" className="btn btn-dark btn-block btn-sm"><Link className="nav-link noDecoration" to="/register">Register</Link></button>
+                                        </li>
+                                    </>
+                                )
                         }
 
                     </ul>

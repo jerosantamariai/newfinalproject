@@ -20,7 +20,7 @@ const injectContext = PassedComponent => {
         }
 
         componentDidMount() {
-            
+            this.state.actions.isAuth();
         }
 
         render() {
