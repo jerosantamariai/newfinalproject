@@ -3,7 +3,7 @@ from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
-from models import db, Users, Roles
+from models import db, Users, Roles, Blogs
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity
@@ -147,15 +147,40 @@ def blog(id = None):
     if request.method == 'GET':
 
         if id is not None :
-            blog = Blog.query.get(id)
+            blog = Blogs.query.get(id)
             if blog:
                return jsonify(blog.serialize()), 200
             else:
-               return jsonify({"msg": "Not Found"}), 404   
+               return jsonify({"msg": "No se encuentra el blog"}), 404   
         else :
-            blogs = Blog.query.all()
+            blogs = Blogs.query.all()
             blogs = list(map(lambda blog: blog.serialize(), blogs))
             return jsonify(blogs), 200
+
+if request.method == 'POST':
+        
+        title = request.form.get('title', None)
+        publictext = request.form.get('publictext', None)
+        privatext = request.form.get('privatext', None)
+       
+              
+        if not title and title == "":
+            return jsonify({"msg":"Debes insertar el titulo del blog"}), 400
+        if not publictext and publictext == "":
+            return jsonify({"msg":"Debes insertar el texto publico del blog"}), 400
+        if not privatext and privatext == "":
+            return jsonify({"msg":"Debes insertar el texto privado del blog"}), 400
+        
+        blog = Blogs()
+         
+        blog.title = title 
+        blog.publictext = publictext 
+        blog.privatext = privatext
+        
+        db.session.add(blog) 
+        db.session.commit()  
+
+        return jsonify(blog.serialize()), 201
 
 @manager.command
 def loadroles():

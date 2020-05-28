@@ -44,6 +44,7 @@ class Blogs (db.Model):
     title = db.Column(db.String(100), nullable=False)
     publictext = db.Column(db.String(100), nullable=True)
     privatext = db.Column(db.String(1000), nullable=True)
+    imagen = db.Column(db.String(250), nullable=True, default='vista.jpg')
     createdate = db.Column(db.DateTime, default=datetime.now())
 
     def serialize(self):
@@ -51,5 +52,6 @@ class Blogs (db.Model):
             "id": self.id,
             "publictext": self.publictext,
             "privatext": self.privatext,
+            "imagen": self.imagen,
             "createdate": self.createdate
         }
