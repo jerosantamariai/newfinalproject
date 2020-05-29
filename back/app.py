@@ -4,11 +4,11 @@ from flask_migrate import Migrate, MigrateCommand
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 from models import db, Users, Roles, Blogs, Contact
+from flask_mail import Mail, Message
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity
 )
-
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -17,6 +17,11 @@ app.config['ENV'] = 'development'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = 'super-secret'  # Change this!
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_USERNAME'] = 'jerosantamariai@gmail.com' #La cuenta de correo electronico de donde saldran los correos
+app.config['MAIL_PASSWORD'] = ''
 jwt = JWTManager(app)
 
 db.init_app(app)
@@ -24,6 +29,7 @@ db.init_app(app)
 Migrate(app, db)
 CORS(app)
 bcrypt = Bcrypt(app)
+mail = Mail(app)
 manager = Manager(app)
 manager.add_command("db", MigrateCommand)
 
@@ -194,49 +200,51 @@ def blog(id = None):
             return jsonify(blogs), 200
 
     if request.method == 'POST':
-        title = request.form.get('title', None)
-        publictext = request.form.get('publictext', None)
-        privatext = request.form.get('privatext', None)
+        title = request.json.get('title', None)
+        publictext = request.json.get('publictext', None)
+        privatext = request.json.get('privatext', None)
        
-              
-        if not title and title == "":
-            return jsonify({"msg":"Debes insertar el titulo del blog"}), 400
-        if not publictext and publictext == "":
+        if not title or title == "":
+           return jsonify({"msg":"Debes insertar el titulo del blog"}), 400
+        if not publictext or publictext == "":
             return jsonify({"msg":"Debes insertar el texto publico del blog"}), 400
-        if not privatext and privatext == "":
+        if not privatext or privatext == "":
             return jsonify({"msg":"Debes insertar el texto privado del blog"}), 400
         
-        blog = Blogs()
+        blogs = Blogs()
          
-        blog.title = title 
-        blog.publictext = publictext 
-        blog.privatext = privatext
+        blogs.title = title 
+        blogs.publictext = publictext 
+        blogs.privatext = privatext
         
-        db.session.add(blog) 
+        db.session.add(blogs) 
         db.session.commit()  
 
-        return jsonify(blog.serialize()), 201
+        return jsonify(blogs.serialize()), 201
 
     if request.method == 'PUT':
-        title = request.form.get('title', None)
-        publictext = request.form.get('publictext', None)
-        privatext = request.form.get('privatext', None)
+        title = request.json.get('title', None)
+        publictext = request.json.get('publictext', None)
+        privatext = request.json.get('privatext', None)
        
-        if not title and title == "":
+        if not title or title == "":
             return jsonify({"msg":"Debes insertar el titulo del blog"}), 400
-        if not publictext and publictext == "":
+        if not publictext or publictext == "":
             return jsonify({"msg":"Debes insertar el texto publico del blog"}), 400
-        if not privatext and privatext == "":
+        if not privatext or privatext == "":
             return jsonify({"msg":"Debes insertar el texto privado del blog"}), 400
 
-        blog = Blogs()
+        blogput = Blogs.query.get(id) #busca por el id
+            
+        if not blogput:
+            return jsonify({"msg": "Not Found"}), 404 # para no actualizar algo q no existe
          
-        blog.title = title 
-        blog.publictext = publictext 
-        blog.privatext = privatext
+        blogput.title = title 
+        blogput.publictext = publictext 
+        blogput.privatext = privatext
  
         db.session.commit()
-        return jsonify(blog.serialize()), 201
+        return jsonify(blogput.serialize()), 201
 
     if request.method == 'DELETE':
         blog = Blogs.query.get(id)

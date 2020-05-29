@@ -42,18 +42,17 @@ class Blogs (db.Model):
     __tablename__ = 'blogs'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    publictext = db.Column(db.String(100), nullable=True)
-    privatext = db.Column(db.String(1000), nullable=True)
-    imagen = db.Column(db.String(250), nullable=True, default='vista.jpg')
+    publictext = db.Column(db.String(100), nullable=False)
+    privatext = db.Column(db.String(1000), nullable=False)
     createdate = db.Column(db.DateTime, default=datetime.now())
 
     def serialize(self):
         return {
             "id": self.id,
+            "title": self.title,
             "publictext": self.publictext,
             "privatext": self.privatext,
-            "imagen": self.imagen,
-            "createdate": self.createdate
+            "createdate": self.createdate,
         }
 
 class Contact (db.Model):

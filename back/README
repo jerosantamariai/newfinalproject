@@ -23,7 +23,7 @@ VIDEO1 [0:00 - 25:47] --- COMENZANDO A CREAR EL PROYECTO ---
         cer el entorno virtual.
 
         PASO 3: Una vez creado el entorno virtual, hacemos un archivo >> app.py << y comenzamos a instalar
-        las librerias de Flask con el comando en terminal ++ pipenv install flask flask-script flask-migrate flask-cors flask-sqlalchemy flask-bcrypt flask-jwt-extended++ 
+        las librerias de Flask con el comando en terminal ++ pipenv install flask flask-script flask-migrate flask-cors flask-sqlalchemy flask-bcrypt flask-jwt-extended flask-mail++ 
 
         Las librerias y que hace cada una de ellas son las siguientes:
             - Flask: Libreria principal.
