@@ -20,6 +20,16 @@ const Dashboard = props => {
                     </div>
                     <div className="row listwrapper">
                         <div className="col-md-12 my-3 mx-auto">
+                            {/* {
+                                store.currentUser.users.role.id !== 2 && (
+                                    <div className="list-group">
+                                        <p>Menú {store.currentUser.users.role.rolename}</p>
+                                        <Link to="/dashboard/dashuser" className="list-group-item list-group-item-action dashitem text-white">Agregar/Cambiar Blog</Link>
+                                        <Link to="/dashboard/dashpass" className="list-group-item list-group-item-action dashitem text-white">Cambiar Contraseña</Link>
+                                        <Link to="#" className="list-group-item list-group-item-action dashitem text-white">Usuarios</Link>
+                                    </div>
+                                ) 
+                            } */}
                             <div className="list-group">
                                 <Link to="/dashboard/dashuser" className="list-group-item list-group-item-action dashitem text-white">Agregar/Cambiar Información Personal</Link>
                                 <Link to="/dashboard/dashpass" className="list-group-item list-group-item-action dashitem text-white">Cambiar Contraseña</Link>

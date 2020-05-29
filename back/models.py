@@ -55,3 +55,24 @@ class Blogs (db.Model):
             "imagen": self.imagen,
             "createdate": self.createdate
         }
+
+class Contact (db.Model):
+    __tablename__ = 'contact'
+    id = db.Column(db.Integer, primary_key=True)
+    cont_name = db.Column(db.String(100), nullable=False)
+    cont_lastname = db.Column(db.String(100), nullable=False)
+    cont_email = db.Column(db.String(100), nullable=False)
+    cont_phone = db.Column(db.String(12), nullable=False)
+    cont_message = db.Column(db.String(500), nullable=False)
+    cont_createdate = db.Column(db.DateTime, default=datetime.now())
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "cont_name": self.name,
+            "cont_lastname": self.lastname,
+            "cont_email": self.email,
+            "cont_phone": self.phone,
+            "cont_message": self.message,
+            "cont_createdate": self.createdate,
+        }

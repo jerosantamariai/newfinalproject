@@ -33,7 +33,7 @@ const Dashuser = props => {
                             </nav>
                             {
                                 !!store.currentUser && (
-                                    <form onSubmit={e => actions.changePassword(e, props.history)}>
+                                    <form onSubmit={e => actions.setUserInfo(e, props.history)}>
                                         <div className="form-group">
                                             <label htmlFor="name">What is your name?</label>
                                             <input type="text" className="form-control text-center" id="name" name="name" placeholder={store.currentUser.users.name} onChange={actions.handleChange} value={store.name} />
@@ -51,7 +51,7 @@ const Dashuser = props => {
                                             <input type="text" className="form-control text-center" id="phone" name="phone" placeholder={store.currentUser.users.phone!=="" ? "+569XXXXXXXX" : store.currentUser.users.phone} onChange={actions.handleChange} value={store.phone} />
                                             <small>***Please follow the number format!***</small>
                                         </div>
-                                        <button type="submit" className="btn btn-primary">Submit</button>
+                                        <button type="submit" className="btn btn-primary">Save</button>
                                     </form>
                                 )
                             }

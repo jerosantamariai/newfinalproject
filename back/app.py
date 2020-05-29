@@ -3,7 +3,7 @@ from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
-from models import db, Users, Roles, Blogs
+from models import db, Users, Roles, Blogs, Contact
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity
@@ -135,10 +135,10 @@ def users(id = None):
             return jsonify(users), 200
 
     if request.method == 'POST':
-        name = request.form.get('name', None)
-        lastname = request.form.get('lastname', None)
-        phone = request.form.get('phone', None)
-        email = request.form.get('email', None)
+        name = request.json.get('name', None)
+        lastname = request.json.get('lastname', None)
+        phone = request.json.get('phone', None)
+        email = request.json.get('email', None)
         
         users = Users()
          
@@ -153,10 +153,10 @@ def users(id = None):
         return jsonify(users.serialize()), 201
     
     if request.method == 'PUT':
-        name = request.form.get('name', None)
-        lastname = request.form.get('lastname', None)
-        phone = request.form.get('phone', None)
-        email = request.form.get('email', None)
+        name = request.json.get('name', None)
+        lastname = request.json.get('lastname', None)
+        phone = request.json.get('phone', None)
+        email = request.json.get('email', None)
                 
         users = Users()
          
@@ -246,6 +246,40 @@ def blog(id = None):
         db.session.delete(blog)
         db.session.commit()
         return jsonify({"msg":"Blog borrado"}), 200
+
+@app.route('/contact', methods=['POST'])
+def contact():
+    if not request.is_json:
+        return jsonify({"msg": "Ingresar formato correcto"}), 400
+
+    cont_name = request.json.get('cont_name', None)
+    cont_lastname = request.json.get('cont_lastname', None)
+    cont_email = request.json.get('cont_email', None)
+    cont_phone = request.json.get('cont_phone', None)
+    cont_message = request.json.get('cont_message', None)
+
+    if not cont_name or cont_name == '':
+        return jsonify({"msg": "Por favor ingresar nombre"}), 400
+    if not cont_lastname or cont_lastname == '':
+        return jsonify({"msg": "Por favor ingresar apellido"}), 400
+    if not cont_email or cont_email == '':
+        return jsonify({"msg": "Por favor ingresar correo electronico"}), 400
+    if not cont_phone or cont_phone == '':
+        return jsonify({"msg": "Por favor ingresar telefono"}), 400
+    if not cont_message or cont_message == '':
+        return jsonify({"msg": "Por favor ingresar mensaje"}), 400
+
+    contact = Contact()
+    contact.cont_name = cont_name
+    contact.cont_lastname = cont_lastname
+    contact.cont_email = cont_email
+    contact.cont_phone = cont_phone
+    contact.cont_message = cont_message
+    
+    db.session.add(contact)
+    db.session.commit()  
+
+    return jsonify(contact.serialize()), 201
 
 @manager.command
 def loadroles():

@@ -152,6 +152,47 @@ const getState = ({ getStore, getActions, setStore }) => {
                 sessionStorage.removeItem('currentUser');
                 sessionStorage.removeItem('isAuthenticated');
             },
+
+            setUserInfo: (e, history) => {
+                e.preventDefault();
+                const store = getStore();
+                const { access_token } = store.currentUser;
+
+                fetch(store.path + '/users/' + store.currentUser.users.id, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        name: store.name,
+                        lastname: store.lastname,
+                        email: store.email,
+                        phone: store.phone
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json', //estoy enviando en formato json
+                        'Authorization': 'Bearer ' + store.currentUser.access_token
+                    }
+                })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        console.log(data)
+                        if (data.msg) {
+                            setStore({
+                                errors: data
+                            })
+                        } else {   //una vez logeado, cambio el valor del store:
+                            setStore({
+                                success: data,
+                                name: '',
+                                lastname: '',
+                                email: '',
+                                phone: '',
+                                errors: null
+                            })
+                            sessionStorage.setItem('currentUser', JSON.stringify(data))
+                            sessionStorage.setItem('isAuth', true)
+                            history.push("/")
+                        }
+                    })
+            },
         }
             
     }
