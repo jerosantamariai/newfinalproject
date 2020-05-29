@@ -42,6 +42,7 @@ class Blogs (db.Model):
     __tablename__ = 'blogs'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
+    bintro = db.Column(db.String(100), nullable=False)
     publictext = db.Column(db.String(100), nullable=False)
     privatext = db.Column(db.String(1000), nullable=False)
     createdate = db.Column(db.DateTime, default=datetime.now())
@@ -50,6 +51,7 @@ class Blogs (db.Model):
         return {
             "id": self.id,
             "title": self.title,
+            "bintro": self.bintro,
             "publictext": self.publictext,
             "privatext": self.privatext,
             "createdate": self.createdate,

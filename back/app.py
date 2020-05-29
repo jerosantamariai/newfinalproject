@@ -201,11 +201,14 @@ def blog(id = None):
 
     if request.method == 'POST':
         title = request.json.get('title', None)
+        bintro = request.json.get('bintro', None)
         publictext = request.json.get('publictext', None)
         privatext = request.json.get('privatext', None)
        
         if not title or title == "":
            return jsonify({"msg":"Debes insertar el titulo del blog"}), 400
+        if not bintro or bintro == "":
+           return jsonify({"msg":"Debes insertar la introducción del blog"}), 400
         if not publictext or publictext == "":
             return jsonify({"msg":"Debes insertar el texto publico del blog"}), 400
         if not privatext or privatext == "":
@@ -214,6 +217,7 @@ def blog(id = None):
         blogs = Blogs()
          
         blogs.title = title 
+        blogs.bintro = bintro
         blogs.publictext = publictext 
         blogs.privatext = privatext
         
@@ -224,11 +228,14 @@ def blog(id = None):
 
     if request.method == 'PUT':
         title = request.json.get('title', None)
+        bintro = request.json.get('bintro', None)
         publictext = request.json.get('publictext', None)
         privatext = request.json.get('privatext', None)
        
         if not title or title == "":
             return jsonify({"msg":"Debes insertar el titulo del blog"}), 400
+        if not bintro or bintro == "":
+            return jsonify({"msg":"Debes insertar la introducción del blog"}), 400
         if not publictext or publictext == "":
             return jsonify({"msg":"Debes insertar el texto publico del blog"}), 400
         if not privatext or privatext == "":
@@ -239,7 +246,8 @@ def blog(id = None):
         if not blogput:
             return jsonify({"msg": "Not Found"}), 404 # para no actualizar algo q no existe
          
-        blogput.title = title 
+        blogput.title = title
+        blogput.bintro = bintro
         blogput.publictext = publictext 
         blogput.privatext = privatext
  

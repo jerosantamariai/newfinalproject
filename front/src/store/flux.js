@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             success: null,
             isAuth: false,
             currentUser: null,
+            blog: null,
             name: '',
             lastname: '',
             phone: '',
@@ -17,6 +18,10 @@ const getState = ({ getStore, getActions, setStore }) => {
             cont_email: '',
             cont_phone: '',
             cont_message: '',
+            title: '',
+            bintro: '',
+            publictext: '',
+            privatext: '',
         },
 
         actions: {
@@ -233,6 +238,46 @@ const getState = ({ getStore, getActions, setStore }) => {
                                 errors: null
                             })
                             history.push("/dashboard");
+                        }
+                    })
+            },
+
+            loadBlog: (e, history) => {
+                e.preventDefault();
+                const store = getStore();
+
+                fetch(store.path + '/blog', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        title: store.title,
+                        bintro: store.bintro,
+                        publictext: store.publictext,
+                        privatext: store.privatext,
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        console.log(data)
+                        if (data.msg) {
+                            setStore({
+                                errors: data
+                            })
+                        } else {
+                            setStore({
+                                currentUser: data,
+                                isAuth: true,
+                                title: '',
+                                bintro: '',
+                                publictext: '',
+                                privatext: '',
+                                errors: null
+                            })
+                            sessionStorage.setItem('currentUser', JSON.stringify(data))
+                            sessionStorage.setItem('isAuth', true)
+                            history.push("/");
                         }
                     })
             },

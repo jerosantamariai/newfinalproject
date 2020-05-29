@@ -519,6 +519,19 @@ font-family: 'Montserrat', sans-serif;
   min-height: 550px;
 }
 
+.dashadminblogteiner{
+  margin: 0px auto !important;
+  background: 
+  linear-gradient(rgba(19,19,19,0.5),rgba(19,19,19,0.9)),
+  url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQHqBpaSmf0hSjTFov27v8VAoLF1Pq9hrnqKYfANlw0SRp8lnsc&usqp=CAU);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 40px;
+  color: rgb(255, 255, 255);
+  width: 100%;
+  min-height: 550px;
+}
+
 .listwrapper{
   background-color: rgba(104, 103, 103, 0.4);
   }
