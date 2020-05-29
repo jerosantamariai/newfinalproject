@@ -182,7 +182,6 @@ def users(id = None):
 # @jwt_required
 def blog(id = None):
     if request.method == 'GET':
-
         if id is not None :
             blog = Blogs.query.get(id)
             if blog:
@@ -247,39 +246,53 @@ def blog(id = None):
         db.session.commit()
         return jsonify({"msg":"Blog borrado"}), 200
 
-@app.route('/contact', methods=['POST'])
-def contact():
-    if not request.is_json:
-        return jsonify({"msg": "Ingresar formato correcto"}), 400
-
-    cont_name = request.json.get('cont_name', None)
-    cont_lastname = request.json.get('cont_lastname', None)
-    cont_email = request.json.get('cont_email', None)
-    cont_phone = request.json.get('cont_phone', None)
-    cont_message = request.json.get('cont_message', None)
-
-    if not cont_name or cont_name == '':
-        return jsonify({"msg": "Por favor ingresar nombre"}), 400
-    if not cont_lastname or cont_lastname == '':
-        return jsonify({"msg": "Por favor ingresar apellido"}), 400
-    if not cont_email or cont_email == '':
-        return jsonify({"msg": "Por favor ingresar correo electronico"}), 400
-    if not cont_phone or cont_phone == '':
-        return jsonify({"msg": "Por favor ingresar telefono"}), 400
-    if not cont_message or cont_message == '':
-        return jsonify({"msg": "Por favor ingresar mensaje"}), 400
-
-    contact = Contact()
-    contact.cont_name = cont_name
-    contact.cont_lastname = cont_lastname
-    contact.cont_email = cont_email
-    contact.cont_phone = cont_phone
-    contact.cont_message = cont_message
+@app.route('/contact', methods=['GET', 'POST'])
+@app.route('/contact/<int:id>', methods=['GET', 'PUT', 'DELETE'])
+def contact(id = None):
+    if request.method == 'GET':
+        if id is not None :
+            contact = Contact.query.get(id)
+            if contact:
+               return jsonify(contact.serialize()), 200
+            else:
+               return jsonify({"msg": "No se encuentra el comentario"}), 404   
+        else :
+            contacts = Contact.query.all()
+            contacts = list(map(lambda contact: contact.serialize(), contacts))
+            return jsonify(contacts), 200
     
-    db.session.add(contact)
-    db.session.commit()  
+    if request.method == 'POST':
+        if not request.is_json:
+            return jsonify({"msg": "Ingresar formato correcto"}), 400
 
-    return jsonify(contact.serialize()), 201
+        cont_name = request.json.get('cont_name', None)
+        cont_lastname = request.json.get('cont_lastname', None)
+        cont_email = request.json.get('cont_email', None)
+        cont_phone = request.json.get('cont_phone', None)
+        cont_message = request.json.get('cont_message', None)
+
+        if not cont_name or cont_name == '':
+            return jsonify({"msg": "Por favor ingresar nombre"}), 400
+        if not cont_lastname or cont_lastname == '':
+            return jsonify({"msg": "Por favor ingresar apellido"}), 400
+        if not cont_email or cont_email == '':
+            return jsonify({"msg": "Por favor ingresar correo electronico"}), 400
+        if not cont_phone or cont_phone == '':
+            return jsonify({"msg": "Por favor ingresar telefono"}), 400
+        if not cont_message or cont_message == '':
+            return jsonify({"msg": "Por favor ingresar mensaje"}), 400
+
+        contact = Contact()
+        contact.cont_name = cont_name
+        contact.cont_lastname = cont_lastname
+        contact.cont_email = cont_email
+        contact.cont_phone = cont_phone
+        contact.cont_message = cont_message
+        
+        db.session.add(contact)
+        db.session.commit()  
+
+        return jsonify(contact.serialize()), 201
 
 @manager.command
 def loadroles():

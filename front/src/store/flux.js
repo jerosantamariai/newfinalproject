@@ -12,6 +12,11 @@ const getState = ({ getStore, getActions, setStore }) => {
             email: '',
             password: '',
             oldpassword: '',
+            c_name: '',
+            c_lastname: '',
+            c_email: '',
+            c_phone: '',
+            c_text: '',
         },
 
         actions: {
@@ -192,9 +197,47 @@ const getState = ({ getStore, getActions, setStore }) => {
                             history.push("/")
                         }
                     })
+            }, //AQUI TENGO PROBLEMAS
+
+            contact: (e, history) => {
+                e.preventDefault();
+                const store = getStore();
+
+                fetch(store.path + '/contact', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        c_name: store.c_name,
+                        c_lastname: store.c_lastname,
+                        c_email: store.c_email,
+                        c_phone: store.c_phone,
+                        c_text: store.c_text,
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        console.log(data)
+                        if (data.msg) {
+                            setStore({
+                                errors: data
+                            })
+                        } else {
+                            setStore({
+                                c_name: '',
+                                c_lastname: '',
+                                c_email: '',
+                                c_phone: '',
+                                c_text: '',
+                                errors: null
+                            })
+                            history.push("/dashboard");
+                        }
+                    })
             },
         }
-            
+
     }
 }
 

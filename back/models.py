@@ -69,10 +69,10 @@ class Contact (db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "cont_name": self.name,
-            "cont_lastname": self.lastname,
-            "cont_email": self.email,
-            "cont_phone": self.phone,
-            "cont_message": self.message,
-            "cont_createdate": self.createdate,
+            "cont_name": self.cont_name,
+            "cont_lastname": self.cont_lastname,
+            "cont_email": self.cont_email,
+            "cont_phone": self.cont_phone,
+            "cont_message": self.cont_message,
+            "cont_createdate": self.cont_createdate,
         }

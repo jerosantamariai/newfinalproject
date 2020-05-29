@@ -16,23 +16,27 @@ const Contact = props => {
                   <li className="breadcrumb-item active" aria-current="page">Contact</li>
                 </ol>
               </nav>
-              <form onSubmit={e => actions.setUserInfo(e, props.history)}>
+              <form onSubmit={e => actions.contact(e, props.history)}>
                 <div className="form-group">
                   <label htmlFor="name">What is your name?</label>
-                  <input type="text" className="form-control text-center" id="name" name="name" onChange={actions.handleChange} value={store.name} />
+                  <input type="text" className="form-control text-center" id="name" name="name" onChange={actions.handleChange} value={store.c_name} />
                 </div>
                 <div className="form-group">
                   <label htmlFor="lastname">What is your last name?</label>
-                  <input type="text" className="form-control text-center" id="lastname" name="lastname" onChange={actions.handleChange} value={store.lastname} />
+                  <input type="text" className="form-control text-center" id="lastname" name="lastname" onChange={actions.handleChange} value={store.c_lastname} />
                 </div>
                 <div className="form-group">
                   <label htmlFor="email">What is your email?</label>
-                  <input type="email" className="form-control text-center" id="email" name="email" onChange={actions.handleChange} value={store.email} />
+                  <input type="email" className="form-control text-center" id="email" name="email" onChange={actions.handleChange} value={store.c_email} />
                 </div>
                 <div className="form-group">
                   <label htmlFor="phone">What is your phone number?</label>
-                  <input type="text" className="form-control text-center" id="phone" name="phone" onChange={actions.handleChange} value={store.phone} />
+                  <input type="text" className="form-control text-center" id="phone" name="phone" onChange={actions.handleChange} value={store.c_phone} />
                   <small>***Please follow the number format!***</small>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="c_text">What do yopu want to tell us?</label>
+                  <input type="text" className="form-control text-center" id="c_text" name="c_text" onChange={actions.handleChange} value={store.c_text} />
                 </div>
                 <button type="submit" className="btn btn-primary">Save</button>
               </form>
