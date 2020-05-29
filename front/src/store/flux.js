@@ -99,7 +99,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                             })
                         } else {
                             setStore({
-                                currentUser: data,
+                                blog: data,
                                 isAuth: true,
                                 email: '',
                                 password: '',
@@ -281,6 +281,26 @@ const getState = ({ getStore, getActions, setStore }) => {
                         }
                     })
             },
+
+            getBlogs: url => {
+                fetch(url, {
+                  method: 'GET',
+        
+                  headers: {
+                    'Content-Type': 'application/json'
+                  }
+                })
+                  .then(resp => resp.json())
+                  .then(data => {
+                    console.log(data)
+                    setStore({
+                      blog: data
+                    })
+                  })
+                  .catch(error => {
+                    console.log(error)
+                  })
+              },
         }
 
     }

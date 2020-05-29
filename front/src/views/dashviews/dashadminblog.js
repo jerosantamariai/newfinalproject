@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Context } from '../../store/appContext';
+import { Link } from 'react-router-dom';
 
 const DashAdminBlog = props => {
     const { store, actions } = useContext(Context)
@@ -23,7 +24,7 @@ const DashAdminBlog = props => {
                 <div className="col-md-10 offset-md-1">
                     <div className="row listwrapper">
                         <div className="col-md-8 my-3 mx-auto text-center">
-                            <h1>User's Information</h1>
+                            <h1>Administrar Blogs</h1>
                             <nav aria-label="breadcrumb">
                                 <ol className="breadcrumb text-white" id="breadcrumb">
                                     <li className="breadcrumb-item"><a href="/">Home</a></li>
@@ -31,6 +32,7 @@ const DashAdminBlog = props => {
                                     <li className="breadcrumb-item active" aria-current="page">Load/Change Blog</li>
                                 </ol>
                             </nav>
+                            <h3>Crear/Modificar Blogs</h3>
                             <form onSubmit={e => actions.loadBlog(e, props.history)}>
                                 <div className="form-group">
                                     <label htmlFor="title">What is the Title of the blog</label>
@@ -50,31 +52,32 @@ const DashAdminBlog = props => {
                                 </div>
                                 <button type="submit" className="btn btn-primary">Save</button>
                             </form>
-                            <div className="row">
-                                {/* {
-                            !!store.films ?
-                                store.films.results.map((film, i) => {
-                                    const img = film.title.split(" ").join("-").toLowerCase() + ".jpg";
-                                    return (
-                                        < div className="card text-white bg-dark col-3 mb-3" key={i}>
-                                            <img src={"img/films/" + img} className="card-img-top" alt={"image of " + img} />
-                                            <div className="card-body">
-                                                <h5 className="card-title">{film.title}</h5>
-                                                <p className="card-text">Director: {film.director}</p>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                                <Link to={"/films/" + film.title} className="btn btn-secondary">Go to...></Link>
-                                            </div>
-                                        </div>
-                                    )
-                                })
-                                : (
-                                    <div class="text-center" id="undefined">
-                                        <div className="spinner-grow text-light" role="status">
-                                        </div>
-                                    </div>
-                                )
-                        } */}
+                            <h3>Current Blogs</h3>
+                            <div className="list-group d-flex justify-content-center overflow-auto my-1" id="scrollablecorps">
+                                <ul>
+                                    {
+                                        !!store.blog ?
+                                            store.blog.map((blo, i) => {
+                                                return (
+                                                    <>
+                                                        <Link
+                                                            to="#"
+                                                            className="list-group-item list-group-item-action d-flex justify-content-between dashitem text-white">
+                                                                {blo.id} - {blo.title}<i className="fas fa-trash" id="icons"></i>
+                                                        </Link>
+                                                    </>
+                                                )
+                                            })
+                                            : (
+                                                <div className="text-center" id="undefined">
+                                                    <div className="spinner-grow text-light" role="status">
+                                                    </div>
+                                                </div>
+                                            )
+                                    }
+                                </ul>
                             </div>
+
                         </div>
                     </div>
                 </div>
