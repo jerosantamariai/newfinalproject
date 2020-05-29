@@ -12,11 +12,11 @@ const getState = ({ getStore, getActions, setStore }) => {
             email: '',
             password: '',
             oldpassword: '',
-            c_name: '',
-            c_lastname: '',
-            c_email: '',
-            c_phone: '',
-            c_text: '',
+            cont_name: '',
+            cont_lastname: '',
+            cont_email: '',
+            cont_phone: '',
+            cont_message: '',
         },
 
         actions: {
@@ -206,11 +206,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                 fetch(store.path + '/contact', {
                     method: 'POST',
                     body: JSON.stringify({
-                        c_name: store.c_name,
-                        c_lastname: store.c_lastname,
-                        c_email: store.c_email,
-                        c_phone: store.c_phone,
-                        c_text: store.c_text,
+                        cont_name: store.cont_name,
+                        cont_lastname: store.cont_lastname,
+                        cont_email: store.cont_email,
+                        cont_phone: store.cont_phone,
+                        cont_message: store.cont_message,
                     }),
                     headers: {
                         'Content-Type': 'application/json'
@@ -225,11 +225,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                             })
                         } else {
                             setStore({
-                                c_name: '',
-                                c_lastname: '',
-                                c_email: '',
-                                c_phone: '',
-                                c_text: '',
+                                cont_name: '',
+                                cont_lastname: '',
+                                cont_email: '',
+                                cont_phone: '',
+                                cont_message: '',
                                 errors: null
                             })
                             history.push("/dashboard");
