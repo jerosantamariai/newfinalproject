@@ -1,9 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../store/appContext';
 
 const Blogs = props => {
     const { store, actions } = useContext(Context)
+    useEffect(() => {
+        console.log("aqui estoy")
+        actions.getBlogs()
+    }, [])
     return (
         <>
             <div className="blogteiner">

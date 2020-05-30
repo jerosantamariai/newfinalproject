@@ -100,6 +100,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         } else {
                             setStore({
                                 blog: data,
+                                currentUser: data,
                                 isAuth: true,
                                 email: '',
                                 password: '',
@@ -260,24 +261,22 @@ const getState = ({ getStore, getActions, setStore }) => {
                 })
                     .then(resp => resp.json())
                     .then(data => {
-                        console.log(data)
+                        console.error(data)
                         if (data.msg) {
                             setStore({
                                 errors: data
                             })
                         } else {
+                            // getActions().getBlogs();
                             setStore({
-                                currentUser: data,
-                                isAuth: true,
+                                blog: data,
                                 title: '',
                                 bintro: '',
                                 publictext: '',
                                 privatext: '',
-                                errors: null
+                                errors: null,
                             })
-                            sessionStorage.setItem('currentUser', JSON.stringify(data))
-                            sessionStorage.setItem('isAuth', true)
-                            history.push("/");
+                            history.push("/blogs");
                         }
                     })
             },
@@ -300,6 +299,21 @@ const getState = ({ getStore, getActions, setStore }) => {
                   .catch(error => {
                     console.log(error)
                   })
+            },
+
+            deleteBlogs: (url, history) => {
+                const store = getStore();
+                fetch(store.path + "/blog" + url, {
+                  method: "DELETE",
+                  headers: {
+                    "Content-Type": "application/json"
+                  }
+                })
+                  .then(resp => resp.json())
+                  .then(data => {
+                    getActions().getBlogs(store.path + '/blog');
+                  });
+                  history.push("/dashboard/dashadminblog");
               },
         }
 

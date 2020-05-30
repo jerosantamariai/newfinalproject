@@ -65,7 +65,6 @@ def login():
     else:
         return jsonify({"msg": "Algo ingresaste mal, vuelve a intentarlo"}), 401
 
-
 @app.route('/register', methods=['POST'])
 def register():
     if not request.is_json:
@@ -224,7 +223,9 @@ def blog(id = None):
         db.session.add(blogs) 
         db.session.commit()  
 
-        return jsonify(blogs.serialize()), 201
+        blogs = Blogs.query.all()
+        blogs = list(map(lambda blog: blog.serialize(), blogs))
+        return jsonify(blogs), 201
 
     if request.method == 'PUT':
         title = request.json.get('title', None)

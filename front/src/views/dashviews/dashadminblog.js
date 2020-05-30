@@ -33,7 +33,10 @@ const DashAdminBlog = props => {
                                 </ol>
                             </nav>
                             <h3>Crear/Modificar Blogs</h3>
-                            <form onSubmit={e => actions.loadBlog(e, props.history)}>
+                            <form onSubmit={e => {
+                                e.preventDefault();
+                                actions.loadBlog(e, props.history)
+                                }}>
                                 <div className="form-group">
                                     <label htmlFor="title">What is the Title of the blog</label>
                                     <textarea className="form-control text-center rows-4" id="title" name="title" placeholder="" onChange={actions.handleChange} value={store.title} />
@@ -56,14 +59,20 @@ const DashAdminBlog = props => {
                             <div className="list-group d-flex justify-content-center overflow-auto my-1" id="scrollablecorps">
                                 <ul>
                                     {
-                                        !!store.blog ?
+                                        store.blog !== null && store.blog !== undefined ?
                                             store.blog.map((blo, i) => {
                                                 return (
                                                     <>
                                                         <Link
                                                             to="#"
                                                             className="list-group-item list-group-item-action d-flex justify-content-between dashitem text-white">
-                                                                {blo.id} - {blo.title}<i className="fas fa-trash" id="icons"></i>
+                                                            {blo.id} - {blo.title}
+                                                            <i
+                                                                className="fas fa-trash"
+                                                                id="icons"
+                                                                onClick={e => actions.deleteBlogs(e, props.history)}
+                                                                >
+                                                            </i>
                                                         </Link>
                                                     </>
                                                 )
