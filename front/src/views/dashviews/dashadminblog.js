@@ -54,6 +54,7 @@ const DashAdminBlog = props => {
                                     <textarea className="form-control text-center rows-12" id="privatext" name="privatext" placeholder="" onChange={actions.handleChange} value={store.privatext} />
                                 </div>
                                 <button type="submit" className="btn btn-primary">Save</button>
+                                <button type="btn" className="btn btn-primary" onClick={(e)=> actions.setBlog(e)}>Edit</button>
                             </form>
                             <h3>Current Blogs</h3>
                             <div className="list-group d-flex justify-content-center overflow-auto my-1" id="scrollablecorps">
@@ -65,12 +66,15 @@ const DashAdminBlog = props => {
                                                     <>
                                                         <Link
                                                             to="#"
-                                                            className="list-group-item list-group-item-action d-flex justify-content-between dashitem text-white">
+                                                            className="list-group-item list-group-item-action d-flex justify-content-between dashitem text-white"
+                                                            onClick={() => actions.getCurrent(blo.id, blo.title, blo.bintro, blo.publictext, blo.privatext)}>
                                                             {blo.id} - {blo.title}
                                                             <i
                                                                 className="fas fa-trash"
-                                                                id="icons"
-                                                                onClick={e => actions.deleteBlogs(e, props.history)}
+                                                                id="deleteid"
+                                                                name="deleteid"
+                                                                value={store.deleteid}
+                                                                onClick={e => actions.deleteBlogs(blo.id)}
                                                                 >
                                                             </i>
                                                         </Link>

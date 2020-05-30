@@ -253,7 +253,10 @@ def blog(id = None):
         blogput.privatext = privatext
  
         db.session.commit()
-        return jsonify(blogput.serialize()), 201
+        
+        blogput = Blogs.query.all()
+        blogput = list(map(lambda blog: blog.serialize(), blogput))
+        return jsonify(blogput), 200
 
     if request.method == 'DELETE':
         blog = Blogs.query.get(id)

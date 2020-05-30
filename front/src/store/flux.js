@@ -22,6 +22,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             bintro: '',
             publictext: '',
             privatext: '',
+            blogid: '',
         },
 
         actions: {
@@ -261,13 +262,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                 })
                     .then(resp => resp.json())
                     .then(data => {
-                        console.error(data)
                         if (data.msg) {
                             setStore({
                                 errors: data
                             })
                         } else {
-                            // getActions().getBlogs();
                             setStore({
                                 blog: data,
                                 title: '',
@@ -283,38 +282,96 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             getBlogs: url => {
                 fetch(url, {
-                  method: 'GET',
-        
-                  headers: {
-                    'Content-Type': 'application/json'
-                  }
+                    method: 'GET',
+
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
                 })
-                  .then(resp => resp.json())
-                  .then(data => {
-                    console.log(data)
-                    setStore({
-                      blog: data
+                    .then(resp => resp.json())
+                    .then(data => {
+                        // const newData = data.map((elem) => {
+                        //     return { ...elem, title: elem.title.replace(/[!@#$%^&*(),.?":{}|<> ]/g, '_')}
+                        // })                       
+                        // console.log(newData);
+                        setStore({
+                            blog: data
+                        })
                     })
-                  })
-                  .catch(error => {
-                    console.log(error)
-                  })
+                    .catch(error => {
+                        console.log(error)
+                    })
             },
 
-            deleteBlogs: (url, history) => {
+            deleteBlogs: (id) => {
                 const store = getStore();
-                fetch(store.path + "/blog" + url, {
-                  method: "DELETE",
-                  headers: {
-                    "Content-Type": "application/json"
-                  }
+                fetch(store.path + "/blog/" + id, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
                 })
-                  .then(resp => resp.json())
-                  .then(data => {
-                    getActions().getBlogs(store.path + '/blog');
-                  });
-                  history.push("/dashboard/dashadminblog");
-              },
+                    .then(resp => resp.json())
+                    .then(data => {
+                        console.error(data)
+                        if (data.msg === "Blog borrado") {
+                            const action = getActions()
+                            action.getBlogs(store.path + "/blog/");
+                            setStore({
+                                success: data
+                            })
+                        } else {
+                            setStore({
+                                error: data
+                            })
+                        }
+                    })
+            },
+
+            getCurrent: (blogid, title, bintro, publictext, privatext) => {
+                setStore({
+                    blogid,
+                    title,
+                    bintro,
+                    publictext,
+                    privatext,
+                })
+            },
+
+            setBlog: (e) => {
+                e.preventDefault();
+                const store = getStore();
+
+                fetch(store.path + '/blog/' + store.blogid, {
+                    method: 'PUT',
+                    body: JSON.stringify({
+                        title: store.title,
+                        bintro: store.bintro,
+                        publictext: store.publictext,
+                        privatext: store.privatext,
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        if (data.msg) {
+                            setStore({
+                                errors: data
+                            })
+                        } else {
+                            setStore({
+                                blog: data,
+                                title: '',
+                                bintro: '',
+                                publictext: '',
+                                privatext: '',
+                                errors: null,
+                            })
+                        }
+                    })
+            },
         }
 
     }
