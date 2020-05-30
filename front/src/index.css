@@ -543,6 +543,14 @@ font-family: 'Montserrat', sans-serif;
   background-color: rgb(188,156,92,0.7) !important;
 }
 
+.blogitem{
+  background-color: rgba(105, 105, 105, 0.4) !important;
+}
+
+.blogitem:hover{
+  background-color: rgb(188,156,92,0.7) !important;
+}
+
 .testi-meta{
   color: white;
   margin-top: 30px;

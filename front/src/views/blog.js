@@ -1,44 +1,52 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
 import { Context } from '../store/appContext';
+import { Link } from 'react-router-dom';
 
 const Blog = props => {
     const { store, actions } = useContext(Context)
+    const blogger = props.match.params.title;
     return (
         <>
             <div className="blogteiner">
-                <h1>Bienvenido a nuestro Blog!</h1>
-                <div class="card-deck">
-                    <div className="row d-flex justify-content-center">
+                <div className="card-group">
+                    <div className="row">
                         {
                             !!store.blog ?
                                 store.blog.map((blo, i) => {
-                                    // const img = blo.title.split(" ").join("-").toLowerCase() + ".jpg";
-                                    return (
-                                        <>
-                                            < div className="card text-white bg-dark col-3 mb-3" key={i}>
-                                                {/* <img src={"img/films/" + img} className="card-img-top" alt={"image of " + img} /> */}
-                                                <img src="http://placehold.it/300x200" className="card-img-top my-2" alt={"image of " + blo.id} />
-                                                {/* <a classNam="text" id="overlay">GO!</a> */}
-                                                <div className="card-body">
-                                                    <h5 className="card-title">{blo.title}</h5>
-                                                    <p className="card-text text-justify">{blo.bintro}</p>
+                                    if (JSON.stringify(blo.title) === JSON.stringify(blogger)) {
+                                        // const img = blo.title.split(" ").join("-").toLowerCase() + ".jpg";
+                                        return (
+                                            <div className="row card-group text-white bg-dark mb-3 d-flex justify-content-center" key={i}>
+                                                <div className="col-3 my-auto">
+                                                    <img src="http://placehold.it/300x200" className="card-img-top" alt={"image of " + blo.id} />
+                                                    <Link to={"/blogs"} className="btn btn-secondary d-flex justify-content-center">Back to Blogs!</Link>
                                                 </div>
-                                                <div class="card-footer">
-                                                    <small class="text-muted">{blo.createdate}</small>
+                                                <div className="col-9 py-4">
+                                                    <h2 className="card-title">{blo.title}</h2>
+                                                    <h5 className="card-text">{blo.bintro}</h5>
+                                                    <p className="card-text">{blo.publictext}</p>
+                                                    {
+                                                     !!store.currentUser ? (
+                                                    <p className="card-text">{blo.privatext}</p>
+                                                     ) : (
+                                                         <h3>Si te registras podras acceder a todo el resto de este contenido!!!</h3>
+                                                     )
+                                                    }
+                                                    <p className="card-text">Release Date: {blo.createdate}</p>
                                                 </div>
                                             </div>
-                                        </>
-                                    )
+                                        )
+                                    }
                                 })
                                 : (
-                                    <div class="text-center" id="undefined">
+                                    <div className="text-center" id="undefined">
                                         <div className="spinner-grow text-light" role="status">
                                         </div>
                                     </div>
                                 )
                         }
                     </div>
+
                 </div>
             </div>
         </>

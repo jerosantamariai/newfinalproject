@@ -15,6 +15,7 @@ import Footer from './components/footer';
 import Pricing from './views/pricing';
 import Faq from './views/faq';
 import Dashboard from './views/dashboard';
+import Blogs from './views/blogs';
 import Blog from './views/blog';
 import Dashpass from './views/dashviews/dashpass';
 import Dashuser from './views/dashviews/dashuser';
@@ -32,7 +33,8 @@ const App = props => {
             <Route exact path="/dashboard/dashuser" component={Dashuser} />
             <Route exact path="/dashboard/dashpass" component={Dashpass} />
             <Route exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/blog" component={Blog} />
+            <Route exact path="/blogs/:title" component={Blog} />
+            <Route exact path="/blogs" component={Blogs} />
             <Route exact path="/faq" component={Faq} />
             <Route exact path="/pricing" component={Pricing} />
             <Route exact path="/login" component={LogIn} />
