@@ -237,7 +237,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                                 cont_message: '',
                                 errors: null
                             })
-                            history.push("/dashboard");
+                            history.push("/");
                         }
                     })
             },

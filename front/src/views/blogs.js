@@ -17,18 +17,19 @@ const Blogs = props => {
                                     return (
                                         <>
                                             <div className="col-xl-4 col-lg-6 col-md-8 col-xs-12">
-                                                <div className="card text-white bg-dark mb-3 blogitem text-white" key={i}>
-                                                    {/* <img src={"img/films/" + img} className="card-img-top" alt={"image of " + img} /> */}
-                                                    <img src="http://placehold.it/300x200" className="card-img-top my-2" alt={"image of " + blo.id} />
-                                                    {/* <a classNam="text" id="overlay">GO!</a> */}
-                                                    <div className="card-body">
-                                                        <h5 className="card-title">{blo.title}</h5>
-                                                        <p className="card-text text-justify">{blo.bintro}</p>
-                                                    </div>
-                                                    <div class="card-footer">
-                                                        <small class="text-muted">{blo.createdate}</small>
-                                                    </div>
-                                                    <Link type="button" className="btn btn-light" to={"/blogs/" + blo.title}>Ir</Link>
+                                                <div className="card text-white mb-3 blogitem text-white blogitem" key={i}>
+                                                    <Link type="button" className="btn btn-light noDecoration2" to={"/blogs/" + blo.title}>
+                                                        {/* <img src={"img/films/" + img} className="card-img-top" alt={"image of " + img} /> */}
+                                                        <img src="http://placehold.it/300x200" className="card-img-top my-2" alt={"image of " + blo.id} />
+                                                        {/* <a classNam="text" id="overlay">GO!</a> */}
+                                                        <div className="card-body">
+                                                            <h5 className="card-title">{blo.title}</h5>
+                                                            <p className="card-text text-justify">{blo.bintro}</p>
+                                                        </div>
+                                                        <div class="card-footer">
+                                                            <small class="text-muted">{blo.createdate}</small>
+                                                        </div>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </>

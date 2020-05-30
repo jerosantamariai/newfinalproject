@@ -241,6 +241,12 @@ color: #bb9d52;
     color: white !important;
     width: 100%;
 }
+.noDecoration2{ /*usando*/
+  text-decoration: none !important;
+  color: white !important;
+  background-color: transparent !important;
+  border: none !important;
+}
 .about-tab a{
   border-radius: 100px !important;
 }
@@ -544,11 +550,15 @@ font-family: 'Montserrat', sans-serif;
 }
 
 .blogitem{
-  background-color: rgba(105, 105, 105, 0.4) !important;
+  background-color: rgba(100, 100, 100, 0.4) !important;
 }
 
 .blogitem:hover{
   background-color: rgb(188,156,92,0.7) !important;
+}
+
+.cardbg{
+  background-color: rgba(100, 100, 100, 0.4) !important;
 }
 
 .testi-meta{

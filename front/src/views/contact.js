@@ -38,7 +38,7 @@ const Contact = props => {
                   <label htmlFor="cont_message">What do yopu want to tell us?</label>
                   <input type="text" className="form-control text-center" id="cont_message" name="cont_message" onChange={actions.handleChange} value={store.cont_message} />
                 </div>
-                <button type="submit" className="btn btn-primary">Save</button>
+                <button type="submit" className="btn btn-block dashitem text-white my-5">Save</button>
               </form>
             </div>
           </div>

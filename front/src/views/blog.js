@@ -16,21 +16,21 @@ const Blog = props => {
                                     if (JSON.stringify(blo.title) === JSON.stringify(blogger)) {
                                         // const img = blo.title.split(" ").join("-").toLowerCase() + ".jpg";
                                         return (
-                                            <div className="row card-group text-white bg-dark mb-3 d-flex justify-content-center" key={i}>
+                                            <div className="row card-group text-white mb-3 d-flex justify-content-center cardbg" key={i}>
                                                 <div className="col-3 my-auto">
                                                     <img src="http://placehold.it/300x200" className="card-img-top" alt={"image of " + blo.id} />
-                                                    <Link to={"/blogs"} className="btn btn-secondary d-flex justify-content-center">Back to Blogs!</Link>
+                                                    <Link to={"/blogs"} className="btn btn-secondary d-flex justify-content-center blogitem text-white">Back to Blogs!</Link>
                                                 </div>
                                                 <div className="col-9 py-4">
                                                     <h2 className="card-title">{blo.title}</h2>
                                                     <h5 className="card-text">{blo.bintro}</h5>
                                                     <p className="card-text">{blo.publictext}</p>
                                                     {
-                                                     !!store.currentUser ? (
-                                                    <p className="card-text">{blo.privatext}</p>
-                                                     ) : (
-                                                         <h3>Si te registras podras acceder a todo el resto de este contenido!!!</h3>
-                                                     )
+                                                        !!store.currentUser ? (
+                                                            <p className="card-text">{blo.privatext}</p>
+                                                        ) : (
+                                                                <h3>Si te registras podras acceder a todo el resto de este contenido!!!</h3>
+                                                            )
                                                     }
                                                     <p className="card-text">Release Date: {blo.createdate}</p>
                                                 </div>
