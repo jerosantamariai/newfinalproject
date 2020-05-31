@@ -36,7 +36,7 @@ const DashAdminBlog = props => {
                             <form onSubmit={e => {
                                 e.preventDefault();
                                 actions.loadBlog(e, props.history)
-                                }}>
+                            }}>
                                 <div className="form-group">
                                     <label htmlFor="title">What is the Title of the blog</label>
                                     <textarea className="form-control text-center rows-4" id="title" name="title" placeholder="" onChange={actions.handleChange} value={store.title} />
@@ -53,11 +53,18 @@ const DashAdminBlog = props => {
                                     <label htmlFor="privatext">What is the Private Text of the blog?</label>
                                     <textarea className="form-control text-center rows-12" id="privatext" name="privatext" placeholder="" onChange={actions.handleChange} value={store.privatext} />
                                 </div>
-                                <button type="submit" className="btn btn-primary">Save</button>
-                                <button type="btn" className="btn btn-primary" onClick={(e)=> actions.setBlog(e)}>Edit</button>
+                                <div>
+                                    {
+                                        !!store.blogid ? (
+                                            <button type="btn" className="btn btn-dark dashitem text-white btn-block" onClick={(e) => actions.setBlog(e)}>Edit</button>
+                                        ) : (
+                                                <button type="submit" className="btn btn-dark dashitem text-white btn-block">Save</button>
+                                            )
+                                    }
+                                </div>
                             </form>
-                            <h3>Current Blogs</h3>
-                            <div className="list-group d-flex justify-content-center overflow-auto my-1" id="scrollablecorps">
+                            <h3 className="my-5">Current Blogs</h3>
+                            <div className="list-group" id="scrollablecorps">
                                 <ul>
                                     {
                                         store.blog !== null && store.blog !== undefined ?
@@ -75,14 +82,14 @@ const DashAdminBlog = props => {
                                                                 name="deleteid"
                                                                 value={store.deleteid}
                                                                 onClick={e => actions.deleteBlogs(blo.id)}
-                                                                >
+                                                            >
                                                             </i>
                                                         </Link>
                                                     </>
                                                 )
                                             })
                                             : (
-                                                <div className="text-center" id="undefined">
+                                                <div className="content-center" id="undefined">
                                                     <div className="spinner-grow text-light" role="status">
                                                     </div>
                                                 </div>
@@ -90,7 +97,6 @@ const DashAdminBlog = props => {
                                     }
                                 </ul>
                             </div>
-
                         </div>
                     </div>
                 </div>

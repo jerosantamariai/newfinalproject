@@ -171,7 +171,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const { access_token } = store.currentUser;
 
                 fetch(store.path + '/users/' + store.currentUser.users.id, {
-                    method: 'POST',
+                    method: 'PUT',
                     body: JSON.stringify({
                         name: store.name,
                         lastname: store.lastname,
