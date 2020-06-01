@@ -27,7 +27,7 @@ const Dashboard = props => {
                                             <p>Menú Admin</p>
                                             <Link to="/dashboard/dashadminuser" className="list-group-item list-group-item-action dashitem text-white">Administrar Usuarios</Link>
                                             <Link to="/dashboard/dashadminblog" className="list-group-item list-group-item-action dashitem text-white">Administrar Blog</Link>
-                                            <Link to="#" className="list-group-item list-group-item-action dashitem text-white">Usuarios</Link>
+                                            <Link to="/dashboard/dashadminappoint" className="list-group-item list-group-item-action dashitem text-white">Administrar Citas</Link>
                                         </div>
                                         <hr className="hr1 my-5 col-md-10" />
                                     </>

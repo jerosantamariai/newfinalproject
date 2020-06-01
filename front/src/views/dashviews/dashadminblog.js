@@ -77,16 +77,16 @@ const DashAdminBlog = props => {
                                                             onClick={() => actions.getCurrent(blo.id, blo.title, blo.bintro, blo.publictext, blo.privatext)}>
                                                             {blo.id} - {blo.title}
                                                         </Link>
-                                                        <span className="d-flex align-middle dashitem text-white">
+                                                        <div className="d-flex dashitem text-white">
                                                             <i
-                                                                className="fas fa-trash"
+                                                                className="fas my-auto p-3 fa-trash"
                                                                 id="deleteid"
                                                                 name="deleteid"
                                                                 value={store.deleteid}
                                                                 onClick={e => actions.deleteBlogs(blo.id)}
                                                             >
                                                             </i>
-                                                        </span>
+                                                        </div>
                                                     </div>
                                                 )
                                             })
