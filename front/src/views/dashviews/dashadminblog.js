@@ -56,7 +56,7 @@ const DashAdminBlog = props => {
                                 <div>
                                     {
                                         !!store.blogid ? (
-                                            <button type="btn" className="btn btn-dark dashitem text-white btn-block" onClick={(e) => actions.setBlog(e)}>Edit</button>
+                                            <button type="btn" className="btn btn-dark dashitem text-white btn-block" onClick={(e, history) => actions.setBlog(e, props.history)}>Edit</button>
                                         ) : (
                                                 <button type="submit" className="btn btn-dark dashitem text-white btn-block">Save</button>
                                             )
@@ -67,15 +67,17 @@ const DashAdminBlog = props => {
                             <div className="list-group" id="scrollablecorps">
                                 <ul>
                                     {
-                                        store.blog !== null && store.blog !== undefined ?
+                                        !!store.blog ?
                                             store.blog.map((blo, i) => {
                                                 return (
-                                                    <>
+                                                    <div className="d-flex">
                                                         <Link
                                                             to="#"
-                                                            className="list-group-item list-group-item-action d-flex justify-content-between dashitem text-white"
+                                                            className="list-group-item list-group-item-action d-flex justify-content-left dashitem text-white"
                                                             onClick={() => actions.getCurrent(blo.id, blo.title, blo.bintro, blo.publictext, blo.privatext)}>
                                                             {blo.id} - {blo.title}
+                                                        </Link>
+                                                        <span className="d-flex align-middle dashitem text-white">
                                                             <i
                                                                 className="fas fa-trash"
                                                                 id="deleteid"
@@ -84,8 +86,8 @@ const DashAdminBlog = props => {
                                                                 onClick={e => actions.deleteBlogs(blo.id)}
                                                             >
                                                             </i>
-                                                        </Link>
-                                                    </>
+                                                        </span>
+                                                    </div>
                                                 )
                                             })
                                             : (

@@ -344,7 +344,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 })
             },
 
-            setBlog: (e) => {
+            setBlog: (e, history) => {
                 e.preventDefault();
                 const store = getStore();
 
@@ -375,6 +375,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                                 privatext: '',
                                 errors: null,
                             })
+                            history.push("/blogs");
                         }
                     })
             },

@@ -20,13 +20,19 @@ const Dashboard = props => {
                     </div>
                     <div className="row listwrapper">
                         <div className="col-md-12 my-3 mx-auto">
-                            <div className="list-group">
-                                <p>Menú Admin</p>
-                                <Link to="/dashboard/dashadminuser" className="list-group-item list-group-item-action dashitem text-white">Administrar Usuarios</Link>
-                                <Link to="/dashboard/dashadminblog" className="list-group-item list-group-item-action dashitem text-white">Administrar Blog</Link>
-                                <Link to="#" className="list-group-item list-group-item-action dashitem text-white">Usuarios</Link>
-                            </div>
-                            <hr className="hr1 my-5 col-md-10" />
+                            {
+                                store.currentUser && store.currentUser.users.role.id === 1 && (
+                                    <>
+                                        <div className="list-group">
+                                            <p>Menú Admin</p>
+                                            <Link to="/dashboard/dashadminuser" className="list-group-item list-group-item-action dashitem text-white">Administrar Usuarios</Link>
+                                            <Link to="/dashboard/dashadminblog" className="list-group-item list-group-item-action dashitem text-white">Administrar Blog</Link>
+                                            <Link to="#" className="list-group-item list-group-item-action dashitem text-white">Usuarios</Link>
+                                        </div>
+                                        <hr className="hr1 my-5 col-md-10" />
+                                    </>
+                                )
+                            }
                             <div className="list-group">
                                 <Link to="/dashboard/dashuser" className="list-group-item list-group-item-action dashitem text-white">Agregar/Cambiar Información Personal</Link>
                                 <Link to="/dashboard/dashpass" className="list-group-item list-group-item-action dashitem text-white">Cambiar Contraseña</Link>

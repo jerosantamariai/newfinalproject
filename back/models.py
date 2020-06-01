@@ -25,8 +25,11 @@ class Users (db.Model):
     createdate = db.Column(db.DateTime, default=datetime.now())
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'), nullable=False)
     role = db.relationship(Roles)
+    appointment = db.relationship("Appointment", backref="appointment", cascade="delete")
 
     def serialize(self):
+        appointment = []
+        appointment = list(map(lambda appoint: appoint.serialize(), self.appointment))
         return {
             "id": self.id,
             "name": self.name,
@@ -35,7 +38,34 @@ class Users (db.Model):
             "avatar": self.avatar,
             "phone": self.phone,
             "createdate": self.createdate,
-            "role": self.role.serialize()
+            "role": self.role.serialize(),
+            "appointment": appointment,
+        }
+
+class Appointment (db.Model):
+    __tablename__ = 'appointment'
+    id = db.Column(db.Integer, primary_key=True)
+    app_name = db.Column(db.String(100), nullable=False)
+    app_lastname = db.Column(db.String(100), nullable=False)
+    app_email = db.Column(db.String(100), nullable=False)
+    app_phone = db.Column(db.String(12), nullable=False)
+    app_time = db.Column(db.String(100), nullable=False)
+    app_message = db.Column(db.String(500), nullable=False)
+    app_status = db.Column(db.String(500), nullable=True, default=False)
+    cont_createdate = db.Column(db.DateTime, default=datetime.now())
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "app_name": self.app_name,
+            "app_lastname": self.app_lastname,
+            "app_email": self.app_email,
+            "app_phone": self.app_phone,
+            "app_time": self.app_time,
+            "app_message": self.app_message,
+            "app_status": self.app_status,
+            "app_createdate": self.cont_createdate,
         }
 
 class Blogs (db.Model):
@@ -78,27 +108,3 @@ class Contact (db.Model):
             "cont_createdate": self.cont_createdate,
         }
 
-class Appointment (db.Model):
-    __tablename__ = 'appointment'
-    id = db.Column(db.Integer, primary_key=True)
-    app_name = db.Column(db.String(100), nullable=False)
-    app_lastname = db.Column(db.String(100), nullable=False)
-    app_email = db.Column(db.String(100), nullable=False)
-    app_phone = db.Column(db.String(12), nullable=False)
-    app_time = db.Column(db.String(100), nullable=False)
-    app_message = db.Column(db.String(500), nullable=False)
-    app_status = db.Column(db.String(500), nullable=True, default=False)
-    cont_createdate = db.Column(db.DateTime, default=datetime.now())
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "app_name": self.app_name,
-            "app_lastname": self.app_lastname,
-            "app_email": self.app_email,
-            "app_phone": self.app_phone,
-            "app_time": self.app_time,
-            "app_message": self.app_message,
-            "app_status": self.app_status,
-            "app_createdate": self.cont_createdate,
-        }
