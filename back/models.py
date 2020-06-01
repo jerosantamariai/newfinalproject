@@ -77,3 +77,28 @@ class Contact (db.Model):
             "cont_message": self.cont_message,
             "cont_createdate": self.cont_createdate,
         }
+
+class Appointment (db.Model):
+    __tablename__ = 'appointment'
+    id = db.Column(db.Integer, primary_key=True)
+    app_name = db.Column(db.String(100), nullable=False)
+    app_lastname = db.Column(db.String(100), nullable=False)
+    app_email = db.Column(db.String(100), nullable=False)
+    app_phone = db.Column(db.String(12), nullable=False)
+    app_time = db.Column(db.String(100), nullable=False)
+    app_message = db.Column(db.String(500), nullable=False)
+    app_status = db.Column(db.String(500), nullable=True, default=False)
+    cont_createdate = db.Column(db.DateTime, default=datetime.now())
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "app_name": self.app_name,
+            "app_lastname": self.app_lastname,
+            "app_email": self.app_email,
+            "app_phone": self.app_phone,
+            "app_time": self.app_time,
+            "app_message": self.app_message,
+            "app_status": self.app_status,
+            "app_createdate": self.cont_createdate,
+        }

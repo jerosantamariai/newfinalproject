@@ -3,7 +3,7 @@ from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
-from models import db, Users, Roles, Blogs, Contact
+from models import db, Users, Roles, Blogs, Contact, Appointment
 from flask_mail import Mail, Message
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
@@ -266,6 +266,60 @@ def blog(id = None):
         db.session.commit()
         return jsonify({"msg":"Blog borrado"}), 200
 
+@app.route('/appointment', methods=['GET', 'POST'])
+@app.route('/appointment/<int:id>', methods=['GET', 'PUT', 'DELETE'])
+def appointment(id = None):
+    if request.method == 'GET':
+        if id is not None :
+            appoint = Appointment.query.get(id)
+            if appoint:
+               return jsonify(appoint.serialize()), 200
+            else:
+               return jsonify({"msg": "No se encuentra la cita"}), 404   
+        else :
+            appoints = Appointment.query.all()
+            appoints = list(map(lambda appoint: Appointment.serialize(), appoints))
+            return jsonify(appoints), 200
+
+    if request.method == 'POST':
+        if not request.is_json:
+            return jsonify({"msg": "Ingresar formato correcto"}), 400
+
+        app_name = request.json.get('app_name', None)
+        app_lastname = request.json.get('app_lastname', None)
+        app_email = request.json.get('app_email', None)
+        app_phone = request.json.get('app_phone', None)
+        app_time = request.json.get('app_time', None)
+        app_message = request.json.get('app_message', None)
+
+        if not app_name or app_name == '':
+            return jsonify({"msg": "Por favor ingresar nombre"}), 400
+        if not app_lastname or app_lastname == '':
+            return jsonify({"msg": "Por favor ingresar apellido"}), 400
+        if not app_email or app_email == '':
+            return jsonify({"msg": "Por favor ingresar correo electronico"}), 400
+        if not app_time or app_time == '':
+            return jsonify({"msg": "Por favor ingresar fecha tentativa"}), 400
+        if not app_phone or app_phone == '':
+            return jsonify({"msg": "Por favor ingresar telefono"}), 400
+        if not app_message or app_message == '':
+            return jsonify({"msg": "Por favor ingresar mensaje"}), 400
+
+        appoints = Appointment()
+        appoints.app_name = app_name
+        appoints.app_lastname = app_lastname
+        appoints.app_email = app_email
+        appoints.app_time = app_time
+        appoints.app_phone = app_phone
+        appoints.app_message = app_message
+        
+        db.session.add(appoints)
+        db.session.commit()  
+
+        appoints = Appointment.query.all()
+        appoints = list(map(lambda appoint: appoint.serialize(), appoints))
+        return jsonify(appoints), 201
+
 @app.route('/contact', methods=['GET', 'POST'])
 @app.route('/contact/<int:id>', methods=['GET', 'PUT', 'DELETE'])
 def contact(id = None):
@@ -280,7 +334,7 @@ def contact(id = None):
             contacts = Contact.query.all()
             contacts = list(map(lambda contact: contact.serialize(), contacts))
             return jsonify(contacts), 200
-    
+        
     if request.method == 'POST':
         if not request.is_json:
             return jsonify({"msg": "Ingresar formato correcto"}), 400

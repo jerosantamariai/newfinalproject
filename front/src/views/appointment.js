@@ -2,15 +2,27 @@ import React, { useContext, useEffect } from 'react';
 import { Context } from '../store/appContext';
 import { Link } from 'react-router-dom';
 import LandComments from '../components/landinghome/landcomments';
+
 const Appointment = props => {
-  // const { store, actions } = useContext(Context)
-  // useEffect(() => {
-  //   if (!store.isAuth) props.history.push("/login");
-  // }, []);
+  const { store, actions } = useContext(Context)
   return (
     <>
       <div className="appointsteiner text-center">
-        <div className="  ">
+      {
+          !!store.errors && (
+            <div className="row fixed-top text-center">
+              <div className="col-md-12">
+                <div className="alert alert-warning alert-dismissible fade show" role="alert">
+                  <strong>ERROR!</strong> {store.errors.msg}
+                  <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          )
+        }
+        <div>
           <h2 className="aboutsteinertitulo">Appointment<br /></h2>
           <ul className="breadcrumb" id="breadcrumb">
             <li><Link className="text-white" href="/">Home / </Link></li>
@@ -69,31 +81,31 @@ const Appointment = props => {
             </div>
           </div>
           <div className="col-md-6" id="contactform">
-            <form id="contactform-form" className="row" method="post">
+            <form id="contactform-form" className="row" onSubmit={e => actions.loadAppointment(e, props.history)}>
               <div className=" col-md-6 col-xs-6">
-                <input type="text" name="first_name" id="first_name" className="form-control" placeholder="First Name" />
+                <input type="text" id="app_name" className="form-control" placeholder="First Name" name="app_name" onChange={actions.handleChange} value={store.app_name} />
               </div>
               <div className="col-md-6 col-xs-6">
-                <input type="text" name="last_name" id="last_name" className="form-control" placeholder="Last Name" />
+                <input type="text" id="app_lastname" className="form-control" placeholder="Last Name" name="app_lastname" onChange={actions.handleChange} value={store.app_lastname} />
               </div>
               <div className="mt-2 col-md-12 col-xs-12">
-                <input type="email" name="email" id="email" className="form-control" placeholder="Your Email" />
+                <input type="email" id="app_email" className="form-control" placeholder="Your Email" name="app_email" onChange={actions.handleChange} value={store.app_email} />
               </div>
               <div className="mt-2 col-md-12 col-xs-12">
-                <input type="text" name="phone" id="phone" className="form-control" placeholder="Your Phone" />
+                <input type="text" id="app_phone" className="form-control" placeholder="Your Phone" name="app_phone" onChange={actions.handleChange} value={store.app_phone} />
               </div>
               <div className="mt-2 col-md-12 col-xs-12">
-                <select id="inputState" class="form-control">
+                <select id="app_time" class="form-control" name="app_time" onChange={actions.handleChange} value={store.app_time}>
                   <option selected>Select time</option>
-                  <option value="Weekdays">Weekdays</option>
-                  <option value="Weekend">Weekend</option>
+                  <option>Weekdays</option>
+                  <option>Weekend</option>
                 </select>
               </div>
               <div className="mt-2 col-md-12 col-xs-12">
-                <textarea className="form-control" name="comments" id="comments" rows="6" placeholder="Give us more details.."></textarea>
+                <textarea className="form-control" id="app_message" rows="6" placeholder="Give us more details.." name="app_message" onChange={actions.handleChange} value={store.app_message}></textarea>
               </div>
               <div className="mt-2 text-center ">
-                <button type="submit" value="SEND" id="submit" className="btn btn-primary btn-radius btn-brd grd1 btn-block subt ml-3">Get Appointment</button>
+                <button type="submit" id="submit" className="btn btn-primary btn-radius btn-brd grd1 btn-block subt ml-3">Get Appointment</button>
               </div>
             </form>
           </div>

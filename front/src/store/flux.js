@@ -23,6 +23,12 @@ const getState = ({ getStore, getActions, setStore }) => {
             publictext: '',
             privatext: '',
             blogid: '',
+            app_name: '',
+            app_lastname: '',
+            app_email: '',
+            app_phone: '',
+            app_time: '',
+            app_message: '',
         },
 
         actions: {
@@ -369,6 +375,46 @@ const getState = ({ getStore, getActions, setStore }) => {
                                 privatext: '',
                                 errors: null,
                             })
+                        }
+                    })
+            },
+
+            loadAppointment: (e, history) => {
+                e.preventDefault();
+                const store = getStore();
+
+                fetch(store.path + '/appointment', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        app_name: store.app_name,
+                        app_lastname: store.app_lastname,
+                        app_email: store.app_email,
+                        app_time: store.app_time,
+                        app_phone: store.app_phone,
+                        app_message: store.app_message,
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        console.log(data)
+                        if (data.msg) {
+                            setStore({
+                                errors: data
+                            })
+                        } else {
+                            setStore({
+                                app_name: '',
+                                app_lastname: '',
+                                app_email: '',
+                                app_phone: '',
+                                app_time: '',
+                                app_message: '',
+                                errors: null
+                            })
+                            history.push("/");
                         }
                     })
             },
