@@ -22,6 +22,7 @@ import Dashuser from './views/dashviews/dashuser';
 import DashAdminBlog from './views/dashviews/dashadminblog';
 import DashAdminAppoint from './views/dashviews/dashadminappoint';
 import DashAdminUser from './views/dashviews/dashadminuser';
+import DashUserView from './views/dashviews/dashuserview';
 
 const App = props => {
   return (
@@ -33,6 +34,7 @@ const App = props => {
             <Route exact path="/register" component={Register} />
             <Route exact path="/dashboard/dashadminblog" component={DashAdminBlog} />
             <Route exact path="/dashboard/dashadminappoint" component={DashAdminAppoint} />
+            <Route exact path="/dashboard/dashadminuser/:email" component={DashUserView} />
             <Route exact path="/dashboard/dashadminuser" component={DashAdminUser} />
             <Route exact path="/dashboard/dashuser" component={Dashuser} />
             <Route exact path="/dashboard/dashpass" component={Dashpass} />

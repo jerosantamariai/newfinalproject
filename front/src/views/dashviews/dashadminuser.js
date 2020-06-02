@@ -35,7 +35,7 @@ const DashAdminUser = props => {
                                                         user.role.id != 2 && (
                                                             <>
                                                                 <Link
-                                                                    to="#"
+                                                                    to={"/dashboard/dashadminuser/" + user.email}
                                                                     key={i}
                                                                     className="list-group-item list-group-item-action d-flex justify-content-left dashitem text-white"
                                                                     name="role_id"
@@ -70,7 +70,7 @@ const DashAdminUser = props => {
                                                         user.role.id === 2 && (
                                                             <>
                                                                 <Link
-                                                                    to="#"
+                                                                    to={"/dashboard/dashadminuser/" + user.email}
                                                                     key={i}
                                                                     className="list-group-item list-group-item-action d-flex justify-content-left dashitem text-white"
                                                                     name="role_id"
