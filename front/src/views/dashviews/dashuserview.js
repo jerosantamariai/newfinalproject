@@ -45,23 +45,25 @@ const DashUserView = props => {
                                                     <hr className="hr1" />
                                                     <p className="card-text">{usr.role.rolename}</p>
                                                     {
-                                                        usr.role.id === 1 ? (
-                                                            <>
-                                                                <select className="custom-select col-md-4">
-                                                                    <option selected>Select Role for the User</option>
-                                                                    <option value="2">Customer</option>
-                                                                </select>
-                                                                <button type="button" className="btn dashitem text-white ml-2">Save</button>
-                                                            </>
-                                                        ) : (
+                                                        usr.email !== "admin@gmail.com" && (
+                                                            usr.role.id === 1 ? (
                                                                 <>
                                                                     <select className="custom-select col-md-4">
                                                                         <option selected>Select Role for the User</option>
-                                                                        <option value="1">Admin</option>
+                                                                        <option value="2">Customer</option>
                                                                     </select>
                                                                     <button type="button" className="btn dashitem text-white ml-2">Save</button>
                                                                 </>
-                                                            )
+                                                            ) : (
+                                                                    <>
+                                                                        <select className="custom-select col-md-4">
+                                                                            <option selected>Select Role for the User</option>
+                                                                            <option value="1">Admin</option>
+                                                                        </select>
+                                                                        <button type="button" className="btn dashitem text-white ml-2">Save</button>
+                                                                    </>
+                                                                )
+                                                        )
                                                     }
                                                     <hr className="hr1" />
                                                     {

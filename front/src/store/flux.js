@@ -67,6 +67,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                     .then(data => {
                         console.log(data)
                         if (data.msg) {
+                            const action = getActions()
+                            action.getusers(store.path + "/users/");
                             setStore({
                                 errors: data
                             })
@@ -103,6 +105,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                     .then(data => {
                         console.log(data)
                         if (data.msg) {
+                            const action = getActions()
+                            action.getUsers(store.path + "/users/");
                             setStore({
                                 errors: data
                             })
@@ -488,6 +492,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                     .then(data => {
                         console.log(data)
                         if (data.msg) {
+                            const action = getActions()
+                            action.getUsers(store.path + "/users/");
                             setStore({
                                 errors: data
                             })
