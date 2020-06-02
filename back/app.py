@@ -182,6 +182,20 @@ def users(id = None):
         db.session.commit()
         return jsonify({"msg":"Usuario borrado"}), 200
 
+@app.route('/setrole/<int:id>', methods=['PUT'])
+# @jwt_required
+def users(id = None):
+    if request.method == 'PUT':
+        role_id = request.json.get('name', None)
+                
+        setrole = Users()
+         
+        setrole.role_id = role_id 
+        
+        db.session.commit()  
+
+        return jsonify(setrole.serialize()), 201
+
 @app.route('/blog', methods=['GET', 'POST'])
 @app.route('/blog/<int:id>', methods=['GET', 'PUT', 'DELETE'])
 # @jwt_required

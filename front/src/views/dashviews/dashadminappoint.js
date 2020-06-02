@@ -21,7 +21,13 @@ const DashAdminAppoint = props => {
                         </div>
                     )
                 }
-                
+                <div className="col-md-6 col-sm-12 dashitem text-white">
+                    <h2>Appointment: To Do</h2>
+                </div>
+                <hr className="hr1" />
+                <div className="col-md-6 col-sm-12 dashitem text-white">
+                    <h2>Appointment: Ready</h2>
+                </div>
             </div>
         </>
     )

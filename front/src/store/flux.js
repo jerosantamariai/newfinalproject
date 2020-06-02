@@ -30,7 +30,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             app_phone: '',
             app_time: '',
             app_message: '',
-            role: '',
+            role_id: '',
         },
 
         actions: {
@@ -398,6 +398,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                                 bintro: '',
                                 publictext: '',
                                 privatext: '',
+                                blogid: '',
                                 errors: null,
                             })
                             history.push("/blogs");
@@ -445,21 +446,16 @@ const getState = ({ getStore, getActions, setStore }) => {
                     })
             },
 
-            changeRole: (e, history) => {
-                e.preventDefault();
+            changeRole: () => {
                 const store = getStore();
 
-                fetch(store.path + '/users/' + store.currentUser.users.id, {
+                fetch(store.path + '/setrole/' + store.currentUser.users.id, {
                     method: 'PUT',
                     body: JSON.stringify({
-                        name: store.name,
-                        lastname: store.lastname,
-                        email: store.email,
-                        phone: store.phone
+                        role_id: store.role_id
                     }),
                     headers: {
                         'Content-Type': 'application/json', //estoy enviando en formato json
-                        'Authorization': 'Bearer ' + store.currentUser.access_token
                     }
                 })
                     .then(resp => resp.json())
@@ -472,15 +468,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                         } else {   //una vez logeado, cambio el valor del store:
                             setStore({
                                 success: data,
-                                name: '',
-                                lastname: '',
-                                email: '',
-                                phone: '',
+                                role_id: '',
                                 errors: null
                             })
-                            sessionStorage.setItem('currentUser', JSON.stringify(data))
-                            sessionStorage.setItem('isAuth', true)
-                            history.push("/")
                         }
                     })
             },
