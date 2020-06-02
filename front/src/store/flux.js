@@ -7,6 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             isAuth: false,
             currentUser: null,
             blog: null,
+            users: null,
             name: '',
             lastname: '',
             phone: '',
@@ -29,6 +30,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             app_phone: '',
             app_time: '',
             app_message: '',
+            role: '',
         },
 
         actions: {
@@ -309,6 +311,29 @@ const getState = ({ getStore, getActions, setStore }) => {
                     })
             },
 
+            getUsers: url => {
+                fetch(url, {
+                    method: 'GET',
+
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        // const newData = data.map((elem) => {
+                        //     return { ...elem, title: elem.title.replace(/[!@#$%^&*(),.?":{}|<> ]/g, '_')}
+                        // })                       
+                        // console.log(newData);
+                        setStore({
+                            users: data
+                        })
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
+
             deleteBlogs: (id) => {
                 const store = getStore();
                 fetch(store.path + "/blog/" + id, {
@@ -416,6 +441,46 @@ const getState = ({ getStore, getActions, setStore }) => {
                                 errors: null
                             })
                             history.push("/");
+                        }
+                    })
+            },
+
+            changeRole: (e, history) => {
+                e.preventDefault();
+                const store = getStore();
+
+                fetch(store.path + '/users/' + store.currentUser.users.id, {
+                    method: 'PUT',
+                    body: JSON.stringify({
+                        name: store.name,
+                        lastname: store.lastname,
+                        email: store.email,
+                        phone: store.phone
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json', //estoy enviando en formato json
+                        'Authorization': 'Bearer ' + store.currentUser.access_token
+                    }
+                })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        console.log(data)
+                        if (data.msg) {
+                            setStore({
+                                errors: data
+                            })
+                        } else {   //una vez logeado, cambio el valor del store:
+                            setStore({
+                                success: data,
+                                name: '',
+                                lastname: '',
+                                email: '',
+                                phone: '',
+                                errors: null
+                            })
+                            sessionStorage.setItem('currentUser', JSON.stringify(data))
+                            sessionStorage.setItem('isAuth', true)
+                            history.push("/")
                         }
                     })
             },

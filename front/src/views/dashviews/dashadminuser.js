@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { Context } from '../../store/appContext';
 import { Link } from 'react-router-dom';
+import { Context } from '../../store/appContext';
 
 const DashAdminUser = props => {
     const { store, actions } = useContext(Context)
@@ -23,29 +23,58 @@ const DashAdminUser = props => {
                 }
                 <div className="row">
                     <div className="col-md-12">
-                        <h3 className="my-5">Current Users</h3>
+                        <h3 className="my-5">Current Admin Users</h3>
                         <div className="list-group" id="scrollablecorps">
                             <ul>
                                 {
-                                    !!store.blog ?
-                                        store.blog.map((blo, i) => {
+                                    !!store.users ? (
+                                        store.users.map((user, i) => {
                                             return (
                                                 <div className="d-flex">
-                                                    <Link
-                                                        to="#"
-                                                        className="list-group-item list-group-item-action d-flex justify-content-left dashitem text-white">
-                                                        {blo.id} - {blo.title}
-                                                    </Link>
-                                                    {/* <div className="d-flex dashitem text-white">
-                                                        <i
-                                                            className="fas my-auto p-3 fa-trash"
-                                                            id="deleteid"
-                                                            name="deleteid"
-                                                            value={store.deleteid}
-                                                            onClick={e => actions.deleteBlogs(blo.id)}
-                                                        >
-                                                        </i>
-                                                    </div> */}
+                                                    {
+                                                        user.role.id != 2 && (
+                                                            <>
+                                                                <Link
+                                                                    to="#"
+                                                                    key={i}
+                                                                    className="list-group-item list-group-item-action d-flex justify-content-left dashitem text-white">
+                                                                    {user.id} - {user.email}
+                                                                </Link>
+                                                            </>
+                                                        )
+                                                    }
+                                                </div>
+                                            )
+                                        }))
+                                        : (
+                                            <div className="content-center" id="undefined">
+                                                <div className="spinner-grow text-light" role="status">
+                                                </div>
+                                            </div>
+                                        )
+                                }
+                            </ul>
+                        </div>
+                        <h3 className="my-5">Current Customer Users</h3>
+                        <div className="list-group" id="scrollablecorps">
+                            <ul>
+                                {
+                                    !!store.users ?
+                                        store.users.map((user, i) => {
+                                            return (
+                                                <div className="d-flex">
+                                                    {
+                                                        user.role.id === 2 && (
+                                                            <>
+                                                                <Link
+                                                                    to="#"
+                                                                    key={i}
+                                                                    className="list-group-item list-group-item-action d-flex justify-content-left dashitem text-white">
+                                                                    {user.id} - {user.email}
+                                                                </Link>
+                                                            </>
+                                                        )
+                                                    }
                                                 </div>
                                             )
                                         })

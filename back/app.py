@@ -99,7 +99,7 @@ def register():
     return jsonify(data), 201
 
 @app.route('/changepassword', methods=['POST'])
-@jwt_required
+# @jwt_required
 def changepassword():
     if not request.is_json:
         return jsonify({"msg": "Ingresar formato correcto"}), 400
@@ -125,7 +125,7 @@ def changepassword():
 
 @app.route('/users', methods=['GET', 'POST'])
 @app.route('/users/<int:id>', methods=['GET', 'PUT', 'DELETE'])
-@jwt_required
+# @jwt_required
 def users(id = None):
     if request.method == 'GET':
         if id is not None:
@@ -268,6 +268,7 @@ def blog(id = None):
 
 @app.route('/appointment', methods=['GET', 'POST'])
 @app.route('/appointment/<int:id>', methods=['GET', 'PUT', 'DELETE'])
+# @jwt_required
 def appointment(id = None):
     if request.method == 'GET':
         if id is not None :
@@ -322,6 +323,7 @@ def appointment(id = None):
 
 @app.route('/contact', methods=['GET', 'POST'])
 @app.route('/contact/<int:id>', methods=['GET', 'PUT', 'DELETE'])
+# @jwt_required
 def contact(id = None):
     if request.method == 'GET':
         if id is not None :

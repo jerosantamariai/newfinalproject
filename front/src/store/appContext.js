@@ -21,6 +21,7 @@ const injectContext = PassedComponent => {
 
         componentDidMount() {
             this.state.actions.getBlogs('http://localhost:5000/blog');
+            this.state.actions.getUsers('http://localhost:5000/users');
             this.state.actions.isAuth();
         }
 
