@@ -359,6 +359,32 @@ const getState = ({ getStore, getActions, setStore }) => {
                     })
             },
 
+            deleteUsr: (id, history) => {
+                const store = getStore();
+                fetch(store.path + "/users/" + id, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        console.error(data)
+                        if (data.msg === "Usuario borrado") {
+                            const action = getActions()
+                            action.getUsers(store.path + "/users/");
+                            setStore({
+                                success: data
+                            })
+                        } else {
+                            setStore({
+                                error: data
+                            })
+                        }
+                        history.push("/dashboard/dashadminuser");
+                    })
+            },
+
             getCurrent: (blogid, title, bintro, publictext, privatext) => {
                 setStore({
                     blogid,
