@@ -343,6 +343,28 @@ def appointment(id = None):
         appoints = list(map(lambda appoint: appoint.serialize(), appoints))
         return jsonify(appoints), 201
 
+@app.route('/appointment/setstatus/<int:id>', methods=['GET', 'PUT', 'DELETE'])
+# @jwt_required
+def appsetstatus(id = None):
+    if request.method == 'PUT':
+        if not request.is_json:
+            return jsonify({"msg": "Ingresar formato correcto"}), 400
+
+        app_status = request.json.get('app_status', None)
+
+        if not app_status or app_status == '':
+            return jsonify({"msg": "Por favor cambiar status"}), 400
+
+        setappoints = Appointment()
+        setappoints.app_status = app_status
+        
+        db.session.add(setappoints)
+        db.session.commit()  
+
+        appoints = Appointment.query.all()
+        appoints = list(map(lambda appoint: appoint.serialize(), appoints))
+        return jsonify(appoints), 201
+
 @app.route('/contact', methods=['GET', 'POST'])
 @app.route('/contact/<int:id>', methods=['GET', 'PUT', 'DELETE'])
 # @jwt_required

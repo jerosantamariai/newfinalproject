@@ -34,7 +34,7 @@ const DashAdminAppoint = props => {
                                                     appoint.app_status === "0" && (
                                                         <>
                                                             <Link
-                                                                to={"/dashboard/dashadminuser/" + appoint.app_email}
+                                                                to={"/dashboard/dashadminappoint/" + appoint.app_email}
                                                                 key={i}
                                                                 className="list-group-item list-group-item-action d-flex justify-content-left dashitem text-white">
                                                                 {appoint.id} - {appoint.app_name} {appoint.app_lastname} - {appoint.app_email}
@@ -69,7 +69,7 @@ const DashAdminAppoint = props => {
                                                     appoint.app_status === "1" && (
                                                         <>
                                                             <Link
-                                                                to={"/dashboard/dashadminuser/" + appoint.app_email}
+                                                                to={"/dashboard/dashadminappoint/" + appoint.app_email}
                                                                 key={i}
                                                                 className="list-group-item list-group-item-action d-flex justify-content-left dashitem text-white">
                                                                 {appoint.id} - {appoint.app_name} {appoint.app_lastname} - {appoint.app_email}
