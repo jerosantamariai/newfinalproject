@@ -21,7 +21,7 @@ const DashAdminAppoint = props => {
                         </div>
                     )
                 }
-                <div className="col-md-6 col-sm-12 dashitem text-white">
+                <div className="col-md-12 justify-content-center">
                     <h2>Appointment: To Do</h2>
                     <div className="list-group" id="scrollablecorps">
                         <ul>
@@ -29,13 +29,12 @@ const DashAdminAppoint = props => {
                                 !!store.appoints ? (
                                     store.appoints.map((appoint, i) => {
                                         return (
-                                            <div className="d-flex">
+                                            <div className="d-flex dashitem text-white">
                                                 {
                                                     appoint.app_status === "0" && (
                                                         <>
                                                             <Link
-                                                                to="#"
-                                                                // {"/dashboard/dashadminuser/" + appoin.email}
+                                                                to={"/dashboard/dashadminuser/" + appoint.app_email}
                                                                 key={i}
                                                                 className="list-group-item list-group-item-action d-flex justify-content-left dashitem text-white">
                                                                 {appoint.id} - {appoint.app_name} {appoint.app_lastname} - {appoint.app_email}
@@ -57,8 +56,39 @@ const DashAdminAppoint = props => {
                     </div>
                 </div>
                 <hr className="hr1" />
-                <div className="col-md-6 col-sm-12 dashitem text-white">
+                <div className="col-md-12">
                     <h2>Appointment: Ready</h2>
+                    <div className="list-group" id="scrollablecorps">
+                        <ul>
+                            {
+                                !!store.appoints ? (
+                                    store.appoints.map((appoint, i) => {
+                                        return (
+                                            <div className="d-flex dashitem text-white">
+                                                {
+                                                    appoint.app_status === "1" && (
+                                                        <>
+                                                            <Link
+                                                                to={"/dashboard/dashadminuser/" + appoint.app_email}
+                                                                key={i}
+                                                                className="list-group-item list-group-item-action d-flex justify-content-left dashitem text-white">
+                                                                {appoint.id} - {appoint.app_name} {appoint.app_lastname} - {appoint.app_email}
+                                                            </Link>
+                                                        </>
+                                                    )
+                                                }
+                                            </div>
+                                        )
+                                    }))
+                                    : (
+                                        <div className="content-center" id="undefined">
+                                            <div className="spinner-grow text-light" role="status">
+                                            </div>
+                                        </div>
+                                    )
+                            }
+                        </ul>
+                    </div>
                 </div>
             </div>
         </>
