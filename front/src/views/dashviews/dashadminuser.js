@@ -32,7 +32,7 @@ const DashAdminUser = props => {
                                             return (
                                                 <div className="d-flex">
                                                     {
-                                                        user.role.id !== 2 && (
+                                                        user.role.rolename !== "customer" && (
                                                             <>
                                                                 <Link
                                                                     to={"/dashboard/dashadminuser/" + user.email}
@@ -64,11 +64,13 @@ const DashAdminUser = props => {
                                             return (
                                                 <div className="d-flex">
                                                     {
-                                                        user.role.id === 2 && (
+                                                        user.role.rolename === "customer" && (
                                                             <>
                                                                 <Link
                                                                     to={"/dashboard/dashadminuser/" + user.email}
-                                                                    key={i} className="list-group-item list-group-item-action d-flex justify-content-left dashitem text-white">
+                                                                    key={i} 
+                                                                    onClick={() => actions.getCurrentUser(user.id)}
+                                                                    className="list-group-item list-group-item-action d-flex justify-content-left dashitem text-white">
                                                                     {user.id} - {user.email}
                                                                 </Link>
                                                             </>

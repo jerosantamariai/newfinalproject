@@ -44,27 +44,27 @@ const DashUserView = props => {
                                                     <p className="card-text">Date of Incorporation: {usr.createdate}</p>
                                                     <hr className="hr1" />
                                                     <p className="card-text">{usr.role.rolename}</p>
-                                                    {
+                                                    {/* {
                                                         usr.email !== "admin@gmail.com" && (
-                                                            usr.role.id === 1 ? (
+                                                            usr.role.rolename === "admin" ? (
                                                                 <>
-                                                                    <select className="custom-select col-md-4">
+                                                                    <select className="custom-select col-md-4" name="rolename" onChange={actions.handleChange} value={store.rolename}>
                                                                         <option selected>Select Role for the User</option>
-                                                                        <option value="2">Customer</option>
+                                                                        <option>Customer</option>
                                                                     </select>
-                                                                    <button type="button" className="btn dashitem text-white ml-2">Save</button>
+                                                                    <button type="button" className="btn dashitem text-white ml-2" onClick={(e) => actions.changeRole(e, props.history)}>Save</button>
                                                                 </>
                                                             ) : (
                                                                     <>
-                                                                        <select className="custom-select col-md-4">
+                                                                        <select className="custom-select col-md-4" name="rolename" onChange={actions.handleChange} value={store.rolename}>
                                                                             <option selected>Select Role for the User</option>
-                                                                            <option value="1">Admin</option>
+                                                                            <option>Admin</option>
                                                                         </select>
-                                                                        <button type="button" className="btn dashitem text-white ml-2">Save</button>
+                                                                        <button type="button" className="btn dashitem text-white ml-2" onClick={(e) => actions.changeRole(e, props.history)}>Save</button>
                                                                     </>
                                                                 )
                                                         )
-                                                    }
+                                                    } */}
                                                     <hr className="hr1" />
                                                     {
                                                         usr.email !== "admin@gmail.com" && (

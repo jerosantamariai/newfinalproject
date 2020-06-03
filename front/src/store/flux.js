@@ -30,7 +30,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             app_phone: '',
             app_time: '',
             app_message: '',
-            role_id: '',
+            usrid: '',
+            rolename: '',
         },
 
         actions: {
@@ -476,32 +477,38 @@ const getState = ({ getStore, getActions, setStore }) => {
                     })
             },
 
-            changeRole: () => {
+            getCurrentUser: (usrid) => {
+                setStore({
+                    usrid,
+                })
+            },
+
+            changeRole: (e) => {
+                e.preventDefault();
                 const store = getStore();
 
-                fetch(store.path + '/setrole/' + store.currentUser.users.id, {
+                fetch(store.path + '/users/setrole/' + store.usrid, {
                     method: 'PUT',
                     body: JSON.stringify({
-                        role_id: store.role_id
+                        role_id: store.rolename,
                     }),
                     headers: {
-                        'Content-Type': 'application/json', //estoy enviando en formato json
+                        'Content-Type': 'application/json'
                     }
                 })
                     .then(resp => resp.json())
                     .then(data => {
-                        console.log(data)
                         if (data.msg) {
                             const action = getActions()
                             action.getUsers(store.path + "/users/");
                             setStore({
                                 errors: data
                             })
-                        } else {   //una vez logeado, cambio el valor del store:
+                        } else {
                             setStore({
-                                success: data,
-                                role_id: '',
-                                errors: null
+                                users: data,
+                                rolename: '',
+                                errors: null,
                             })
                         }
                     })

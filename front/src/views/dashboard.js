@@ -21,7 +21,7 @@ const Dashboard = props => {
                     <div className="row listwrapper">
                         <div className="col-md-12 my-3 mx-auto">
                             {
-                                store.currentUser && store.currentUser.users.role.id === 1 && (
+                                store.currentUser && store.currentUser.users.role.rolename === "admin" && (
                                     <>
                                         <div className="list-group">
                                             <p>Menú Admin</p>

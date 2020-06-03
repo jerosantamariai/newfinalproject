@@ -136,6 +136,7 @@ def users(id = None):
                 return jsonify({"msg": "El usuario no existe, reintente..."}), 404
         else:
             users = Users.query.all()
+            print("aqui!!")
             users = list(map(lambda user: user.serialize(), users))
             return jsonify(users), 200
 
@@ -182,19 +183,26 @@ def users(id = None):
         db.session.commit()
         return jsonify({"msg":"Usuario borrado"}), 200
 
-@app.route('/setrole/<int:id>', methods=['PUT'])
+@app.route('/users/setrole/<int:id>', methods=['PUT'])
 # @jwt_required
-def users(id = None):
+def setrole(id = None):
     if request.method == 'PUT':
-        role_id = request.json.get('name', None)
+        role_id = request.json.get('role_id', None)
                 
-        setrole = Users()
-         
-        setrole.role_id = role_id 
+        users = Users.query.get(id)
+        if not users:
+            return jsonify({"msg": "No encontrado"}), 404
+
+        role = Roles.query.filter_by(rolename = "admin").first()
+        if not role:
+            return jsonify({"msg": "No encontrado"}), 404
+        print(role)
+
+        users.role_id = role_id
         
         db.session.commit()  
 
-        return jsonify(setrole.serialize()), 201
+        return jsonify(users.serialize()), 201
 
 @app.route('/blog', methods=['GET', 'POST'])
 @app.route('/blog/<int:id>', methods=['GET', 'PUT', 'DELETE'])
@@ -405,7 +413,7 @@ def loadadmin():
     users = Users()
     users.email = "admin@gmail.com"
     users.password = bcrypt.generate_password_hash("123456")
-    users.role_id = 1
+    users.role_id = "1"
 
     db.session.add(users)
     db.session.commit()
@@ -414,5 +422,3 @@ def loadadmin():
 
 if __name__ == '__main__':
     manager.run()
-
-

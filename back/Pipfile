@@ -17,3 +17,7 @@ flask-mail = "*"
 
 [requires]
 python_version = "3.8"
+
+[scripts]
+startdb = "python app.py db init && python app.py db migrate && python app.py db upgrade"
+startserver = "python app.py loadroles && python app.py loadadmin && python app.py runserver"
