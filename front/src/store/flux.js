@@ -8,6 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             currentUser: null,
             blog: null,
             users: null,
+            appoints: null,
             name: '',
             lastname: '',
             phone: '',
@@ -332,6 +333,29 @@ const getState = ({ getStore, getActions, setStore }) => {
                         // console.log(newData);
                         setStore({
                             users: data
+                        })
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
+
+            getAppoints: url => {
+                fetch(url, {
+                    method: 'GET',
+
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        // const newData = data.map((elem) => {
+                        //     return { ...elem, title: elem.title.replace(/[!@#$%^&*(),.?":{}|<> ]/g, '_')}
+                        // })                       
+                        // console.log(newData);
+                        setStore({
+                            appoints: data
                         })
                     })
                     .catch(error => {

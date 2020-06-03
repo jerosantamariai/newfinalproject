@@ -23,6 +23,38 @@ const DashAdminAppoint = props => {
                 }
                 <div className="col-md-6 col-sm-12 dashitem text-white">
                     <h2>Appointment: To Do</h2>
+                    <div className="list-group" id="scrollablecorps">
+                        <ul>
+                            {
+                                !!store.appoints ? (
+                                    store.appoints.map((appoint, i) => {
+                                        return (
+                                            <div className="d-flex">
+                                                {
+                                                    appoint.app_status === "0" && (
+                                                        <>
+                                                            <Link
+                                                                to="#"
+                                                                // {"/dashboard/dashadminuser/" + appoin.email}
+                                                                key={i}
+                                                                className="list-group-item list-group-item-action d-flex justify-content-left dashitem text-white">
+                                                                {appoint.id} - {appoint.app_name} {appoint.app_lastname} - {appoint.app_email}
+                                                            </Link>
+                                                        </>
+                                                    )
+                                                }
+                                            </div>
+                                        )
+                                    }))
+                                    : (
+                                        <div className="content-center" id="undefined">
+                                            <div className="spinner-grow text-light" role="status">
+                                            </div>
+                                        </div>
+                                    )
+                            }
+                        </ul>
+                    </div>
                 </div>
                 <hr className="hr1" />
                 <div className="col-md-6 col-sm-12 dashitem text-white">

@@ -301,7 +301,7 @@ def appointment(id = None):
                return jsonify({"msg": "No se encuentra la cita"}), 404   
         else :
             appoints = Appointment.query.all()
-            appoints = list(map(lambda appoint: Appointment.serialize(), appoints))
+            appoints = list(map(lambda appoint: appoint.serialize(), appoints))
             return jsonify(appoints), 200
 
     if request.method == 'POST':
