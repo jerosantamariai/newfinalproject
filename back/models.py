@@ -20,7 +20,7 @@ class Users (db.Model):
     name = db.Column(db.String(100), nullable=True)
     lastname = db.Column(db.String(100), nullable=True)
     email = db.Column(db.String(100), nullable=False)
-    avatar = db.Column(db.String(100), nullable=True)
+    avatar = db.Column(db.String(100), nullable=True, default='defaultavatar.jpg')
     phone = db.Column(db.String(12), nullable=True)
     createdate = db.Column(db.DateTime, default=datetime.now())
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'), nullable=False)

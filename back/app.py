@@ -1,14 +1,20 @@
-from flask import Flask, jsonify, request, render_template
+import os  
+from flask import Flask, jsonify, request, render_template, send_from_directory
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 from models import db, Users, Roles, Blogs, Contact, Appointment
 from flask_mail import Mail, Message
+from werkzeug.utils import secure_filename
+from functions import allowed_file
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity
 )
+
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+ALLOWED_EXTENSIONS_IMAGES = {'png', 'jpg', 'jpeg', 'gif', 'svg'}
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -22,6 +28,7 @@ app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_USERNAME'] = 'jerosantamariai@gmail.com' #La cuenta de correo electronico de donde saldran los correos
 app.config['MAIL_PASSWORD'] = ''
+app.config['UPLOAD_FOLDER'] = os.path.join(BASE_DIR, 'static')
 jwt = JWTManager(app)
 
 db.init_app(app)
@@ -147,7 +154,7 @@ def users(id = None):
         email = request.json.get('email', None)
         
         users = Users()
-         
+        
         users.name = name 
         users.lastname = lastname 
         users.phone = phone
@@ -159,17 +166,19 @@ def users(id = None):
         return jsonify(users.serialize()), 201
     
     if request.method == 'PUT':
-        name = request.json.get('name', None)
-        lastname = request.json.get('lastname', None)
-        phone = request.json.get('phone', None)
-        email = request.json.get('email', None)
-                
+        name = request.form.get('name', None)
+        lastname = request.form.get('lastname', None)
+        phone = request.form.get('phone', None)
+        email = request.form.get('email', None)
+            
         users = Users()
          
         users.name = name 
         users.lastname = lastname 
         users.phone = phone
         users.email = email
+        if file:
+            users.avatar = filename
         
         db.session.commit()  
 
@@ -182,6 +191,29 @@ def users(id = None):
         db.session.delete(users)
         db.session.commit()
         return jsonify({"msg":"Usuario borrado"}), 200
+
+@app.route('/users/avatar/<int:id>', methods=['PUT'])
+# @jwt_required
+def setavatar(id = None):
+    if request.method == 'PUT':
+        file = request.files['avatar']
+    
+        if file and file.filename != '' and allowed_file(file.filename, ALLOWED_EXTENSIONS_IMAGES):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(os.path.join(app.config['UPLOAD_FOLDER'], 'img/avatars'), filename))
+        else:
+            return jsonify({"msg": "Ingrese correctamente el archivo "}), 400
+                
+        users = Users.query.get(id)
+        if not users:
+            return jsonify({"msg": "No encontrado"}), 404
+
+        if file:
+            users.avatar = filename
+        
+        db.session.commit()  
+
+        return jsonify(users.serialize()), 201
 
 @app.route('/users/setrole/<int:id>', methods=['PUT'])
 # @jwt_required
@@ -425,6 +457,10 @@ def contact(id = None):
         db.session.commit()  
 
         return jsonify(contact.serialize()), 201
+
+@app.route('/users/avatar/<filename>')
+def getavatar(filename):
+    return  send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'], 'img/avatars'), filename)
 
 @manager.command
 def loadroles():

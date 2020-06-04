@@ -35,6 +35,10 @@ const Dashuser = props => {
                                 !!store.currentUser && (
                                     <form onSubmit={e => actions.setUserInfo(e, props.history)}>
                                         <div className="form-group">
+                                            <img src={store.avatarpath + store.currentUser.users.avatar} className="card-img-top" alt={"image of " + store.currentUser.users.email} />
+                                            <input type="file" className="form-control text-center" id="avatar" name="avatar" onChange={actions.handleChangeFile} />
+                                        </div>
+                                        <div className="form-group">
                                             <label htmlFor="name">What is your name?</label>
                                             <input type="text" className="form-control text-center" id="name" name="name" placeholder={store.currentUser.users.name} onChange={actions.handleChange} value={store.name} />
                                         </div>

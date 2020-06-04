@@ -2,6 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
             path: 'http://localhost:5000',
+            avatarpath: 'http://localhost:5000/users/avatar/',
             errors: null,
             success: null,
             isAuth: false,
@@ -9,6 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             blog: null,
             users: null,
             appoints: null,
+            avatar: null,
             name: '',
             lastname: '',
             phone: '',
@@ -41,6 +43,12 @@ const getState = ({ getStore, getActions, setStore }) => {
             handleChange: e => {
                 setStore({
                     [e.target.name]: e.target.value
+                })
+            },
+
+            handleChangeFile: e => {
+                setStore({
+                    [e.target.name]: e.target.files[0]
                 })
             },
 
