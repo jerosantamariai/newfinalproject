@@ -25,11 +25,11 @@ class Users (db.Model):
     createdate = db.Column(db.DateTime, default=datetime.now())
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'), nullable=False)
     role = db.relationship(Roles)
-    appointment = db.relationship("Appointment", backref="appointment", cascade="delete")
+    # appointment = db.relationship("Appointment", backref="appointment", cascade="delete")
 
     def serialize(self):
-        appointment = []
-        appointment = list(map(lambda appoint: appoint.serialize(), self.appointment))
+        # appointment = []
+        # appointment = list(map(lambda appoint: appoint.serialize(), self.appointment))
         return {
             "id": self.id,
             "name": self.name,
@@ -39,7 +39,7 @@ class Users (db.Model):
             "phone": self.phone,
             "createdate": self.createdate,
             "role": self.role.serialize(),
-            "appointment": appointment,
+            # "appointment": appointment,
         }
 
 class Appointment (db.Model):
@@ -51,9 +51,9 @@ class Appointment (db.Model):
     app_phone = db.Column(db.String(12), nullable=False)
     app_time = db.Column(db.String(100), nullable=False)
     app_message = db.Column(db.String(500), nullable=False)
-    app_status = db.Column(db.String(500), nullable=True, default=False)
+    app_status = db.Column(db.Boolean, nullable=True, default=False)
     cont_createdate = db.Column(db.DateTime, default=datetime.now())
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    # user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
 
     def serialize(self):
         return {

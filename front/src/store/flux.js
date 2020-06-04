@@ -25,12 +25,14 @@ const getState = ({ getStore, getActions, setStore }) => {
             publictext: '',
             privatext: '',
             blogid: '',
+            appid: '',
             app_name: '',
             app_lastname: '',
             app_email: '',
             app_phone: '',
             app_time: '',
             app_message: '',
+            app_status: '',
             usrid: '',
             rolename: '',
         },
@@ -532,6 +534,63 @@ const getState = ({ getStore, getActions, setStore }) => {
                             setStore({
                                 users: data,
                                 rolename: '',
+                                errors: null,
+                            })
+                        }
+                    })
+            },
+
+            getCurrentApp: (appid, app_name, app_lastname, app_email, app_phone, app_time, app_status, app_message) => {
+                const store = getStore();
+                let app_status2;
+                if (store.app_status === true){
+                    app_status2 = 1
+                } else {
+                    app_status2 = 0
+                }
+                setStore({
+                    appid,
+                    app_name,
+                    app_lastname,
+                    app_email,
+                    app_phone,
+                    app_time,
+                    app_status: app_status2,
+                    app_message,
+                })
+            },
+
+            setAppoint: (e, appointment) => {
+                e.preventDefault();
+                const store = getStore();
+                appointment.app_status = !appointment.app_status;
+
+                fetch(store.path + '/appointment/' + appointment.id, {
+                    method: 'PUT',
+                    body: JSON.stringify(
+                        appointment
+                    ),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        if (data.msg) {
+                            setStore({
+                                errors: data
+                            })
+                        } else {
+                            setStore({
+                                appoints: data,
+                                appid: '',
+                                app_name: '',
+                                app_lastname: '',
+                                app_email: '',
+                                app_phone: '',
+                                app_time: '',
+                                app_message: '',
+                                app_status: '',
                                 errors: null,
                             })
                         }

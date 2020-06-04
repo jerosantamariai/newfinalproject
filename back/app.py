@@ -343,27 +343,39 @@ def appointment(id = None):
         appoints = list(map(lambda appoint: appoint.serialize(), appoints))
         return jsonify(appoints), 201
 
-@app.route('/appointment/setstatus/<int:id>', methods=['GET', 'PUT', 'DELETE'])
-# @jwt_required
-def appsetstatus(id = None):
     if request.method == 'PUT':
         if not request.is_json:
             return jsonify({"msg": "Ingresar formato correcto"}), 400
 
+        app_name = request.json.get('app_name', None)
+        app_lastname = request.json.get('app_lastname', None)
+        app_email = request.json.get('app_email', None)
+        app_phone = request.json.get('app_phone', None)
+        app_time = request.json.get('app_time', None)
+        app_message = request.json.get('app_message', None)
         app_status = request.json.get('app_status', None)
 
-        if not app_status or app_status == '':
-            return jsonify({"msg": "Por favor cambiar status"}), 400
+        # if not app_status or app_status == '':
+        #     return jsonify({"msg": "Por favor cambiar status"}), 400
 
-        setappoints = Appointment()
+        setappoints = Appointment.query.get(id) #busca por el id
+            
+        if not setappoints:
+            return jsonify({"msg": "Not Found"}), 404 # para no actualizar algo q no existe
+
         setappoints.app_status = app_status
+        setappoints.app_name = app_name
+        setappoints.app_lastname = app_lastname
+        setappoints.app_email = app_email
+        setappoints.app_time = app_time
+        setappoints.app_phone = app_phone
+        setappoints.app_message = app_message
         
-        db.session.add(setappoints)
         db.session.commit()  
 
-        appoints = Appointment.query.all()
-        appoints = list(map(lambda appoint: appoint.serialize(), appoints))
-        return jsonify(appoints), 201
+        setappoints = Appointment.query.all()
+        setappoints = list(map(lambda setappoint: setappoint.serialize(), setappoints))
+        return jsonify(setappoints), 201
 
 @app.route('/contact', methods=['GET', 'POST'])
 @app.route('/contact/<int:id>', methods=['GET', 'PUT', 'DELETE'])

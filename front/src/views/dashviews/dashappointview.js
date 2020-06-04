@@ -6,6 +6,10 @@ const DashAppointView = props => {
     const { store, actions } = useContext(Context)
     const { appoints } = store;
     const appointurl = props.match.params.app_email;
+    const updateAppointment = (e, appointment) => {
+        e.preventDefault();
+        actions.setAppoint(e, appointment)
+    }
     return (
         <>
             <div className="blogteiner">
@@ -24,7 +28,7 @@ const DashAppointView = props => {
                     )
                 }
                 <div className="card-group">
-                    <div className="row mx-auto">
+                    <div className="row">
                         {
                             !!store.appoints ?
                                 store.appoints.map((appoint, i) => {
@@ -44,10 +48,10 @@ const DashAppointView = props => {
                                                     <p className="card-text">Date of Incorporation: {appoint.app_createdate}</p>
                                                     <hr className="hr1" />
                                                     {
-                                                        appoint.status === "0" ? (
-                                                            <p className="card-text">Status: Ready</p>
+                                                        appoint.app_status === true ? (
+                                                            <button className="card-text" onClick={e => updateAppointment(e, appoint)}>Status: Ready</button>
                                                         ):(
-                                                            <p className="card-text">Status: Pending</p>
+                                                            <button className="card-text" onClick={e => updateAppointment(e, appoint)}>Status: Pending</button>
                                                         )
                                                     }
                                                     <hr className="hr1" />
