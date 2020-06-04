@@ -35,9 +35,11 @@ const Dashuser = props => {
                                 !!store.currentUser && (
                                     <form onSubmit={e => actions.setUserInfo(e, props.history)}>
                                         <div className="form-group">
-                                            <img src={store.avatarpath + store.currentUser.users.avatar} className="card-img-top" alt={"image of " + store.currentUser.users.email} />
-                                            <input type="file" className="form-control text-center" id="avatar" name="avatar" onChange={actions.handleChangeFile} />
+                                            <img src={store.avatarPath + store.currentUser.users.avatar} className="card-img-top" alt={"image of " + store.currentUser.users.email} />
+                                            <input type="file" className="form-control bg-transparent border-0 my-3 text-white text-center" id="avatar" name="avatar" onChange={actions.handleChangeFile} />
+                                            <button className="btn dashitem text-white" onClick={e => actions.setAvatar(e)}>Save Image</button>
                                         </div>
+                                        <hr className="hr1" />
                                         <div className="form-group">
                                             <label htmlFor="name">What is your name?</label>
                                             <input type="text" className="form-control text-center" id="name" name="name" placeholder={store.currentUser.users.name} onChange={actions.handleChange} value={store.name} />
@@ -55,7 +57,7 @@ const Dashuser = props => {
                                             <input type="text" className="form-control text-center" id="phone" name="phone" placeholder={store.currentUser.users.phone!=="" ? "+569XXXXXXXX" : store.currentUser.users.phone} onChange={actions.handleChange} value={store.phone} />
                                             <small>***Please follow the number format!***</small>
                                         </div>
-                                        <button type="submit" className="btn btn-primary">Save</button>
+                                        <button type="submit" className="btn dashitem text-white">Save</button>
                                     </form>
                                 )
                             }

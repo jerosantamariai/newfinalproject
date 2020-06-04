@@ -32,7 +32,7 @@ const DashUserView = props => {
                                         return (
                                             <div className="row card-group text-white mb-3 d-flex justify-content-center cardbg" key={i}>
                                                 <div className="col-3 my-auto">
-                                                    <img src={store.avatarpath + usr.avatar} className="card-img-top" alt={"image of " + usr.email} />
+                                                    <img src={store.avatarPath + usr.avatar} className="card-img-top" alt={"image of " + usr.email} />
                                                     <Link to={"/dashboard/dashadminuser"} className="btn btn-secondary d-flex justify-content-center blogitem text-white">Back</Link>
                                                 </div>
                                                 <div className="col-9 py-4">

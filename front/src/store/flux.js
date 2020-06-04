@@ -2,7 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
             path: 'http://localhost:5000',
-            avatarpath: 'http://localhost:5000/users/avatar/',
+            avatarPath: 'http://localhost:5000/users/avatar/',
             errors: null,
             success: null,
             isAuth: false,
@@ -599,6 +599,31 @@ const getState = ({ getStore, getActions, setStore }) => {
                                 app_time: '',
                                 app_message: '',
                                 app_status: '',
+                                errors: null,
+                            })
+                        }
+                    })
+            },
+
+            setAvatar: (e) => {
+                e.preventDefault();
+                const store = getStore();
+                let formData = new FormData();
+                formData.append("avatar", store.avatar);
+
+                fetch(store.avatarPath + store.usrid, {
+                    method: 'PUT',
+                    body: formData
+                })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        if (data.msg) {
+                            setStore({
+                                errors: data
+                            })
+                        } else {
+                            setStore({
+                                avatar: null,
                                 errors: null,
                             })
                         }
