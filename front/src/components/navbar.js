@@ -37,8 +37,9 @@ const Navbar = props => {
                         {
                             store.currentUser !== null ? (
                                 <>
-                                    <li className="nav-item">
+                                    <li className="nav-item text-center">
                                         <button type="button" className="btn btn-dark btn-block btn-sm"><Link className="nav-link noDecoration" to="/dashboard">{store.currentUser.users.email}</Link></button>
+                                        <img src={store.avatarPath + store.currentUser.users.avatar} width="40" height="40" className="rounded-circle" />
                                     </li>
                                 </>
                             ) : (
