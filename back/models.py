@@ -75,6 +75,7 @@ class Blogs (db.Model):
     bintro = db.Column(db.String(100), nullable=False)
     publictext = db.Column(db.String(100), nullable=False)
     privatext = db.Column(db.String(1000), nullable=False)
+    blogimagen = db.Column(db.String(100), nullable=True)
     createdate = db.Column(db.DateTime, default=datetime.now())
 
     def serialize(self):
@@ -84,6 +85,7 @@ class Blogs (db.Model):
             "bintro": self.bintro,
             "publictext": self.publictext,
             "privatext": self.privatext,
+            "blogimagen": self.blogimagen,
             "createdate": self.createdate,
         }
 

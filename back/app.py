@@ -320,6 +320,29 @@ def blog(id = None):
         db.session.commit()
         return jsonify({"msg":"Blog borrado"}), 200
 
+@app.route('/blog/imagen/<int:id>', methods=['PUT'])
+# @jwt_required
+def setimgblog(id = None):
+    if request.method == 'PUT':
+        file = request.files['blogimagen']
+    
+        if file and file.filename != '' and allowed_file(file.filename, ALLOWED_EXTENSIONS_IMAGES):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(os.path.join(app.config['UPLOAD_FOLDER'], 'img/blog'), filename))
+        else:
+            return jsonify({"msg": "Ingrese correctamente el archivo"}), 400
+                
+        blogs = Blogs.query.get(id)
+        if not blogs:
+            return jsonify({"msg": "No encontrado"}), 404
+
+        if file:
+            blogs.blogimagen = filename
+        
+        db.session.commit()  
+
+        return jsonify(blogs.serialize()), 201
+
 @app.route('/appointment', methods=['GET', 'POST'])
 @app.route('/appointment/<int:id>', methods=['GET', 'PUT', 'DELETE'])
 # @jwt_required
