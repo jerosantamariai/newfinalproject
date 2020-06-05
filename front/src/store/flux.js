@@ -36,6 +36,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             app_message: '',
             app_status: '',
             usrid: '',
+            usremail: '',
             rolename: '',
         },
 
@@ -80,7 +81,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.log(data)
                         if (data.msg) {
                             const action = getActions()
-                            action.getusers(store.path + "/users/");
+                            action.getUsers(store.path + "/users/");
                             setStore({
                                 errors: data
                             })
@@ -199,7 +200,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     body: JSON.stringify({
                         name: store.name,
                         lastname: store.lastname,
-                        email: store.email,
+                        email: store.usremail,
                         phone: store.phone
                     }),
                     headers: {
@@ -228,7 +229,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                             history.push("/")
                         }
                     })
-            }, //AQUI TENGO PROBLEMAS
+            },
 
             contact: (e, history) => {
                 e.preventDefault();
@@ -511,9 +512,10 @@ const getState = ({ getStore, getActions, setStore }) => {
                     })
             },
 
-            getCurrentUser: (usrid) => {
+            getCurrentUser: (usrid, usremail) => {
                 setStore({
                     usrid,
+                    usremail,
                 })
             },
 

@@ -166,19 +166,19 @@ def users(id = None):
         return jsonify(users.serialize()), 201
     
     if request.method == 'PUT':
-        name = request.form.get('name', None)
-        lastname = request.form.get('lastname', None)
-        phone = request.form.get('phone', None)
-        email = request.form.get('email', None)
-            
-        users = Users()
+        name = request.json.get('name', None)
+        lastname = request.json.get('lastname', None)
+        phone = request.json.get('phone', None)
+        email = request.json.get('email', None)
+
+        users = Users.query.get(id)
+        if not users:
+            return jsonify({"msg": "No encontrado"}), 404
          
         users.name = name 
         users.lastname = lastname 
         users.phone = phone
         users.email = email
-        if file:
-            users.avatar = filename
         
         db.session.commit()  
 

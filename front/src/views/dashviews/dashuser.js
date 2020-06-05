@@ -49,8 +49,12 @@ const Dashuser = props => {
                                             <input type="text" className="form-control text-center" id="lastname" name="lastname" placeholder={store.currentUser.users.lastname} onChange={actions.handleChange} value={store.lastname} />
                                         </div>
                                         <div className="form-group">
+                                            {
+                                                <>
                                             <label htmlFor="email">What is your email?</label>
-                                            <input type="email" className="form-control text-center" id="email" name="email" placeholder={store.currentUser.users.email} onChange={actions.handleChange} value={store.email} />
+                                            <input type="email" className="form-control text-center" id="email" name="email" value={store.usremail} />
+                                                </>
+                                            }
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="phone">What is your phone number?</label>
