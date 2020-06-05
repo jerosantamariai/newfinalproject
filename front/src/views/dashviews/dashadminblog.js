@@ -38,6 +38,21 @@ const DashAdminBlog = props => {
                                 actions.loadBlog(e, props.history)
                             }}>
                                 <div className="form-group">
+                                    {
+                                        store.blog == null ? (
+                                                <>
+                                                <h1>aqui</h1>
+                                                <img src={store.avatarPath + store.blog.blogimagen} className="card-img-top" alt={"image of blog"} />
+                                                </>
+                                            ) : (
+                                                <img src="http://placehold.it/200x300" className="card-img-top" alt={"image of blog"} />
+                                        )
+                                    }
+                                    {/* <img src={store.blog.blogimagen === null ? (store.avatarPath + store.blog.blogimagen) : ("http://placehold.it/200x300")} className="card-img-top" alt={"image of " + store.blog.title} /> */}
+                                    <input type="file" className="form-control bg-transparent border-0 my-3 text-white text-center" id="blogimagen" name="blogimagen" onChange={actions.handleChangeFile} />
+                                    <button className="btn dashitem text-white" onClick={e => actions.setImgBlog(e)}>Save Image</button>
+                                </div>
+                                <div className="form-group">
                                     <label htmlFor="title">What is the Title of the blog</label>
                                     <textarea className="form-control text-center rows-4" id="title" name="title" placeholder="" onChange={actions.handleChange} value={store.title} />
                                 </div>
@@ -74,7 +89,7 @@ const DashAdminBlog = props => {
                                                         <Link
                                                             to="#"
                                                             className="list-group-item list-group-item-action d-flex justify-content-left dashitem text-white"
-                                                            onClick={() => actions.getCurrent(blo.id, blo.title, blo.bintro, blo.publictext, blo.privatext)}>
+                                                            onClick={() => actions.getCurrent(blo.id, blo.blogimagen, blo.title, blo.bintro, blo.publictext, blo.privatext)}>
                                                             {blo.id} - {blo.title}
                                                         </Link>
                                                         <div className="d-flex dashitem text-white">

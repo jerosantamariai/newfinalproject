@@ -11,6 +11,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             users: null,
             appoints: null,
             avatar: null,
+            blogimagen: null,
             name: '',
             lastname: '',
             phone: '',
@@ -425,9 +426,10 @@ const getState = ({ getStore, getActions, setStore }) => {
                     })
             },
 
-            getCurrent: (blogid, title, bintro, publictext, privatext) => {
+            getCurrent: (blogid, blogimagen, title, bintro, publictext, privatext) => {
                 setStore({
                     blogid,
+                    blogimagen,
                     title,
                     bintro,
                     publictext,
@@ -626,6 +628,31 @@ const getState = ({ getStore, getActions, setStore }) => {
                         } else {
                             setStore({
                                 avatar: null,
+                                errors: null,
+                            })
+                        }
+                    })
+            },
+
+            setImgBlog: (e) => {
+                e.preventDefault();
+                const store = getStore();
+                let formData = new FormData();
+                formData.append("blogimagen", store.blogimagen);
+
+                fetch(store.avatarPath + store.blogid, {
+                    method: 'PUT',
+                    body: formData
+                })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        if (data.msg) {
+                            setStore({
+                                errors: data
+                            })
+                        } else {
+                            setStore({
+                                blogimagen: null,
                                 errors: null,
                             })
                         }
