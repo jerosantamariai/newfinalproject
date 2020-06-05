@@ -40,13 +40,13 @@ const DashAdminBlog = props => {
                                 <div className="form-group">
                                     {
                                         store.blog == null ? (
+                                            <img src="http://placehold.it/200x300" className="card-img-top" alt={"image of blog"} />
+                                        ) : (
                                                 <>
-                                                <h1>aqui</h1>
-                                                <img src={store.avatarPath + store.blog.blogimagen} className="card-img-top" alt={"image of blog"} />
+                                                    <h1>aqui</h1>
+                                                    <img src={store.avatarPath + store.blog.blogimagen} className="card-img-top" alt={"image of blog"} />
                                                 </>
-                                            ) : (
-                                                <img src="http://placehold.it/200x300" className="card-img-top" alt={"image of blog"} />
-                                        )
+                                            )
                                     }
                                     {/* <img src={store.blog.blogimagen === null ? (store.avatarPath + store.blog.blogimagen) : ("http://placehold.it/200x300")} className="card-img-top" alt={"image of " + store.blog.title} /> */}
                                     <input type="file" className="form-control bg-transparent border-0 my-3 text-white text-center" id="blogimagen" name="blogimagen" onChange={actions.handleChangeFile} />
