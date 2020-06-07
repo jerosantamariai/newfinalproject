@@ -12,8 +12,8 @@ const Dashboard = props => {
                         {
                             !!store.currentUser && (
                                 <div className="col-md-12 my-3 mx-auto">
-                                    <h1>Hola <strong>{store.currentUser.users.email}</strong>!</h1>
-                                    <p> Que deseas hacer?!</p>
+                                    <h1>Hi <strong>{store.currentUser.users.email}</strong>!</h1>
+                                    <p> What do you want to do today?!</p>
                                 </div>
                             )
                         }
@@ -35,9 +35,9 @@ const Dashboard = props => {
                             }
                             <div className="list-group">
                                 <Link to="/dashboard/dashuser" className="list-group-item list-group-item-action dashitem text-white" onClick={() => actions.getCurrentUser(store.currentUser.users.id, store.currentUser.users.email)}>Agregar/Cambiar Información Personal</Link>
-                                <Link to="/dashboard/dashpass" className="list-group-item list-group-item-action dashitem text-white">Cambiar Contraseña</Link>
+                                <Link to="/dashboard/dashpass" className="list-group-item list-group-item-action dashitem text-white">Change Password</Link>
                                 <Link to="#" className="list-group-item list-group-item-action dashitem text-white">Morbi leo risus</Link>
-                                <Link to="/" className="list-group-item list-group-item-action dashitem text-white" onClick={actions.logout}>Cerrar Sesión</Link>
+                                <Link to="/" className="list-group-item list-group-item-action dashitem text-white" onClick={actions.logout}>Logout</Link>
                             </div>
                         </div>
                     </div>

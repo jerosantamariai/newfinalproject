@@ -12,7 +12,7 @@ const Contact = props => {
               <h1>Contact!!!</h1>
               <nav aria-label="breadcrumb">
                 <ol className="breadcrumb text-white" id="breadcrumb">
-                  <li className="breadcrumb-item"><a href="/">Home</a></li>
+                  <li className="breadcrumb-item"><a to="/">Home</a></li>
                   <li className="breadcrumb-item active" aria-current="page">Contact</li>
                 </ol>
               </nav>
@@ -35,7 +35,7 @@ const Contact = props => {
                   <small>***Please follow the number format!***</small>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="cont_message">What do yopu want to tell us?</label>
+                  <label htmlFor="cont_message">What do you want to tell us?</label>
                   <input type="text" className="form-control text-center" id="cont_message" name="cont_message" onChange={actions.handleChange} value={store.cont_message} />
                 </div>
                 <button type="submit" className="btn btn-block dashitem text-white my-5">Save</button>

@@ -29,7 +29,7 @@ const Blog = props => {
                                                         !!store.currentUser ? (
                                                             <p className="card-text">{blo.privatext}</p>
                                                         ) : (
-                                                                <h3>Si te registras podras acceder a todo el resto de este contenido!!!</h3>
+                                                                <h3>If yor are register, you can see all of this!!!</h3>
                                                             )
                                                     }
                                                     <p className="card-text">Release Date: {blo.createdate}</p>

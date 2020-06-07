@@ -32,26 +32,23 @@ const DashAdminBlog = props => {
                                     <li className="breadcrumb-item active" aria-current="page">Load/Change Blog</li>
                                 </ol>
                             </nav>
-                            <h3>Crear/Modificar Blogs</h3>
+                            <h3>New/Edit Blogs</h3>
+                            <div className="form-group">
+                                {
+                                    !!store.blog ? (
+                                        <img src={store.avatarPath + store.blog.blogimagen} className="card-img-top" />
+                                    ) : (
+                                            <>
+                                               <h1>Here</h1>
+                                            </>
+                                        )
+                                }
+                                <input type="file" className="form-control bg-transparent border-0 my-3 text-white text-center" id="blogimagen" name="blogimagen" onChange={actions.handleChangeFile} />
+                            </div>
                             <form onSubmit={e => {
                                 e.preventDefault();
                                 actions.loadBlog(e, props.history)
                             }}>
-                                <div className="form-group">
-                                    {
-                                        store.blog == null ? (
-                                            <img src="http://placehold.it/200x300" className="card-img-top" alt={"image of blog"} />
-                                        ) : (
-                                                <>
-                                                    <h1>aqui</h1>
-                                                    <img src={store.avatarPath + store.blog.blogimagen} className="card-img-top" alt={"image of blog"} />
-                                                </>
-                                            )
-                                    }
-                                    {/* <img src={store.blog.blogimagen === null ? (store.avatarPath + store.blog.blogimagen) : ("http://placehold.it/200x300")} className="card-img-top" alt={"image of " + store.blog.title} /> */}
-                                    <input type="file" className="form-control bg-transparent border-0 my-3 text-white text-center" id="blogimagen" name="blogimagen" onChange={actions.handleChangeFile} />
-                                    <button className="btn dashitem text-white" onClick={e => actions.setImgBlog(e)}>Save Image</button>
-                                </div>
                                 <div className="form-group">
                                     <label htmlFor="title">What is the Title of the blog</label>
                                     <textarea className="form-control text-center rows-4" id="title" name="title" placeholder="" onChange={actions.handleChange} value={store.title} />

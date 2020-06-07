@@ -3,6 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         store: {
             path: 'http://localhost:5000',
             avatarPath: 'http://localhost:5000/users/avatar/',
+            blogPath: 'http://localhost:5000/blog/',
             errors: null,
             success: null,
             isAuth: false,
@@ -274,17 +275,16 @@ const getState = ({ getStore, getActions, setStore }) => {
                 e.preventDefault();
                 const store = getStore();
 
-                fetch(store.path + '/blog', {
+                let formData = new FormData;
+                formData.append("title", store.title);
+                formData.append("bintro", store.bintro);
+                formData.append("publictext", store.publictext);
+                formData.append("privatext", store.privatext);
+                formData.append("blogimagen", store.blogimagen);
+
+                fetch(store.blogPath, {
                     method: 'POST',
-                    body: JSON.stringify({
-                        title: store.title,
-                        bintro: store.bintro,
-                        publictext: store.publictext,
-                        privatext: store.privatext,
-                    }),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
+                    body: formData,
                 })
                     .then(resp => resp.json())
                     .then(data => {
@@ -299,6 +299,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                                 bintro: '',
                                 publictext: '',
                                 privatext: '',
+                                blogimagen: null,
                                 errors: null,
                             })
                             history.push("/blogs");

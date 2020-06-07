@@ -47,20 +47,20 @@ def root():
 @app.route('/login', methods=['POST'])
 def login():
     if not request.is_json:
-        return jsonify({"msg": "Ingresar formato correcto"}), 400
+        return jsonify({"msg": "The number is not correct"}), 400
 
     email = request.json.get('email', None)
     password = request.json.get('password', None)
     
 
     if not email or email == '':
-        return jsonify({"msg": "Ingresar Correo Electronico"}), 400
+        return jsonify({"msg": "email / password invalid"}), 400
     if not password or password == '':
-        return jsonify({"msg": "Ingresar contraseña"}), 400
+        return jsonify({"msg": "email / password invalid"}), 400
 
     users = Users.query.filter_by(email=email).first()
     if not users:
-        return jsonify({"msg": "Algo ingresaste mal, vuelve a intentarlo"}), 401
+        return jsonify({"msg": "Ops! Try again"}), 401
 
     if bcrypt.check_password_hash(users.password, password):
         access_token = create_access_token(identity=users.email)
@@ -70,24 +70,24 @@ def login():
         }
         return jsonify(data), 201
     else:
-        return jsonify({"msg": "Algo ingresaste mal, vuelve a intentarlo"}), 401
+        return jsonify({"msg": "Ops! Try again"}), 401
 
 @app.route('/register', methods=['POST'])
 def register():
     if not request.is_json:
-        return jsonify({"msg": "Ingresar formato correcto"}), 400
+        return jsonify({"msg": "Invalid format"}), 400
 
     email = request.json.get('email', None)
     password = request.json.get('password', None)
 
     if not email or email == '':
-        return jsonify({"msg": "Ingresar correo electronico"}), 400
+        return jsonify({"msg": "ERROR: Enter correct mail"}), 400
     if not password or password == '':
-        return jsonify({"msg": "Ingresar contraseña"}), 400
+        return jsonify({"msg": "ERROR: Enter correct password"}), 400
 
     users = Users.query.filter_by(email=email).first()
     if users:
-        return jsonify({"msg": "Nombre de usuario existe, por favor ingresar otro"}), 400
+        return jsonify({"msg": "ERROR: Username all ready exist"}), 400
 
     users = Users()
     users.email = email
@@ -115,9 +115,9 @@ def changepassword():
     password = request.json.get('password', None)
 
     if not oldpassword or oldpassword == '':
-        return jsonify({"msg": "Debes ingresar tu clave anterior"}), 400
+        return jsonify({"msg": "ERROR: tyoe the last password"}), 400
     if not password or password == '':
-        return jsonify({"msg": "Debes ingresar una nueva clave"}), 400
+        return jsonify({"msg": "Enter new password"}), 400
 
     email = get_jwt_identity()
 
@@ -126,9 +126,9 @@ def changepassword():
     if bcrypt.check_password_hash(users.password, oldpassword):
         users.password = bcrypt.generate_password_hash(password)
         db.session.commit()
-        return jsonify({"success": "Contraseña cambiada!"}), 200
+        return jsonify({"success": "Your password is change!"}), 200
     else:
-        return jsonify({"msg": "Ingresaste mal tu contraseña antigua!"}), 400
+        return jsonify({"msg": "Enter your last password!"}), 400
 
 @app.route('/users', methods=['GET', 'POST'])
 @app.route('/users/<int:id>', methods=['GET', 'PUT', 'DELETE'])
@@ -140,7 +140,7 @@ def users(id = None):
             if user:
                 return jsonify(user.serialize()), 200
             else:
-                return jsonify({"msg": "El usuario no existe, reintente..."}), 404
+                return jsonify({"msg": "Username not exist"}), 404
         else:
             users = Users.query.all()
             print("aqui!!")
@@ -173,7 +173,7 @@ def users(id = None):
 
         users = Users.query.get(id)
         if not users:
-            return jsonify({"msg": "No encontrado"}), 404
+            return jsonify({"msg": "Not Found"}), 404
          
         users.name = name 
         users.lastname = lastname 
@@ -187,10 +187,10 @@ def users(id = None):
     if request.method == 'DELETE':
         users = Users.query.get(id)
         if not blog:
-            return jsonify({"msg": "Usuario no encontrado"}), 404
+            return jsonify({"msg": "User not found"}), 404
         db.session.delete(users)
         db.session.commit()
-        return jsonify({"msg":"Usuario borrado"}), 200
+        return jsonify({"msg":"You delete the User"}), 200
 
 @app.route('/users/avatar/<int:id>', methods=['PUT'])
 # @jwt_required
@@ -202,11 +202,11 @@ def setavatar(id = None):
             filename = secure_filename(file.filename)
             file.save(os.path.join(os.path.join(app.config['UPLOAD_FOLDER'], 'img/avatars'), filename))
         else:
-            return jsonify({"msg": "Ingrese correctamente el archivo "}), 400
+            return jsonify({"msg": "File is not correct "}), 400
                 
         users = Users.query.get(id)
         if not users:
-            return jsonify({"msg": "No encontrado"}), 404
+            return jsonify({"msg": "Not Found"}), 404
 
         if file:
             users.avatar = filename
@@ -223,11 +223,11 @@ def setrole(id = None):
                 
         users = Users.query.get(id)
         if not users:
-            return jsonify({"msg": "No encontrado"}), 404
+            return jsonify({"msg": "Not Found"}), 404
 
         role = Roles.query.filter_by(rolename = "admin").first()
         if not role:
-            return jsonify({"msg": "No encontrado"}), 404
+            return jsonify({"msg": "Not Found"}), 404
         print(role)
 
         users.role_id = role_id
@@ -246,33 +246,45 @@ def blog(id = None):
             if blog:
                return jsonify(blog.serialize()), 200
             else:
-               return jsonify({"msg": "No se encuentra el blog"}), 404   
+               return jsonify({"msg": "Blog not found"}), 404   
         else :
             blogs = Blogs.query.all()
             blogs = list(map(lambda blog: blog.serialize(), blogs))
             return jsonify(blogs), 200
 
     if request.method == 'POST':
-        title = request.json.get('title', None)
-        bintro = request.json.get('bintro', None)
-        publictext = request.json.get('publictext', None)
-        privatext = request.json.get('privatext', None)
+        title = request.form.get('title', None)
+        bintro = request.form.get('bintro', None)
+        publictext = request.form.get('publictext', None)
+        privatext = request.form.get('privatext', None)
        
         if not title or title == "":
-           return jsonify({"msg":"Debes insertar el titulo del blog"}), 400
+           return jsonify({"msg":"Insert the blog title"}), 400
         if not bintro or bintro == "":
-           return jsonify({"msg":"Debes insertar la introducción del blog"}), 400
+           return jsonify({"msg":"Insert the blog introduction"}), 400
         if not publictext or publictext == "":
-            return jsonify({"msg":"Debes insertar el texto publico del blog"}), 400
+            return jsonify({"msg":"Insert the blog public text"}), 400
         if not privatext or privatext == "":
-            return jsonify({"msg":"Debes insertar el texto privado del blog"}), 400
+            return jsonify({"msg":"Insert the blog private text"}), 400
+        # if not blogimagen or blogimagen == "":
+        #     return jsonify({"msg":"Debes agregar una foto para el blog"}), 400
         
+        file = request.files['blogimagen']
+    
+        if file and file.filename != '' and allowed_file(file.filename, ALLOWED_EXTENSIONS_IMAGES):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(os.path.join(app.config['UPLOAD_FOLDER'], 'img/blog'), filename))
+        else:
+            return jsonify({"msg": "Incorrect File"}), 400
+
         blogs = Blogs()
          
         blogs.title = title 
         blogs.bintro = bintro
         blogs.publictext = publictext 
         blogs.privatext = privatext
+        if file:
+            blogs.blogimagen = filename
         
         db.session.add(blogs) 
         db.session.commit()  
@@ -288,13 +300,13 @@ def blog(id = None):
         privatext = request.json.get('privatext', None)
        
         if not title or title == "":
-            return jsonify({"msg":"Debes insertar el titulo del blog"}), 400
+            return jsonify({"msg":"Insert the blog title"}), 400
         if not bintro or bintro == "":
-            return jsonify({"msg":"Debes insertar la introducción del blog"}), 400
+            return jsonify({"msg":"Insert the blog introduction"}), 400
         if not publictext or publictext == "":
-            return jsonify({"msg":"Debes insertar el texto publico del blog"}), 400
+            return jsonify({"msg":"Insert the blog public text"}), 400
         if not privatext or privatext == "":
-            return jsonify({"msg":"Debes insertar el texto privado del blog"}), 400
+            return jsonify({"msg":"Insert the blog private text"}), 400
 
         blogput = Blogs.query.get(id) #busca por el id
             
@@ -315,10 +327,10 @@ def blog(id = None):
     if request.method == 'DELETE':
         blog = Blogs.query.get(id)
         if not blog:
-            return jsonify({"msg": "Blog no encontrado"}), 404
+            return jsonify({"msg": "Blog not found"}), 404
         db.session.delete(blog)
         db.session.commit()
-        return jsonify({"msg":"Blog borrado"}), 200
+        return jsonify({"msg":"Blog deleted"}), 200
 
 @app.route('/blog/imagen/<int:id>', methods=['PUT'])
 # @jwt_required
@@ -330,11 +342,11 @@ def setimgblog(id = None):
             filename = secure_filename(file.filename)
             file.save(os.path.join(os.path.join(app.config['UPLOAD_FOLDER'], 'img/blog'), filename))
         else:
-            return jsonify({"msg": "Ingrese correctamente el archivo"}), 400
+            return jsonify({"msg": "File incorrect"}), 400
                 
         blogs = Blogs.query.get(id)
         if not blogs:
-            return jsonify({"msg": "No encontrado"}), 404
+            return jsonify({"msg": "Not found"}), 404
 
         if file:
             blogs.blogimagen = filename
@@ -353,7 +365,7 @@ def appointment(id = None):
             if appoint:
                return jsonify(appoint.serialize()), 200
             else:
-               return jsonify({"msg": "No se encuentra la cita"}), 404   
+               return jsonify({"msg": "Appointment not found"}), 404   
         else :
             appoints = Appointment.query.all()
             appoints = list(map(lambda appoint: appoint.serialize(), appoints))
@@ -361,7 +373,7 @@ def appointment(id = None):
 
     if request.method == 'POST':
         if not request.is_json:
-            return jsonify({"msg": "Ingresar formato correcto"}), 400
+            return jsonify({"msg": "Incorrect format"}), 400
 
         app_name = request.json.get('app_name', None)
         app_lastname = request.json.get('app_lastname', None)
@@ -371,17 +383,17 @@ def appointment(id = None):
         app_message = request.json.get('app_message', None)
 
         if not app_name or app_name == '':
-            return jsonify({"msg": "Por favor ingresar nombre"}), 400
+            return jsonify({"msg": "Please enter Name"}), 400
         if not app_lastname or app_lastname == '':
-            return jsonify({"msg": "Por favor ingresar apellido"}), 400
+            return jsonify({"msg": "Please enter Last name"}), 400
         if not app_email or app_email == '':
-            return jsonify({"msg": "Por favor ingresar correo electronico"}), 400
+            return jsonify({"msg": "Please enter email"}), 400
         if not app_time or app_time == '':
-            return jsonify({"msg": "Por favor ingresar fecha tentativa"}), 400
+            return jsonify({"msg": "Please enter date"}), 400
         if not app_phone or app_phone == '':
-            return jsonify({"msg": "Por favor ingresar telefono"}), 400
+            return jsonify({"msg": "Please enter a phone number"}), 400
         if not app_message or app_message == '':
-            return jsonify({"msg": "Por favor ingresar mensaje"}), 400
+            return jsonify({"msg": "Please enter a message"}), 400
 
         appoints = Appointment()
         appoints.app_name = app_name
@@ -442,7 +454,7 @@ def contact(id = None):
             if contact:
                return jsonify(contact.serialize()), 200
             else:
-               return jsonify({"msg": "No se encuentra el comentario"}), 404   
+               return jsonify({"msg": "Comment not Found"}), 404   
         else :
             contacts = Contact.query.all()
             contacts = list(map(lambda contact: contact.serialize(), contacts))
@@ -450,7 +462,7 @@ def contact(id = None):
         
     if request.method == 'POST':
         if not request.is_json:
-            return jsonify({"msg": "Ingresar formato correcto"}), 400
+            return jsonify({"msg": "Incorrect format"}), 400
 
         cont_name = request.json.get('cont_name', None)
         cont_lastname = request.json.get('cont_lastname', None)
@@ -459,15 +471,15 @@ def contact(id = None):
         cont_message = request.json.get('cont_message', None)
 
         if not cont_name or cont_name == '':
-            return jsonify({"msg": "Por favor ingresar nombre"}), 400
+            return jsonify({"msg": "Please enter Name"}), 400
         if not cont_lastname or cont_lastname == '':
-            return jsonify({"msg": "Por favor ingresar apellido"}), 400
+            return jsonify({"msg": "Please enter Last name"}), 400
         if not cont_email or cont_email == '':
-            return jsonify({"msg": "Por favor ingresar correo electronico"}), 400
+            return jsonify({"msg": "Please enter email"}), 400
         if not cont_phone or cont_phone == '':
-            return jsonify({"msg": "Por favor ingresar telefono"}), 400
+            return jsonify({"msg": "Please enter a phone number"}), 400
         if not cont_message or cont_message == '':
-            return jsonify({"msg": "Por favor ingresar mensaje"}), 400
+            return jsonify({"msg": "Please enter a message"}), 400
 
         contact = Contact()
         contact.cont_name = cont_name
@@ -485,6 +497,10 @@ def contact(id = None):
 def getavatar(filename):
     return  send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'], 'img/avatars'), filename)
 
+@app.route('/blog/<filename>')
+def getblogimg(filename):
+    return  send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'], 'img/blog'), filename)
+
 @manager.command
 def loadroles():
     role = Roles()
@@ -499,7 +515,7 @@ def loadroles():
     db.session.add(role)
     db.session.commit()
 
-    print("Han sido creados los roles")
+    print("The rolls are made it")
 
 @manager.command
 def loadadmin():
@@ -511,7 +527,7 @@ def loadadmin():
     db.session.add(users)
     db.session.commit()
 
-    print("Administrador creado!")
+    print("Administrador is made!")
 
 if __name__ == '__main__':
     manager.run()
