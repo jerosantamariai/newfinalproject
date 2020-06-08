@@ -4,16 +4,11 @@ import { Link } from 'react-router-dom';
 
 const DashContactView = props => {
     const { store, actions } = useContext(Context)
-    const { appoints } = store;
-    const appointurl = props.match.params.app_email;
-    const updateAppointment = (e, appointment) => {
-        e.preventDefault();
-        actions.setAppoint(e, appointment)
-    }
+    const userurl = props.match.params.email;
     return (
         <>
             <div className="blogteiner">
-                {
+            {
                     !!store.errors && (
                         <div className="row fixed-top text-center">
                             <div className="col-md-12">
@@ -30,32 +25,61 @@ const DashContactView = props => {
                 <div className="card-group">
                     <div className="row">
                         {
-                            !!store.appoints ?
-                                store.appoints.map((appoint, i) => {
-                                    if (JSON.stringify(appoint.app_email) === JSON.stringify(appointurl)) {
+                            !!store.users ?
+                                store.users.map((usr, i) => {
+                                    if (JSON.stringify(usr.email) === JSON.stringify(userurl)) {
                                         // const img = blo.title.split(" ").join("-").toLowerCase() + ".jpg";
                                         return (
-                                            <div className="row card-group text-white mb-3 mx-auto d-flex justify-content-center cardbg" key={i}>
-                                                <div className="col-md-12 py-4">
-                                                    <h1>Appointment {appoint.id}</h1>
-                                                    <p className="card-title">Name: {appoint.app_name}</p>
-                                                    <p className="card-text">Last Name: {appoint.app_lastname}</p>
-                                                    <p className="card-text">Email: {appoint.app_email}</p>
-                                                    <p className="card-text">Phone: {appoint.app_phone}</p>
-                                                    <p className="card-text">During: {appoint.app_time}</p>
-                                                    <p className="card-text">Comments: {appoint.app_message}</p>
+                                            <div className="row card-group text-white mb-3 d-flex justify-content-center cardbg" key={i}>
+                                                <div className="col-3 my-auto">
+                                                    <img src={store.avatarPath + usr.avatar} className="card-img-top" alt={"image of " + usr.email} />
+                                                    <Link to={"/dashboard/dashcontacts"} className="btn btn-secondary d-flex justify-content-center blogitem text-white">Back</Link>
+                                                </div>
+                                                <div className="col-9 py-4">
+                                                    <h1>Profile Name</h1>
+                                                    <p className="card-title">Name: {usr.name}</p>
+                                                    <p className="card-text">Last Name: {usr.lastname}</p>
+                                                    <p className="card-text">Email: {usr.email}</p>
+                                                    <p className="card-text">Phone: {usr.phone}</p>
+                                                    <p className="card-text">Date of Incorporation: {usr.createdate}</p>
                                                     <hr className="hr1" />
-                                                    <p className="card-text">Date of Incorporation: {appoint.app_createdate}</p>
+                                                    <p className="card-text">{usr.role.rolename}</p>
+                                                    {/* {
+                                                        usr.email !== "admin@gmail.com" && (
+                                                            usr.role.rolename === "admin" ? (
+                                                                <>
+                                                                    <select className="custom-select col-md-4" name="rolename" onChange={actions.handleChange} value={store.rolename}>
+                                                                        <option selected>Select Role for the User</option>
+                                                                        <option>Customer</option>
+                                                                    </select>
+                                                                    <button type="button" className="btn dashitem text-white ml-2" onClick={(e) => actions.changeRole(e, props.history)}>Save</button>
+                                                                </>
+                                                            ) : (
+                                                                    <>
+                                                                        <select className="custom-select col-md-4" name="rolename" onChange={actions.handleChange} value={store.rolename}>
+                                                                            <option selected>Select Role for the User</option>
+                                                                            <option>Admin</option>
+                                                                        </select>
+                                                                        <button type="button" className="btn dashitem text-white ml-2" onClick={(e) => actions.changeRole(e, props.history)}>Save</button>
+                                                                    </>
+                                                                )
+                                                        )
+                                                    } */}
                                                     <hr className="hr1" />
                                                     {
-                                                        appoint.app_status === true ? (
-                                                            <button className="btn noDecoration dashitem" onClick={e => updateAppointment(e, appoint)}>Status: Ready</button>
-                                                        ):(
-                                                            <button className="btn noDecoration dashitem" onClick={e => updateAppointment(e, appoint)}>Status: Pending</button>
+                                                        usr.email !== "admin@gmail.com" && (
+                                                            <>
+                                                                <button type="button" 
+                                                                className="btn btn-block dashitem text-white"
+                                                                id="deleteid"
+                                                                name="deleteid"
+                                                                value={store.deleteid}
+                                                                onClick={e => actions.deleteUsr(usr.id, props.history)}>
+                                                                    Delete<i className="fas my-auto p-3 fa-trash"></i>
+                                                                </button>
+                                                            </>
                                                         )
                                                     }
-                                                    <hr className="hr1" />
-                                                    <Link to="/dashboard/dashadminappoint/" className="btn noDecoration dashitem">Back</Link>
                                                 </div>
                                             </div>
                                         )
@@ -69,6 +93,7 @@ const DashContactView = props => {
                                 )
                         }
                     </div>
+
                 </div>
             </div>
         </>

@@ -13,6 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             appoints: null,
             avatar: null,
             blogimagen: null,
+            contact: null,
             name: '',
             lastname: '',
             phone: '',
@@ -304,6 +305,29 @@ const getState = ({ getStore, getActions, setStore }) => {
                             })
                             history.push("/blogs");
                         }
+                    })
+            },
+
+            getContact: url => {
+                fetch(url, {
+                    method: 'GET',
+
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        // const newData = data.map((elem) => {
+                        //     return { ...elem, title: elem.title.replace(/[!@#$%^&*(),.?":{}|<> ]/g, '_')}
+                        // })                       
+                        // console.log(newData);
+                        setStore({
+                            contact: data
+                        })
+                    })
+                    .catch(error => {
+                        console.log(error)
                     })
             },
 
