@@ -23,7 +23,7 @@ const DashContacts = props => {
                 }
                 <div className="row">
                     <div className="col-md-12">
-                        <h3 className="my-5">Current Customer Users</h3>
+                        <h3 className="my-5">Current Active Contact Messages</h3>
                         <div className="list-group" id="scrollablecorps">
                             <ul>
                                 {

@@ -23,7 +23,7 @@ const Footer = props => {
                             <div className="footer-right">
                                 <form method="get" action="#">
                                     <input placeholder="Subscribe our newsletter.." name="search" />
-                                    <i className="fas fa-envelope-o"></i>
+                                    <i className="fas fa-envelope"></i>
                                 </form>
                             </div>
                         </div>

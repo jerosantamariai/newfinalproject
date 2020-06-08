@@ -47,7 +47,7 @@ const DashContactView = props => {
                                                                 id="deleteid"
                                                                 name="deleteid"
                                                                 value={store.deleteid}
-                                                                onClick={e => actions.deletecontac(contac.id, props.history)}>
+                                                                onClick={e => actions.deleteContac(contac.id, props.history)}>
                                                                     Delete<i className="fas my-auto p-3 fa-trash"></i>
                                                                 </button>
                                                             </>

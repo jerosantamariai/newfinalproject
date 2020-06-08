@@ -502,6 +502,14 @@ def contact(id = None):
 
         return jsonify(contact.serialize()), 201
 
+    if request.method == 'DELETE':
+        contact = Contact.query.get(id)
+        if not contact:
+            return jsonify({"msg": "Contact message not found"}), 404
+        db.session.delete(contact)
+        db.session.commit()
+        return jsonify({"msg":"Contact message was erased"}), 200
+
 @app.route('/users/avatar/<filename>')
 def getavatar(filename):
     return  send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'], 'img/avatars'), filename)
