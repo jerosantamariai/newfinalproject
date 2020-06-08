@@ -25,16 +25,17 @@ const Dashboard = props => {
                                     <>
                                         <div className="list-group">
                                             <p>Menú Admin</p>
-                                            <Link to="/dashboard/dashadminuser" className="list-group-item list-group-item-action dashitem text-white">Administrar Usuarios</Link>
-                                            <Link to="/dashboard/dashadminblog" className="list-group-item list-group-item-action dashitem text-white">Administrar Blog</Link>
-                                            <Link to="/dashboard/dashadminappoint" className="list-group-item list-group-item-action dashitem text-white">Administrar Citas</Link>
+                                            <Link to="/dashboard/dashadminuser" className="list-group-item list-group-item-action dashitem text-white">User's Admin</Link>
+                                            <Link to="/dashboard/dashadminblog" className="list-group-item list-group-item-action dashitem text-white">Blog's Admin</Link>
+                                            <Link to="/dashboard/dashadminappoint" className="list-group-item list-group-item-action dashitem text-white">Appointment's Admin</Link>
+                                            <Link to="/dashboard/dashadminappoint" className="list-group-item list-group-item-action dashitem text-white">Appointment's Admin</Link>
                                         </div>
                                         <hr className="hr1 my-5 col-md-10" />
                                     </>
                                 )
                             }
                             <div className="list-group">
-                                <Link to="/dashboard/dashuser" className="list-group-item list-group-item-action dashitem text-white" onClick={() => actions.getCurrentUser(store.currentUser.users.id, store.currentUser.users.email)}>Agregar/Cambiar Información Personal</Link>
+                                <Link to="/dashboard/dashuser" className="list-group-item list-group-item-action dashitem text-white" onClick={() => actions.getCurrentUser(store.currentUser.users.id, store.currentUser.users.email)}>Add/Change Personal Information</Link>
                                 <Link to="/dashboard/dashpass" className="list-group-item list-group-item-action dashitem text-white">Change Password</Link>
                                 <Link to="/" className="list-group-item list-group-item-action dashitem text-white" onClick={actions.logout}>Logout</Link>
                             </div>
