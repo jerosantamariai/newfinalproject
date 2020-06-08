@@ -35,9 +35,9 @@ const DashContacts = props => {
                                                         (
                                                             <>
                                                                 <Link
-                                                                    to={"/dashboard/dashadminuser/" + contac.cont_email}
+                                                                    to={"/dashboard/dashcontacts/" + contac.cont_email}
                                                                     key={i} 
-                                                                    // onClick={() => actions.getCurrentUser(user.id)}
+                                                                    onClick={() => actions.getCurrentContact(contac.id)}
                                                                     className="list-group-item list-group-item-action d-flex justify-content-left dashitem text-white">
                                                                     {contac.id} - {contac.cont_email}
                                                                 </Link>

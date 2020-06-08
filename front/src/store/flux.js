@@ -39,6 +39,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             app_message: '',
             app_status: '',
             usrid: '',
+            cont_id: '',
             usremail: '',
             rolename: '',
         },
@@ -543,6 +544,12 @@ const getState = ({ getStore, getActions, setStore }) => {
                 setStore({
                     usrid,
                     usremail,
+                })
+            },
+
+            getCurrentContact: (cont_id) => {
+                setStore({
+                    cont_id,
                 })
             },
 
