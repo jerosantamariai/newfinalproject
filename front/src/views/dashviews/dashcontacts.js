@@ -21,6 +21,7 @@ const DashContacts = props => {
                         </div>
                     )
                 }
+                <Link to="/dashboard" className="btn col-md-6 offset-md-3 col-xs-12 dashitem noDecoration mb-4">Go Back</Link>
                 <div className="row">
                     <div className="col-md-12">
                         <h3 className="my-5">Current Active Contact Messages</h3>

@@ -21,6 +21,7 @@ const DashAdminAppoint = props => {
                         </div>
                     )
                 }
+                <Link to="/dashboard" className="btn col-md-6 offset-md-3 col-xs-12 dashitem noDecoration mb-4">Go Back</Link>
                 <div className="col-md-12 justify-content-center">
                     {/* <h3>Appointment Information Nº {store.appid}</h3>
                     <form onSubmit={e => {
