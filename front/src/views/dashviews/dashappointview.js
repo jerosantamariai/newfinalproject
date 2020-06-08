@@ -49,12 +49,13 @@ const DashAppointView = props => {
                                                     <hr className="hr1" />
                                                     {
                                                         appoint.app_status === true ? (
-                                                            <button className="card-text" onClick={e => updateAppointment(e, appoint)}>Status: Ready</button>
+                                                            <button className="btn noDecoration dashitem" onClick={e => updateAppointment(e, appoint)}>Status: Ready</button>
                                                         ):(
-                                                            <button className="card-text" onClick={e => updateAppointment(e, appoint)}>Status: Pending</button>
+                                                            <button className="btn noDecoration dashitem" onClick={e => updateAppointment(e, appoint)}>Status: Pending</button>
                                                         )
                                                     }
                                                     <hr className="hr1" />
+                                                    <Link to="/dashboard/dashadminappoint/" className="btn noDecoration dashitem">Back</Link>
                                                 </div>
                                             </div>
                                         )

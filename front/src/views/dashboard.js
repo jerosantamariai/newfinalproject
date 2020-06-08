@@ -36,7 +36,6 @@ const Dashboard = props => {
                             <div className="list-group">
                                 <Link to="/dashboard/dashuser" className="list-group-item list-group-item-action dashitem text-white" onClick={() => actions.getCurrentUser(store.currentUser.users.id, store.currentUser.users.email)}>Agregar/Cambiar Información Personal</Link>
                                 <Link to="/dashboard/dashpass" className="list-group-item list-group-item-action dashitem text-white">Change Password</Link>
-                                <Link to="#" className="list-group-item list-group-item-action dashitem text-white">Morbi leo risus</Link>
                                 <Link to="/" className="list-group-item list-group-item-action dashitem text-white" onClick={actions.logout}>Logout</Link>
                             </div>
                         </div>

@@ -202,7 +202,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     body: JSON.stringify({
                         name: store.name,
                         lastname: store.lastname,
-                        email: store.usremail,
+                        email: store.email,
                         phone: store.phone
                     }),
                     headers: {

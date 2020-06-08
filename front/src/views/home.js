@@ -17,7 +17,7 @@ const Home = props => {
               <div className="row fixed-top text-center">
                 <div className="col-md-12">
                   <div className="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>FELICITACIONES!</strong> {store.success.success}
+                    <strong>CONGRATULATIONS!</strong> {store.success.success}
                     <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>

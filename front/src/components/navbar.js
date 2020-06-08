@@ -7,7 +7,7 @@ const Navbar = props => {
     const { store, actions } = useContext(Context);
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark col-md-3 d-lg-flex align-items-center" id="leftnav">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark col-md-3 col-xs-3 d-lg-flex align-items-center" id="leftnav">
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>

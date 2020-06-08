@@ -49,17 +49,17 @@ const Dashuser = props => {
                                             <input type="text" className="form-control text-center" id="lastname" name="lastname" placeholder={store.currentUser.users.lastname} onChange={actions.handleChange} value={store.lastname} />
                                         </div>
                                         <div className="form-group">
-                                            {
-                                                <>
-                                            <label htmlFor="email">What is your email?</label>
-                                            <input type="email" className="form-control text-center" id="email" name="email" value={store.usremail} />
-                                                </>
-                                            }
-                                        </div>
-                                        <div className="form-group">
                                             <label htmlFor="phone">What is your phone number?</label>
                                             <input type="text" className="form-control text-center" id="phone" name="phone" placeholder={store.currentUser.users.phone!=="" ? "+569XXXXXXXX" : store.currentUser.users.phone} onChange={actions.handleChange} value={store.phone} />
                                             <small>***Please follow the number format!***</small>
+                                        </div>
+                                        <div className="form-group">
+                                            {
+                                                <>
+                                            <label htmlFor="email">Confirm your email?</label>
+                                            <input type="email" className="form-control text-center" id="email" name="email" onChange={actions.handleChange} value={store.email} />
+                                                </>
+                                            }
                                         </div>
                                         <button type="submit" className="btn dashitem text-white">Save</button>
                                     </form>

@@ -15,7 +15,6 @@ const Footer = props => {
                                     <Link to="/blogs">Blogs</Link>
                                     <Link to="/pricing">Pricing</Link>
                                     <Link to="/aboutus">About</Link>
-                                    <Link to="/faq">Faq</Link>
                                     <Link to="/contact">Contact</Link>
                                 </p>
                                 <p className="footer-company-name">All Rights Reserved. &copy; 2018 <Link to="#">SMBarber</Link> Design By : <Link to="https://html.design/">html design</Link></p>

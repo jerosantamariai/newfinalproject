@@ -106,7 +106,7 @@ def register():
     return jsonify(data), 201
 
 @app.route('/changepassword', methods=['POST'])
-# @jwt_required
+@jwt_required
 def changepassword():
     if not request.is_json:
         return jsonify({"msg": "Ingresar formato correcto"}), 400
@@ -126,7 +126,7 @@ def changepassword():
     if bcrypt.check_password_hash(users.password, oldpassword):
         users.password = bcrypt.generate_password_hash(password)
         db.session.commit()
-        return jsonify({"success": "Your password is change!"}), 200
+        return jsonify({"success": "Your password has changed!"}), 200
     else:
         return jsonify({"msg": "Enter your last password!"}), 400
 
@@ -170,6 +170,15 @@ def users(id = None):
         lastname = request.json.get('lastname', None)
         phone = request.json.get('phone', None)
         email = request.json.get('email', None)
+
+        if not name or name == "":
+            return jsonify({"msg":"Insert your name"}), 400
+        if not lastname or lastname == "":
+            return jsonify({"msg":"Insert your lastname"}), 400
+        if not phone or phone == "":
+            return jsonify({"msg":"Insert your phone"}), 400
+        if not email or email == "":
+            return jsonify({"msg":"Confirm your email"}), 400
 
         users = Users.query.get(id)
         if not users:

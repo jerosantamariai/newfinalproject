@@ -18,7 +18,7 @@ const Blog = props => {
                                         return (
                                             <div className="row card-group text-white mb-3 d-flex justify-content-center cardbg" key={i}>
                                                 <div className="col-3 my-auto">
-                                                    <img src="http://placehold.it/300x200" className="card-img-top" alt={"image of " + blo.id} />
+                                                <img src={store.blogPath + blo.blogimagen} className="card-img-top my-2" alt={"image of " + blo.id} />
                                                     <Link to={"/blogs"} className="btn btn-secondary d-flex justify-content-center blogitem text-white">Back to Blogs!</Link>
                                                 </div>
                                                 <div className="col-9 py-4">
