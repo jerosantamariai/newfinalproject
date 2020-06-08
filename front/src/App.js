@@ -36,6 +36,8 @@ const App = props => {
             <Route exact path="/dashboard/dashadminblog" component={DashAdminBlog} />
             <Route exact path="/dashboard/dashadminappoint/:app_email" component={DashAppointView} />
             <Route exact path="/dashboard/dashadminappoint" component={DashAdminAppoint} />
+            <Route exact path="/dashboard/dashadminappoint/:app_email" component={DashAppointView} />
+            <Route exact path="/dashboard/dashcontacts" component={DashContacts} />
             <Route exact path="/dashboard/dashadminuser/:email" component={DashUserView} />
             <Route exact path="/dashboard/dashadminuser" component={DashAdminUser} />
             <Route exact path="/dashboard/dashuser" component={Dashuser} />
