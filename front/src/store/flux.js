@@ -29,6 +29,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             bintro: '',
             publictext: '',
             privatext: '',
+            blogvideo:'',
             blogid: '',
             appid: '',
             app_name: '',
@@ -283,6 +284,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 formData.append("publictext", store.publictext);
                 formData.append("privatext", store.privatext);
                 formData.append("blogimagen", store.blogimagen);
+                formData.append("blogvideo", store.blogvideo);
 
                 fetch(store.blogPath, {
                     method: 'POST',
@@ -301,6 +303,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                                 bintro: '',
                                 publictext: '',
                                 privatext: '',
+                                blogvideo: '',
                                 blogimagen: null,
                                 errors: null,
                             })
@@ -500,6 +503,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         bintro: store.bintro,
                         publictext: store.publictext,
                         privatext: store.privatext,
+                        blogvideo: store.blogvideo,
                     }),
                     headers: {
                         'Content-Type': 'application/json'
@@ -519,6 +523,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                                 publictext: '',
                                 privatext: '',
                                 blogid: '',
+                                blogvideo: '',
                                 errors: null,
                             })
                             history.push("/blogs");
