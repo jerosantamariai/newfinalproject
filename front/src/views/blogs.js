@@ -11,7 +11,7 @@ const Blogs = props => {
     return (
         <>
             <div className="blogteiner">
-                <h1>Welcome to out Blog!</h1>
+                <h1>Welcome to our Blog!</h1>
                 <div class="card-deck">
                     <div className="row d-flex justify-content-center">
                         {

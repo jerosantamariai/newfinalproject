@@ -291,6 +291,7 @@ def blog(id = None):
         blogs.title = title 
         blogs.bintro = bintro
         blogs.publictext = publictext 
+        blogs.blogvideo = blogvideo
         blogs.privatext = privatext
         if file:
             blogs.blogimagen = filename
@@ -532,7 +533,21 @@ def loadroles():
     db.session.add(role)
     db.session.commit()
 
-    print("The rolls are made it")
+    print("Roles Creados")
+
+@manager.command
+def loadblogs():
+    blogs = Blogs()
+    blogs.title = "Bienvenido!" 
+    blogs.bintro = "Te dejo un saludo y una pequeña presentación!"
+    blogs.publictext = "Si estas leyendo estas líneas es por que quieres revisar el trabajo que puedo hacer como Desarrollor Full Stack. Tengo habilidades tanto en el Front como en el Back End. Recomiendo que puedas ver esta pagina como usuario registrado o loguearte como usuario administrador que tiene como correo admin@gmail.com y clave 123456, y así podras ver todo el contenido que tengo para ti, incluyendo videos."
+    blogs.blogvideo = "https://www.youtube.com/embed/AOzjMEIZkrg"
+    blogs.privatext = "Para no tomar mucho de tu tiempo, te cuento que soy Ingeniero Comercial de la Universidad de la Universidad de los Andes y Desarrollador de Software Full Stack de 4Geeks. Cuento con más de 8 años como profesional y la habia desarrollado en el área comercial y de marketing liderando equipos de trabajos, negociaciones con todo nivel de clientes y estrategia empresarial. Lo que me incentivo a dedicarme al área tecnologica fue principalmente que en todas las empresas donde trabajé, la evaluación, implementación y administración de TICs en ellas, y al verme cada vez mas interesado en como se hacen las cosas, descubrí un mundo enorme que terminó siendo más que un pasatiempo, una pasión"
+
+    db.session.add(blogs)
+    db.session.commit()
+
+    print("Blogs Creados!")
 
 @manager.command
 def loadadmin():
@@ -544,7 +559,7 @@ def loadadmin():
     db.session.add(users)
     db.session.commit()
 
-    print("Administrador is made!")
+    print("Administrador Creado! Buena Suerte!")
 
 if __name__ == '__main__':
     manager.run()
